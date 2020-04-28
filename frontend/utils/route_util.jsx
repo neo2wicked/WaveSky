@@ -7,11 +7,11 @@ const mapSTP = state => ({
 }) 
 
 
-const Auth = ({ loggedIn, path, component: Component}) => (
+const Auth = ({ loggedIn, path, component: Component, username}) => (
     <Route
         path={path}
         render={props => (
-            loggedIn ? <Redirect to="/" /> : <Component {...props}/>
+            loggedIn ? <Redirect to={`/${username}`} /> : <Component {...props}/>
         )}
     />
 )

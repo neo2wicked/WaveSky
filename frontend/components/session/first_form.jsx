@@ -16,15 +16,37 @@ class FirstForm extends React.Component{
     }
 
     componentDidMount(){
+        //resets form if clicked outside modal
         let form = document.getElementsByClassName("modal-form")[0]
         form.addEventListener("click",(e)=>{
             if (e.target === form){
-                form.style.display = "none";
-                document.body.style.overflowX = "auto";
-                document.body.style.overflowY = "auto";
+                this.resetForm()
             }
         }) 
+        //resets form if clicked on close button
+        let close = document.getElementsByClassName("close")[0]
+        close.addEventListener("click", () => {
+            this.resetForm()
+        })
     }
+
+
+
+    resetForm(){
+        //hide the whole modal element
+        document.getElementsByClassName("modal-form")[0].style.display = "none";
+
+        //allow to scroll in the browser
+        document.body.style.overflowX = "auto";
+        document.body.style.overflowY = "auto";
+
+        //reset the ll forms and show the first form again if modal was closed
+        document.getElementsByClassName("first-form")[0].style.display = "block";
+
+        //reset the forms to null
+        this.setState({ form: null })
+    }
+
 
     update(value){
         return e => {
@@ -32,20 +54,21 @@ class FirstForm extends React.Component{
         }
     }
 
+
     handleClick(e){
         e.preventDefault();
         let user = { username: this.state.username}
         if (user.username !== ""){
             document.getElementsByClassName("first-form")[0].style.display="none";
             this.props.fetchUserByUsername(user)
-                .then(() => this.setState({ form: <LoginFormContainer username={this.state.username} />, username: "" }))
-                .fail(() => this.setState({ form: <SignupFormContainer username={this.state.username} />, username: "" }))
+                .then(() => this.setState({ form: <LoginFormContainer username={this.state.username} resetForm={this.resetForm}/>, username: "" }))
+                .fail(() => this.setState({ form: <SignupFormContainer username={this.state.username} resetForm={this.resetForm}/>, username: "" }))
         }
     }
 
     render(){
         return(
-            <div className="modal-form" style={this.props.style}>
+            <div className="modal-form">
                 <div className="close"><span>&times;</span></div>
                 <div className="modal-form-content first-form">
                     <div className="modal-form-container">
