@@ -8,8 +8,8 @@ import SessionForm from "./session_form"
 
 const mapSTP = state => ({
     //errors
-    formType: "Sign up",
-    navLink: <Link></Link>
+    formType: "Log in",
+    // navLink: <Link></Link>
 
 })
 const mapDTP = dispatch => ({

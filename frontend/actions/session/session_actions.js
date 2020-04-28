@@ -34,6 +34,7 @@ export const logout = () => dispatch => (
         //errors
 )
 
-export const fetchUserByUsername = (user ,callback1 ,callback2) => dispatch => (
+export const fetchUserByUsername = (user) => dispatch => (
     SessionAPIUtil.fetchUserByUsername(user)
+        .then(() => true)
 )

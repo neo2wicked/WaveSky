@@ -29,7 +29,7 @@ export const fetchUserByUsername = (user) => (
     })
 )
 // export const fetchUserByUsername = (user) => {
-//    console.log("TEST")
+//    console.log(user)
 //     return ($.ajax({
 //        url: `/api/session/`,
 //        method: 'GET',

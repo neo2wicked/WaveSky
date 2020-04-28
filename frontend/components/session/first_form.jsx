@@ -19,11 +19,11 @@ class FirstForm extends React.Component{
 
     handleClick(e){
         e.preventDefault();
-        this.props.fetchUserByUsername(this.state)
-            .then(
-            () => (this.setState({form: <LoginFormContainer username={this.state.username} />})),
-            () => (this.setState({ form: <SignupFormContainer username={this.state.username}/> }))
-        )
+        let user = { username: this.state.username}
+        this.props.fetchUserByUsername(user)
+            .then(() => this.setState({ form: <LoginFormContainer username={this.state.username}/>, username: "" }))
+            .fail(() => this.setState({ form: <SignupFormContainer username={this.state.username} />, username: "" }))
+        
 
 }
 

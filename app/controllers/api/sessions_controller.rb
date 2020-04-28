@@ -1,9 +1,9 @@
 class Api::SessionsController < ApplicationController
 
-    def index       
+    def show       
         @user = User.find_by(username: params[:user][:username])
         if (@user)
-            render json: user_params[:username]
+            render json: ["user was found"], status: 200
         else
             render json: ["The user was not found."], status: 404 
         end

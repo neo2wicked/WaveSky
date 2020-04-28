@@ -5,7 +5,6 @@ class SessionForm extends React.Component {
         super(props)
         this.state = { username: this.props.username, password: "" }
         this.handleClick = this.handleClick.bind(this)
-        // console.log("TEST3")
     }
 
     update(value) {
@@ -36,7 +35,7 @@ class SessionForm extends React.Component {
                         onChange={this.update('password')}
                     />
                 </label>
-                <button onClick={this.handleClick}>Continue</button>
+        <button onClick={this.handleClick}>{this.props.formType}</button>
             </div>
         )
     }
