@@ -16,7 +16,6 @@ class NavBar extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
-        console.log("TEST")
         this.props.logout();
     }
 
