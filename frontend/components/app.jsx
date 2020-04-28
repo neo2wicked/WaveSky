@@ -2,14 +2,13 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../utils/route_util'
 import Index from "./index/index"
-import FirstForm from "./session/first_form_container"
-import NavBarContainer from "./nav_bar/nav_bar_container"
+import Home from "./home/home"
 
 export default (props) => (
     <div>
         {/* <Route exact path="/" component={FirstForm} /> */}
-        <AuthRoute exact path="/" component={Index} username={props.username}></AuthRoute>
-        <ProtectedRoute exact path={`/${props.username}`} component={Index} ></ProtectedRoute> 
+        <AuthRoute exact path="/" component={Index}></AuthRoute>
+        <ProtectedRoute exact path={`/:username`} component={Home} ></ProtectedRoute> 
         {/* <Route path="/" component={Index} />  */}
         {/* <ProtectedRoute exact path="/" component={Index} ></ProtectedRoute>  */}
         {/* <Route path="/" component={NavBarContainer}/> */}

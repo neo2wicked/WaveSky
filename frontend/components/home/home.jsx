@@ -1,7 +1,6 @@
 
 import React from 'react';
-import FirstFormContainer from '../session/first_form_container'
-
+import NavBarContainer from "../nav_bar/nav_bar_container"
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -12,10 +11,13 @@ export default class Home extends React.Component {
     handleClick(e) {
         e.preventDefault();
     }
-    
+
     render() {
         return (
-            <div></div>
+            <div>
+                <NavBarContainer/>
+                
+            </div>
         )
     }
 }

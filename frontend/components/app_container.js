@@ -4,7 +4,7 @@ import {
 
 import App from "./app"
 const mapSTP = (state) => ({
-    username: state.session.currentUser.username
+    // username: state.session.currentUser.username
 })
 
 

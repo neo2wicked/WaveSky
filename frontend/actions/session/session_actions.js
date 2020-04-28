@@ -41,5 +41,4 @@ export const logout = () => dispatch => (
 
 export const fetchUserByUsername = (user) => dispatch => (
     SessionAPIUtil.fetchUserByUsername(user)
-        .then(() => true)
 )
