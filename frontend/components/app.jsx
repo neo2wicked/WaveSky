@@ -7,8 +7,9 @@ import NavBarContainer from "./nav_bar/nav_bar_container"
 
 export default () => (
     <div>
-        <Route exact path="/" component={FirstForm} />
-        <Route path="/" component={NavBarContainer}/>
+        {/* <Route exact path="/" component={FirstForm} /> */}
+        <Route exact path="/" component={Home} />
+        {/* <Route path="/" component={NavBarContainer}/> */}
         {/* <AuthRoute path="/signup" component={SignupContainer} />
         <AuthRoute path="/login" component={LoginContainer} />
         <ProtectedRoute path="/chirps" component={ChirpIndexContainer} /> */}

@@ -1,0 +1,147 @@
+.modal-form {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 2;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 1000px;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(226, 226, 226);
+    /* Fallback color */
+    background-color: rgba(124, 124, 124, 0.171);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-form-content {
+    background-color: #fefefe;
+    margin: 1% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 450px;
+    height: 450px;
+    /* margin-bottom: 400px; */
+    /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: black;
+    font-size: 34px;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 30px;
+    padding-right: 30px;
+    
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #000;
+}
+
+.separator::before {
+    margin-right: 20px;
+}
+
+.separator::after {
+    margin-left: 20px;
+}
+
+.modal-form-container{
+
+    /* margin-top: 30px; */
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    justify-content: space-evenly;
+}
+
+.modal-form-input{
+    width: inherit;
+    height: 30px;
+    padding: 9px 0;
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: white;
+    font-size: medium;
+    font-weight: 400;
+    letter-spacing: 1px;
+    border: 1px solid rgb(168,168,168)
+}
+.demo-button{
+    margin-top: 20px;
+    width: inherit;
+    height: 30px;
+    padding: 9px 0;
+    border-radius: 5px;
+    padding-left: 10px;
+    background: linear-gradient(90deg, rgba(186, 38, 38, 1) 0%, rgba(126, 18, 210, 1) 41%, rgba(0, 212, 255, 1) 100%);
+    color: white;
+    text-align: center;
+    font-size: medium;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.modal-form-button{
+    width: inherit;
+    height: 30px;
+    padding: 9px 0;
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: rgb(255, 75, 0);
+    color: white;
+    text-align: center;
+    font-size: medium;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.modal-text{
+    margin-top: 25px;
+    font-size: 1rem;
+    color: rgb(158,158,158);
+}
+
+.session-form{
+    height: 400px;
+}
+.session-form > h1{
+    width: 300px;
+    font-size: 1.9rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0px auto;
+}
+
+.errors{
+    list-style-type: none;
+    color: red;
+}

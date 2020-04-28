@@ -1,4 +1,4 @@
-import { RECEIVE_CURRENT_USER } from "../../../actions/users/users_actions"
+import { RECEIVE_USER } from "../../../actions/users/users_actions"
 /* NEEDS ATTENTION */
 
 const usersReducers = (state = {}, action) => {
@@ -7,7 +7,7 @@ const usersReducers = (state = {}, action) => {
     let nextState = Object.assign({}, state)
 
     switch (action.type) {
-        case RECEIVE_CURRENT_USER: 
+        case RECEIVE_USER: 
             nextState[action.user.id] = action.user
             return nextState;
         default:
