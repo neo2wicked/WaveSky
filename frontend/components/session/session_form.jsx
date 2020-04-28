@@ -1,0 +1,45 @@
+import React from 'react'
+
+class SessionForm extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = { username: this.props.username, password: "" }
+        this.handleClick = this.handleClick.bind(this)
+        // console.log("TEST3")
+    }
+
+    update(value) {
+        return e => {
+            this.setState({ [value]: e.currentTarget.value })
+        }
+    }
+
+    handleClick(e) {
+        e.preventDefault();
+        this.props.action(this.state)
+    }
+
+    render() {
+        return (
+            <div>
+                <label>Username:
+                    <input
+                        type="text"
+                        value={this.state.username}
+                        onChange={this.update('username')}
+                    />
+                </label>
+                <label>Password:
+                    <input
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.update('password')}
+                    />
+                </label>
+                <button onClick={this.handleClick}>Continue</button>
+            </div>
+        )
+    }
+}
+
+export default SessionForm;
