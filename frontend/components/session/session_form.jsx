@@ -21,6 +21,13 @@ class SessionForm extends React.Component {
     render() {
         return (
             <div>
+                {
+                    this.props.errors.map((error, i) => (
+                        <li key={`error-${i}`}>
+                            {error}
+                        </li>
+                    ))}
+                }
                 <label>Username:
                     <input
                         type="text"

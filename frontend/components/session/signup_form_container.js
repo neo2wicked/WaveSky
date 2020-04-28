@@ -4,7 +4,7 @@ import { signup } from '../../actions/session/session_actions'
 import SessionForm from "./session_form"
 
 const mapSTP = (state,ownProps) => ({
-    //errors
+    errors: state.errors.session,
     formType: "Sign up",
     username: ownProps.username
 

@@ -7,7 +7,7 @@ import SessionForm from "./session_form"
 
 
 const mapSTP = state => ({
-    //errors
+    errors: state.errors.session,
     formType: "Log in",
     // navLink: <Link></Link>
 
