@@ -16,7 +16,9 @@ class Api::SongsController < ApplicationController
     end
 
     def create
-        song = Song.new(song_params)
+        correct_params = song_params.deep_dup
+        correct_params[:metadata] = correct_params[:metadata].split(",")
+        song = Song.new(correct_params)
         if (song.save)
             render json: ["Upload was successful"], status: 200
         else
