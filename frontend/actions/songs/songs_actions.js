@@ -17,8 +17,8 @@ export const receiveSong = ( song ) => ({
 
 //thunk
 
-export const fetchUserSongs = (userId) => dispatch => (
-    SongsAPIUtil.fetchUserSongs(userId)
+export const fetchUserSongs = (username) => dispatch => (
+    SongsAPIUtil.fetchUserSongs(username)
         .then((songs) => dispatch(receiveSongs(songs)))
 )
 

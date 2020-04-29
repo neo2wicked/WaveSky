@@ -1,11 +1,20 @@
 import { connect } from "react-redux"
 import SongForm from "./song_form"
+import {fetchUserSongs ,createSong} from "../../../actions/songs/songs_actions"
+import {
+    withRouter
+} from 'react-router-dom';
+import {fetchUser} from "../../../actions/user/user_actions"
+
 
 const mapSTP = state => ({
-    
+    songs: Object.values(state.entities.songs),
+    user: state.entities.user
 })
 const mapDTP = dispatch => ({
-
+    fetchUserSongs: (username) => dispatch(fetchUserSongs(username)),
+    fetchUser: (username) => dispatch(fetchUser(username)),
+    createSong: (song) => dispatch(createSong(song))
 })
 
-export default connect(mapSTP,mapDTP)(SongForm)
+export default withRouter(connect(mapSTP,mapDTP)(SongForm))

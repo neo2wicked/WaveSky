@@ -1,3 +1,4 @@
+require "byebug"
 class Api::UsersController < ApplicationController
     def create
         @user = User.new(user_params)
@@ -10,7 +11,18 @@ class Api::UsersController < ApplicationController
         
     end
 
-    def show
+    def index
+        username = user_params[:username].to_s
+        @user = User.find_by(username: username)
+        if (@user)
+            render :index
+        else
+            render json: ["The user was not found."], status: 404
+        end
+    end
+
+
+      def show
         @user = User.find(params[:id])
         if (@user)
             render :show
@@ -18,12 +30,6 @@ class Api::UsersController < ApplicationController
             render json: ["The user was not found."], status: 404
         end
     end
-
-
-
-
-
-
 
     def update
         

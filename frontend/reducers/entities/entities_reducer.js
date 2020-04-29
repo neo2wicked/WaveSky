@@ -1,9 +1,9 @@
 //this is entitites reducer
 import { combineReducers } from 'redux'
-import users from "./users/users_reducer.js"
-import songs from "./songs/songs_reducer.js"
+import userReducer from "./user/user_reducer.js"
+import songsReducer from "./songs/songs_reducer.js"
 
 export default combineReducers({
-    users,
-    songs
+    user: userReducer,
+    songs: songsReducer
 })

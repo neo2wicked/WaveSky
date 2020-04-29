@@ -8,7 +8,8 @@ class User < ApplicationRecord
 
 
     has_many :songs,
-        foreign_key: :user_id,
+        primary_key: :username,
+        foreign_key: :username,
         class_name: :Song
 
     def self.find_by_credentials(username,password)

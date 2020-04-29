@@ -1,2 +1,2 @@
-json.extract! @song, :title, :user_id
+json.extract! @song, :title, :username
 json.musicUrl url_for(@song.music)

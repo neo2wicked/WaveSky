@@ -3,7 +3,8 @@ class Song < ApplicationRecord
 
     has_one_attached :music
 
-    has_one :author,
-        foreign_key: :user_id,
+    belongs_to :author,
+        primary_key: :username,
+        foreign_key: :username,
         class_name: :User
 end

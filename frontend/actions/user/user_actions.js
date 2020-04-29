@@ -10,8 +10,9 @@ export const receiveUser = (user) => ({
 
 //thunk
 
-export const fetchUser = (userId) => dispatch => (
-    UsersAPIUtil.fetchUser(userId)
-        .then( user => dispatch(receiveUser(user)))
+export const fetchUser = (username) => dispatch => (
+    UsersAPIUtil.fetchUser(username)
+        .then( (user) => dispatch(receiveUser(user)))
+        // .fail(() => console.log(username))
 //errors
 )

@@ -1,14 +1,14 @@
-import { RECEIVE_USER } from "../../../actions/users/users_actions"
+import { RECEIVE_USER } from "../../../actions/user/user_actions"
 /* NEEDS ATTENTION */
 
-const usersReducers = (state = {}, action) => {
+const userReducers = (state = {}, action) => {
     Object.freeze(state)
     
     let nextState = Object.assign({}, state)
 
     switch (action.type) {
         case RECEIVE_USER: 
-            nextState[action.user.id] = action.user
+            nextState = action.user
             return nextState;
         default:
             return state;
@@ -16,4 +16,4 @@ const usersReducers = (state = {}, action) => {
 
 }
 
-export default usersReducers;
+export default userReducers;

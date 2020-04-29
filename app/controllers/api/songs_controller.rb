@@ -1,10 +1,10 @@
-class SongsController < ApplicationController
+class Api::SongsController < ApplicationController
 
     def index
-        user = User.find(song_params[:user_id])
+        user = User.find_by(username: song_params[:username])
         if (user)
             @songs = user.songs
-            render :index
+            render "/api/songs/index"
         else
             render json: ["The user was not found. Can not fetch songs."], status: 404
         end
@@ -20,12 +20,12 @@ class SongsController < ApplicationController
         if (song.save)
             render json: ["Upload was successful"], status: 200
         else
-            render json: ["Unable to upload the file"], status: 422
+            render json: song.errors.full_messages, status: 422
         end
     end
 
     private
     def song_params
-        params.require(:song).permit(:title, :user_id, :music)
+        params.require(:song).permit(:title, :username, :music)
     end
 end
