@@ -24,8 +24,17 @@ class Api::SongsController < ApplicationController
         end
     end
 
+    def update
+        song = Song.find(params[:id])
+        if song.update(metadata: song_params[:metadata])
+            render json: ["Update was successful"], status: 200
+        else
+            render json: song.errors.full_messages, status: 422
+        end
+    end
+
     private
     def song_params
-        params.require(:song).permit(:title, :username, :music)
+        params.require(:song).permit(:title, :username, :music, :metadata)
     end
 end

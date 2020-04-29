@@ -14,3 +14,12 @@ export const createSong = (song) => (
         processData: false,
     })
 )
+
+
+export const updateSong = (song) => (
+    $.ajax({
+        url: `api/songs/${song.id}`,
+        method: "PATCH",
+        data: { song }
+    })
+)

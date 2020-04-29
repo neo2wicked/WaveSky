@@ -26,3 +26,8 @@ export const createSong = (song) => dispatch => (
     SongsAPIUtil.createSong(song)
         .then(() => dispatch(receiveSong(song)))
 )
+
+export const updateSong = (song) => dispatch => (
+    SongsAPIUtil.updateSong(song)
+        .then(() => dispatch(receiveSong(song)))
+)
