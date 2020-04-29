@@ -2,25 +2,25 @@ import React from 'react'
 import { connect } from 'react-redux'
 import {Redirect, Route, withRouter} from 'react-router-dom'
 
-const mapSTP = state => ({
+const mapSTP = (state) => ({
     loggedIn: Boolean(state.session.currentUser),
-    user: state.session.currentUser
+    user: state.session.currentUser,
 }) 
 
 
 const Auth = ({ loggedIn, path, component: Component, user}) => (
     <Route
-        path={path}
+        exact path={path}
         render={props => (
             loggedIn ? <Redirect to={`/${user.username}`} /> : <Component {...props}/>
         )}
     />
 )
-const Protected = ({ loggedIn, path, component: Component}) => (
+const Protected = ({ loggedIn , path, component: Component}) => (
     <Route
-        path={path}
+        exact path={path}
         render={props => (
-            loggedIn ? <Component {...props} /> : <Redirect to="/" />
+            loggedIn ? <Component {...props} /> : <Redirect to={'/'} />
         )}
     />
 )

@@ -9,7 +9,6 @@ export default class SongForm extends React.Component {
     }
 
     componentDidMount(){
-        console.log(this.props)
         this.props.fetchUserSongs(this.props.match.params.username)
         this.props.fetchUser(this.props.match.params.username)
     }
@@ -20,7 +19,6 @@ export default class SongForm extends React.Component {
         formData.append('song[title]', this.state.title);
         formData.append('song[username]', this.props.user.username);
         formData.append('song[music]', this.state.music);
-        // console.log(formData)
         this.props.createSong(formData)
     }
 
@@ -47,7 +45,6 @@ export default class SongForm extends React.Component {
 
                 </label>
                 <button onClick={this.handleClick}>Upload</button>
-                {console.log(this.props.songs)}
 
              
                    { this.props.songs.map((song) => (

@@ -6,9 +6,10 @@ import Home from "./home/home"
 
 export default (props) => (
     <div>
+        {/* {console.log(props.location.pathname)} */}
         {/* <Route exact path="/" component={FirstForm} /> */}
-        <AuthRoute exact path="/" component={Index}></AuthRoute>
-        <ProtectedRoute exact path={`/:username`} component={Home} ></ProtectedRoute> 
+        <AuthRoute path="/" component={Index}></AuthRoute>
+        <ProtectedRoute path={`/:username/`} component={Home} ></ProtectedRoute> 
         {/* <Route path="/" component={Index} />  */}
         {/* <ProtectedRoute exact path="/" component={Index} ></ProtectedRoute>  */}
         {/* <Route path="/" component={NavBarContainer}/> */}
