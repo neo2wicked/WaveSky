@@ -1,4 +1,3 @@
-require "byebug"
 class StaticPagesController < ApplicationController
 
     def root
