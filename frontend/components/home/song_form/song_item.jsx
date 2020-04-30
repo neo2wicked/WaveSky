@@ -8,7 +8,34 @@ export default class SongItem extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
+        let eventWasSet = false;
         
+        let audio = document.getElementById(`audio-${this.props.i}`)
+        if (audio.paused){
+            let samplePosition = null;
+
+
+            if (!eventWasSet){
+                let canvas = document.getElementById(`canvas-${this.props.i}`);
+                canvas.addEventListener("click", (event) => {
+                    // console.log(canvas.width)
+                    let position = event.layerX / canvas.width
+                    samplePosition = Math.floor(222 * position);
+                    
+                    
+                    let ms = ((audio.duration / 222) * 1000);
+                    let songPosition = ms * samplePosition;
+                    this.props.triggerPlay(this.props.i, samplePosition)
+                })
+                eventWasSet = true;
+            }else{
+                this.props.triggerPlay(this.props.i, samplePosition)
+            }
+            
+            audio.play()
+        }else{
+            audio.pause()
+        }
     }
 
     render() {

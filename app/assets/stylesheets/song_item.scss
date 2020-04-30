@@ -9,11 +9,12 @@
 .song-item-container > img{
     height: 160px;
     width: 160px;
+    
 }
 
 .canvas{
     margin-top: 5px;
-    width: 644px;
+    width: 660px;
     height: 60px;
 }
 .song-item-container-top{
@@ -54,13 +55,10 @@
     
 }
 .song-item-description-title{
-    letter-spacing: 1.5px;
+    letter-spacing: 1.2px;
 }
 .song-item-elements{
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-evenly;
-
+    margin-left: 15px;
 }
 .song-item-container-bottom {
     display: flex;
