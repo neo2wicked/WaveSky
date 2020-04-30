@@ -4,19 +4,26 @@ import ReactAudioPlayer from 'react-audio-player';
 export default class SongItem extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { samplePosition: 0,
-            playing: false}
-            this.newPosition = 0;
-            this.handleClick = this.handleClick.bind(this)
-            this.handleCanvasClick = this.handleCanvasClick.bind(this)
-            
-            this.play = this.play.bind(this)
-            this.pause = this.pause.bind(this)
-            this.onListen = this.onListen.bind(this)
+        this.state = { 
+            samplePosition: 0,
+            playing: false,
+            wasPlayed: false,
         }
+
+        this.newPosition = 0;
+        this.handleClick = this.handleClick.bind(this)
+        this.handleCanvasClick = this.handleCanvasClick.bind(this)
+        
+        this.play = this.play.bind(this)
+        this.pause = this.pause.bind(this)
+        this.onEnded = this.onEnded.bind(this)
+        // this.onListen = this.onListen.bind(this)
+    }
         
     componentDidMount(){
         this.audio = document.getElementById(`audio-${this.props.i}`)
+        
+        
         this.audio.addEventListener("playing", ()=>{
             this.play()
         })
@@ -27,11 +34,17 @@ export default class SongItem extends React.Component {
         this.setCanvasPropertiesAndDraw(this.props.song.metadata, this.props.i)
     }
     handleClick(event) {
-        event.persist();
-        let e = event.nativeEvent
+        // event.persist();
+        // let e = event.nativeEvent
+        if (!this.state.wasPlayed){
+            this.setState({wasPlayed: true})
+        }
+        let button = document.getElementById(`play-${this.props.i}`)
         if (this.audio.paused){
+            button.innerHTML = "<i class='fas fa-pause'></i>"
             this.audio.play()
         }else{
+            button.innerHTML = "<i class='fas fa-play'></i>"
             this.audio.pause()
         }
     }
@@ -41,27 +54,31 @@ export default class SongItem extends React.Component {
         event.persist();
         let e = event.nativeEvent
         
-        if (this.state.playing){
-            let position = e.layerX / event.currentTarget.width
-            let samplePosition = (Math.floor(222 * position))
-            this.newPosition = samplePosition;
+        if (this.state.wasPlayed){
+            if (this.state.playing) {
+                let position = e.layerX / event.currentTarget.width
+                let samplePosition = (Math.floor(222 * position))
+                this.newPosition = samplePosition;
 
-            let seconds = (this.audio.duration / 222);
-            let songPosition = seconds * samplePosition;
-            
-            this.audio.currentTime = songPosition;
-            this.audio.play();
-        }else{
-            let position = e.layerX / event.currentTarget.width
-            let samplePosition = (Math.floor(222 * position))
-            this.newPosition = samplePosition;
+                let seconds = (this.audio.duration / 222);
+                let songPosition = seconds * samplePosition;
 
-            let seconds = (this.audio.duration / 222);
-            let songPosition = seconds * samplePosition;
+                this.audio.currentTime = songPosition;
+                this.audio.play()
+                    .catch(() => this.pause())
+                this.drawPlayingSong(this.props.i);
+            } else {
+                let position = e.layerX / event.currentTarget.width
+                let samplePosition = (Math.floor(222 * position))
+                this.newPosition = samplePosition;
 
-            this.audio.currentTime = songPosition;
+                let seconds = (this.audio.duration / 222);
+                let songPosition = seconds * samplePosition;
+
+                this.audio.currentTime = songPosition;
+            }
+
         }
-
     }
 
 
@@ -118,36 +135,34 @@ drawLineSegment(ctx, x, height, style) {
 };
 
 drawPlayingSong(buttonNumber) {
-
-    // clearInterval(this.eachSample)
-
+    
+    clearInterval(this.eachSample)
+    clearInterval(this.fading);
+    
     // const audio = document.getElementById(`audio-${buttonNumber}`);
     const canvas = document.getElementById(`canvas-${buttonNumber}`);
     const ctx = canvas.getContext("2d");
     let ms = (this.audio.duration / 222) * 1000;
+    
     let alpha = 0;
 
-    let fading = null;
 
-    //moves the canvas's songs position when clicked
-    fading = setInterval(() => {
+    // moves the canvas's songs position when clicked
+    this.fading = setInterval(() => {
         this.draw(this.props.song.metadata, canvas, ctx, this.newPosition, alpha);
         alpha += 0.1;
-    }, ms/ 10)
-
-
+    }, ms/100)
 
     //set interval for color changing
     this.eachSample = setInterval(() => {
-        //clears each interval every time
-        clearInterval(fading);
+        clearInterval(this.fading);
         alpha = 0;
-        //just faing effect for each sample
-
-        fading = setInterval(() => {
+        
+        //just fading effect for each sample
+        this.fading = setInterval(() => {
             this.draw(this.props.song.metadata, canvas, ctx, this.newPosition, alpha);
             alpha += 0.1;
-        }, ms / 10)
+        }, ms/20)
 
         this.newPosition++;
 
@@ -162,13 +177,10 @@ play(){
     this.drawPlayingSong(this.props.i)
 }
 pause(){
-    this.setState({ playing: false })
     clearInterval(this.eachSample)
+    this.setState({ playing: false })
 }
 
-onListen(e){
-    console.log(this.audio.canplay)
-}
 
 
 
@@ -177,7 +189,13 @@ onListen(e){
 
 
     playNext(){
-        //need to work on
+        
+    }
+
+    onEnded(){
+        this.newPosition = 0;
+        this.setState({wasPlayed: false})
+        clearInterval(this.eachSample)
     }
 
 
@@ -191,7 +209,7 @@ onListen(e){
                     src={this.props.song.musicUrl}
                     id={`audio-${this.props.i}`}
                     onAbort={this.pause}
-                    onEnded={this.playNext}
+                    onEnded={this.onEnded}
                     onPause={this.pause}
                     // onListen={this.onListen}
                 />
@@ -201,7 +219,7 @@ onListen(e){
                 <div className="song-item-elements">
                     
                     <div className="song-item-container-top">
-                        <button className="play" onClick={this.handleClick}>&#9658;</button>
+                        <button className="play" id={`play-${this.props.i}`} onClick={this.handleClick}><i class='fas fa-play'></i></button>
                         <div className="song-item-description">
                             <p className="song-item-description-username">{this.props.song.username}</p>
                             <p className="song-item-description-title">{this.props.song.title}</p>
