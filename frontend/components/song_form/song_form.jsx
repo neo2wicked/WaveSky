@@ -1,27 +1,21 @@
 import React from 'react';
-import SongItem from "./song_item"
+import SongItem from "../home/song_item/song_item"
 
 export default class SongForm extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {title: "", music: null, metadata: null}
+        this.state = {title: "", 
+            music: null, 
+            metadata: null,
+            firstForm: true,
+            secondForm: false
+        }
         this.handleClick = this.handleClick.bind(this)
         this.handleFile = this.handleFile.bind(this)
-        // this.triggerPlay = this.triggerPlay.bind(this)
-        // this.drawPlayingSong = this.drawPlayingSong.bind(this)
-
-        this.newPosition = 0;
-
-        this.state = {
-            position: 0,
-            buttonNumber: null
-        }
-        this.eachSample = null;
     }
 
     componentDidMount(){
-        this.props.fetchUser(this.props.match.params.username)
-        this.props.fetchUserSongs(this.props.match.params.username)
+        
     }
 
     handleClick(e) {
@@ -68,6 +62,7 @@ export default class SongForm extends React.Component {
     handleFile(e){
         this.setState({music: e.currentTarget.files[0]})
     }
+
     update(value){
         return e => (this.setState({[value]: e.currentTarget.value}))
     }
@@ -76,10 +71,49 @@ export default class SongForm extends React.Component {
     componentDidUpdate(){
     }
 
+
+    renderForm(){
+        if(this.state.firstForm){
+            return(
+                <div className="song-form-upload">
+                    <h3>Drag and drop your tracks &#38; albums here</h3>
+                    <div className="upload-btn-wrapper">
+                        <button className="upload-button">or choose file to upload</button>
+                        <input
+                            type="file"
+                            onChange={this.handleFile}
+                        />
+                    </div>
+
+                </div>
+            )
+        }else{
+
+
+            
+        }
+
+    }
+
    
     render() {
         return (
-            <div style={{backgroundColor: "lightgray"}}>
+            <div className="song-form-contaienr">
+                
+                
+                
+                
+                
+                
+                <img className="song-form-image" src="/assets/music-notes.jpg" alt=""/>
+                
+                
+                
+                
+                
+                
+                
+                
                 <label>
                     Title:
                     <input 
@@ -93,33 +127,6 @@ export default class SongForm extends React.Component {
 
                 </label>
                 <button onClick={this.handleClick}>Upload</button>
-
-             
-                   { this.props.songs.map((song, i) => (
-
-
-                        <SongItem song={song} i={i}/>
-
-                        // <div>
-                        //     <span>{song.title}</span>
-                        //     <audio controls>
-                        //        <source src={song.musicUrl} type="audio/ogg"/>
-                        //        <source src={song.musicUrl} type="audio/mpeg"/>
-                        //         Your browser does not support the audio element.
-                        //     </audio>
-                            
-                        //     <canvas className="canvas" id={`canvas-${i}`}>
-
-                        //     </canvas>
-
-
-
-                        // </div>
-                    ))}
-
-                {/* {this.props.songs.length != 0 ?  : null} */}
-                    
-              
             </div>
         )
     }

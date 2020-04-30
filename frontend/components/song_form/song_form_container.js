@@ -1,10 +1,10 @@
 import { connect } from "react-redux"
 import SongForm from "./song_form"
-import {fetchUserSongs ,createSong , updateSong } from "../../../actions/songs/songs_actions"
+import {fetchUserSongs ,createSong , updateSong } from "../../actions/songs/songs_actions"
 import {
     withRouter
 } from 'react-router-dom';
-import {fetchUser} from "../../../actions/user/user_actions"
+import {fetchUser} from "../../actions/user/user_actions"
 
 
 const mapSTP = state => ({

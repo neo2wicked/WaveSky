@@ -5,13 +5,11 @@ class Song < ApplicationRecord
     
     
     has_one_attached :music
-    validates :music, presence: true, blob: { content_type: :audio } # supported options: :image, :audio, :video, :text
     validate :ensure_music
     
     
-    has_one_attached :image
-    validates :image, presence: true, blob: { content_type: :image } # supported options: :image, :audio, :video, :text
-    validate :ensure_image
+    has_one_attached :music_image
+    # validate :ensure_image
 
 
 
@@ -21,11 +19,11 @@ class Song < ApplicationRecord
         end
     end
 
-    def ensure_image
-        unless self.image.attached?
-            errors[:image] << "The image file was not attached."
-        end
-    end
+    # def ensure_image
+    #     unless self.music_image.attached?
+    #         errors[:image] << "The image file was not attached."
+    #     end
+    # end
 
 
 

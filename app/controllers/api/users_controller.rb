@@ -32,10 +32,18 @@ class Api::UsersController < ApplicationController
     end
 
     def update
+        username = user_params[:username].to_s
+        @user = User.find_by(username: username)
+        if (@user)
+            @user.update(user_params)
+            render json: ["successful update."], status: 200
+        else
+            render json: ["The user was not found."], status: 404
+        end
         
     end
     private
     def user_params
-        params.require(:user).permit(:username, :password)
+        params.require(:user).permit(:username, :password, :profile_photo, :background_photo)
     end
 end

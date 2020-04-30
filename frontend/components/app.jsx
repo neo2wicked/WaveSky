@@ -1,21 +1,24 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch} from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../utils/route_util'
 import Index from "./index/index"
 import Home from "./home/home"
-
+import SongFormContainer from "./song_form/song_form_container"
+import NavBarContainer from "./nav_bar/nav_bar_container"
 
 //test
-import SongItem from "./home/song_form/song_item"
 
 export default (props) => (
     <div>
         {/* <SongItem/> */}
         {/* {console.log(props.location.pathname)} */}
         {/* <Route exact path="/" component={FirstForm} /> */}
-        
-        <AuthRoute path="/" component={Index}></AuthRoute>
-        <ProtectedRoute path={`/:username/`} component={Home} ></ProtectedRoute> 
+        <ProtectedRoute path="/" component={NavBarContainer}></ProtectedRoute>
+        <AuthRoute exact path="/" component={Index}></AuthRoute>
+        <Switch>
+            <ProtectedRoute exact path={'/upload'} component={SongFormContainer}></ProtectedRoute>
+            <ProtectedRoute exact path={`/:username/`} component={Home} ></ProtectedRoute> 
+        </Switch>
         
         
         {/* <Route path="/" component={Index} />  */}

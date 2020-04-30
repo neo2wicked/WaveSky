@@ -6,6 +6,9 @@ class User < ApplicationRecord
 
     after_initialize :ensure_session_token
 
+    has_one_attached :profile_photo
+    has_one_attached :profile_background
+
 
     has_many :songs,
         primary_key: :username,

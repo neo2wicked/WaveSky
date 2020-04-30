@@ -19,9 +19,23 @@ export default class SongItem extends React.Component {
         this.onEnded = this.onEnded.bind(this)
         // this.onListen = this.onListen.bind(this)
     }
+
+    renderImage(){
+        if (this.props.song.musicImage){
+            return <img src={this.props.song.musicImage}/>
+        }else{
+            if (this.props.user.profilePhoto){
+                return <img src={this.props.user.profilePhoto} />
+            }else{
+                return <img src="https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png" />
+            }
+        }
+    }
         
     componentDidMount(){
         this.audio = document.getElementById(`audio-${this.props.i}`)
+
+        console.log(this.props.song.musicImage)
         
         
         this.audio.addEventListener("playing", ()=>{
@@ -213,8 +227,8 @@ pause(){
                     onPause={this.pause}
                     // onListen={this.onListen}
                 />
-                
-                <img src="/assets/party1.jpg" alt=""/>
+
+                {this.renderImage()}
 
                 <div className="song-item-elements">
                     

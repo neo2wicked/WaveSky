@@ -8,17 +8,19 @@ const mapSTP = (state) => ({
 }) 
 
 
-const Auth = ({ loggedIn, path, component: Component, user}) => (
+const Auth = ({ loggedIn, path, exact, component: Component, user}) => (
     <Route
-        exact path={path}
+        path={path}
+        exact={exact}
         render={props => (
             loggedIn ? <Redirect to={`/${user.username}`} /> : <Component {...props}/>
         )}
     />
 )
-const Protected = ({ loggedIn , path, component: Component}) => (
+const Protected = ({ loggedIn, path, exact, component: Component}) => (
     <Route
-        exact path={path}
+        path={path}
+        exact={exact}
         render={props => (
             loggedIn ? <Component {...props} /> : <Redirect to={'/'} />
         )}

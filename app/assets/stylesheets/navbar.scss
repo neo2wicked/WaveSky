@@ -9,6 +9,14 @@ header {
     position: relative;
 }
 
+header a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -77,7 +85,7 @@ nav {
 }
 
 .upload {
-    width: 170px;
+    width: 130px;
     color: gainsboro;
 }
 
@@ -86,14 +94,34 @@ nav {
     padding: 5px;
     background-color: gray;
     border-radius: 100px;
+    // margin-left: 30px;
 }
 
 .profile {
-    width: 100px;
+    width: 150px;
     color: gainsboro;
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
+.arrow{
+}
+.username{
+    width: auto;
+    // display: flex;
+    // align-items: center;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+.username-box{
+    width: 100px;
+    display: flex;
+    justify-content: space-evenly;
+}
 .fa-ellipsis-h {
     color: white;
     font-size: 1.4rem;
@@ -106,3 +134,9 @@ canvas {
     width: 484px;
     height: 100px;
 }
+
+.active-page{
+    background-color: rgb(17,17,17);
+    color: white;
+}
+
