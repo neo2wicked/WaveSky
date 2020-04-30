@@ -1,4 +1,5 @@
 import React from 'react';
+import SongItem from "./song_item"
 
 export default class SongForm extends React.Component {
     constructor(props) {
@@ -66,7 +67,7 @@ export default class SongForm extends React.Component {
 
 
 
-    draw(normalizedData, canvas, ctx, counter = null){
+    draw(normalizedData, canvas, ctx, ms, counter = null){
 
         // draw the initial canvas
         const width = Math.floor(canvas.width / normalizedData.length) * 1.5;
@@ -75,8 +76,8 @@ export default class SongForm extends React.Component {
             const x = width * i;
             let height = normalizedData[i]// * canvas.offsetHeight - padding;
 
-            this.drawLineSegment(ctx, x, height * 120, "#848484");
-            this.drawLineSegment(ctx, x, -height * 60, "#C1C1C1");
+            this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
+            this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
         }
 
         if (counter) {
@@ -85,10 +86,34 @@ export default class SongForm extends React.Component {
                 let height = normalizedData[i] // * canvas.offsetHeight - padding;
                 this.drawPlaySegment(ctx, x, height * 120, "rgba(255,165,127,0.2)");
                 this.drawPlaySegment(ctx, x, -height * 60, "#FFA57F");
-
+                
             }
         }
     };
+
+
+    
+
+    
+        drawPlayingSong(buttonNumber){
+            const audio = document.getElementById(`audio-${buttonNumber}`);
+            const canvas = document.getElementById(`canvas-${buttonNumber}`);
+            const ctx = canvas.getContext("2d");
+            let ms = (audio.duration / 222) * 1000;
+            let i = 0;
+            setInterval(() => {
+                draw(data, canvas, ctx, ms, i)
+                i += 1;
+            }, ms);
+        }
+
+        triggerPlay(){
+            this.drawPlayingSong
+        }
+
+
+
+
 
 
     drawLineSegment(ctx, x, height, style){
@@ -123,7 +148,6 @@ export default class SongForm extends React.Component {
 
     setCanvasPropertiesAndDraw(data, i){
         const canvas = document.getElementById(`canvas-${i}`);
-        console.log(canvas)
         const dpr = 1
         const padding = 10;
         canvas.width = canvas.offsetWidth * dpr;
@@ -155,21 +179,25 @@ export default class SongForm extends React.Component {
 
              
                    { this.props.songs.map((song, i) => (
-                        <div>
-                            <span>{song.title}</span>
-                            <audio controls>
-                               <source src={song.musicUrl} type="audio/ogg"/>
-                               <source src={song.musicUrl} type="audio/mpeg"/>
-                                Your browser does not support the audio element.
-                            </audio>
+
+
+                        <SongItem song={song} i={i}/>
+
+                        // <div>
+                        //     <span>{song.title}</span>
+                        //     <audio controls>
+                        //        <source src={song.musicUrl} type="audio/ogg"/>
+                        //        <source src={song.musicUrl} type="audio/mpeg"/>
+                        //         Your browser does not support the audio element.
+                        //     </audio>
                             
-                            <canvas style={{width: 644, height: 60}} className="canvas" id={`canvas-${i}`}>
+                        //     <canvas className="canvas" id={`canvas-${i}`}>
 
-                            </canvas>
+                        //     </canvas>
 
 
 
-                        </div>
+                        // </div>
                     ))}
 
                 {/* {this.props.songs.length != 0 ?  : null} */}
