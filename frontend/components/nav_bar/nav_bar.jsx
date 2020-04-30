@@ -66,7 +66,7 @@ class NavBar extends React.Component {
                                     {this.renderAvatar()}
 
                                    <div class="username-box">
-                                        <div className="username">ELydium</div>
+                                        <div className="username">ELydiumnfkjkdhfjh</div>
                                         <div className="arrow">↯</div>
                                    </div>
                                 </div>    
