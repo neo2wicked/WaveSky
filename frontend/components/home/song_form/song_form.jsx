@@ -7,8 +7,8 @@ export default class SongForm extends React.Component {
         this.state = {title: "", music: null, metadata: null}
         this.handleClick = this.handleClick.bind(this)
         this.handleFile = this.handleFile.bind(this)
-        this.triggerPlay = this.triggerPlay.bind(this)
-        this.drawPlayingSong = this.drawPlayingSong.bind(this)
+        // this.triggerPlay = this.triggerPlay.bind(this)
+        // this.drawPlayingSong = this.drawPlayingSong.bind(this)
 
         this.newPosition = 0;
 
@@ -22,9 +22,6 @@ export default class SongForm extends React.Component {
     componentDidMount(){
         this.props.fetchUser(this.props.match.params.username)
         this.props.fetchUserSongs(this.props.match.params.username)
-            .then(()=>{
-                
-            })
     }
 
     handleClick(e) {
@@ -39,8 +36,6 @@ export default class SongForm extends React.Component {
                 this.props.createSong(formData)
             })
 
-       
-        
     }
 
 
@@ -78,148 +73,10 @@ export default class SongForm extends React.Component {
     }
 
 
-
-    draw(normalizedData, canvas, ctx, ms, counter = null, alpha = null){
-
-        // draw the initial canvas
-        // const width = Math.floor((canvas.width) / normalizedData.length) * 1.5;
-        const width = (Math.floor((canvas.width) / normalizedData.length)) * 1.5;
-
-        // if (this.state.samplePosition >= counter){
-            for (let i = 0; i < normalizedData.length; i++) {
-                const x = width * i;
-                let height = normalizedData[i] // * canvas.offsetHeight - padding;
-                
-                if (i < counter){
-                    this.drawLineSegment(ctx, x, height * 120, `rgba(255,66,0,${alpha})`);
-                    this.drawLineSegment(ctx, x, -height * 60, `rgb(255,165,127, ${alpha})`);
-                }else{
-
-                    this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
-                    this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
-                }
-                
-            }
-
-
-        // for (let i = counter; i < normalizedData.length; i++) {
-        //     const x = width * i;
-        //     let height = normalizedData[i]// * canvas.offsetHeight - padding;
-
-        //     this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
-        //     this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
-        // }
-        // }
-
-        // if (counter) {
-        // }
-        
-    };
-
-    
-    
-
-
-        drawPlayingSong(buttonNumber){
-            
-            // clearInterval(this.eachSample)
-
-            const audio = document.getElementById(`audio-${buttonNumber}`);
-            const canvas = document.getElementById(`canvas-${buttonNumber}`);
-            const ctx = canvas.getContext("2d");
-            let ms = (audio.duration / 222) * 1000;
-            let alpha = 0;
-
-            let fading = null;
-            
-            //moves the canvas's songs position when clicked
-            fading = setInterval(() => {
-                this.draw(this.props.songs[buttonNumber].metadata, canvas, ctx, ms, this.newPosition, alpha);
-                alpha += 0.1;
-            }, 40)
-
-            
-
-            //set interval for color changing
-            this.eachSample = setInterval(() => {
-                //clears each interval every time
-                clearInterval(fading);
-                alpha = 0;
-                //just faing effect for each sample
-
-                fading = setInterval(() => {
-                    this.draw(this.props.songs[this.state.buttonNumber].metadata, canvas, ctx, ms, this.newPosition, alpha);
-                    alpha += 0.05;
-                }, ms/ 20)
-
-                this.newPosition++;
-                
-
-            }, ms);
-
-            
-        }
-
-
-    triggerPlay(buttonNumber, position){
-            
-        if (this.state.buttonNumber === null) {
-            this.drawPlayingSong(buttonNumber);
-        }
-
-        this.setState({ buttonNumber })
-        this.newPosition = position;
-    }
-
-
-
-
-
-
-    drawLineSegment(ctx, x, height, style){
-        ctx.lineWidth = 2; // how thick the line is
-        ctx.strokeStyle = style; // what color our line is
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, -height);
-
-        ctx.stroke();
-    };
-
     componentDidUpdate(){
-        this.props.songs.map((song, i) => {
-            this.setCanvasPropertiesAndDraw(song.metadata, i)
-        })
     }
 
-    drawPlaySegment(ctx, x, height, style){
-        ctx.lineWidth = 2; // how thick the line is
-        ctx.strokeStyle = style; // what color our line is
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, -height);
-
-        ctx.stroke();
-    };
-
-
-    
-
-
-    setCanvasPropertiesAndDraw(data, i){
-        const canvas = document.getElementById(`canvas-${i}`);
-        const dpr = 1
-        const padding = 10;
-        canvas.width = canvas.offsetWidth * dpr;
-        canvas.height = (canvas.offsetHeight + padding * 2) * dpr;
-        const ctx = canvas.getContext("2d");
-        ctx.translate(1, canvas.height * (2 / 3)); // set Y = 0 to be in the middle of the canvas
-        this.draw(data, canvas, ctx)
-    }
-
-
-
-
+   
     render() {
         return (
             <div style={{backgroundColor: "lightgray"}}>
@@ -241,7 +98,7 @@ export default class SongForm extends React.Component {
                    { this.props.songs.map((song, i) => (
 
 
-                        <SongItem song={song} i={i} triggerPlay={this.triggerPlay}/>
+                        <SongItem song={song} i={i}/>
 
                         // <div>
                         //     <span>{song.title}</span>
