@@ -23,14 +23,17 @@ export default class SongItem extends React.Component {
                     samplePosition = Math.floor(222 * position);
                     
                     
-                    let ms = ((audio.duration / 222) * 1000);
-                    let songPosition = ms * samplePosition;
+                    let seconds = (audio.duration / 222);
+                    let songPosition = seconds * samplePosition;
                     this.props.triggerPlay(this.props.i, samplePosition)
+                    audio.currentTime = songPosition;
+                    console.log(samplePosition)
+                    audio.play();
                 })
                 eventWasSet = true;
-            }else{
-                this.props.triggerPlay(this.props.i, samplePosition)
             }
+            this.props.triggerPlay(this.props.i, samplePosition)
+            
             
             audio.play()
         }else{

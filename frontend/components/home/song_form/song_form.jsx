@@ -10,8 +10,11 @@ export default class SongForm extends React.Component {
         this.triggerPlay = this.triggerPlay.bind(this)
         this.drawPlayingSong = this.drawPlayingSong.bind(this)
 
+        this.newPosition = 0;
+
         this.state = {
-            samplePosition: 0
+            position: 0,
+            buttonNumber: null
         }
         this.eachSample = null;
     }
@@ -76,30 +79,40 @@ export default class SongForm extends React.Component {
 
 
 
-    draw(normalizedData, canvas, ctx, ms, counter = 0, alpha = null){
+    draw(normalizedData, canvas, ctx, ms, counter = null, alpha = null){
 
         // draw the initial canvas
         // const width = Math.floor((canvas.width) / normalizedData.length) * 1.5;
         const width = (Math.floor((canvas.width) / normalizedData.length)) * 1.5;
 
-      
-        for (let i = 0; counter < normalizedData.length; i++) {
-            const x = width * i;
-            let height = normalizedData[i]// * canvas.offsetHeight - padding;
+        // if (this.state.samplePosition >= counter){
+            for (let i = 0; i < normalizedData.length; i++) {
+                const x = width * i;
+                let height = normalizedData[i] // * canvas.offsetHeight - padding;
+                
+                if (i < counter){
+                    this.drawLineSegment(ctx, x, height * 120, `rgba(255,66,0,${alpha})`);
+                    this.drawLineSegment(ctx, x, -height * 60, `rgb(255,165,127, ${alpha})`);
+                }else{
 
-            this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
-            this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
-        }
-       
-       
-        for (let i = 0; i < counter; i++) {
-            const x = width * i;
-            let height = normalizedData[i] // * canvas.offsetHeight - padding;
-            this.drawLineSegment(ctx, x, height * 120, `rgba(255,66,0,${alpha})`);
-            this.drawLineSegment(ctx, x, -height * 60, `rgb(255,165,127, ${alpha})`);
-            
-        }
+                    this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
+                    this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
+                }
+                
+            }
 
+
+        // for (let i = counter; i < normalizedData.length; i++) {
+        //     const x = width * i;
+        //     let height = normalizedData[i]// * canvas.offsetHeight - padding;
+
+        //     this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
+        //     this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
+        // }
+        // }
+
+        // if (counter) {
+        // }
         
     };
 
@@ -107,9 +120,9 @@ export default class SongForm extends React.Component {
     
 
 
-        drawPlayingSong(buttonNumber, position = 0){
+        drawPlayingSong(buttonNumber){
             
-            clearInterval(this.eachSample)
+            // clearInterval(this.eachSample)
 
             const audio = document.getElementById(`audio-${buttonNumber}`);
             const canvas = document.getElementById(`canvas-${buttonNumber}`);
@@ -121,9 +134,11 @@ export default class SongForm extends React.Component {
             
             //moves the canvas's songs position when clicked
             fading = setInterval(() => {
-                this.draw(this.props.songs[buttonNumber].metadata, canvas, ctx, ms, position, alpha);
+                this.draw(this.props.songs[buttonNumber].metadata, canvas, ctx, ms, this.newPosition, alpha);
                 alpha += 0.1;
             }, 40)
+
+            
 
             //set interval for color changing
             this.eachSample = setInterval(() => {
@@ -131,19 +146,30 @@ export default class SongForm extends React.Component {
                 clearInterval(fading);
                 alpha = 0;
                 //just faing effect for each sample
+
                 fading = setInterval(() => {
-                    this.draw(this.props.songs[buttonNumber].metadata, canvas, ctx, ms, position, alpha);
-                    alpha += 0.1;
-                }, ms / 10)
+                    this.draw(this.props.songs[this.state.buttonNumber].metadata, canvas, ctx, ms, this.newPosition, alpha);
+                    alpha += 0.05;
+                }, ms/ 20)
+
+                this.newPosition++;
                 
-                position += 1;
 
             }, ms);
+
+            
         }
 
-        triggerPlay(buttonNumber, position){
-            this.drawPlayingSong(buttonNumber, position)
+
+    triggerPlay(buttonNumber, position){
+            
+        if (this.state.buttonNumber === null) {
+            this.drawPlayingSong(buttonNumber);
         }
+
+        this.setState({ buttonNumber })
+        this.newPosition = position;
+    }
 
 
 
