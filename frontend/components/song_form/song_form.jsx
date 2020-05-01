@@ -14,6 +14,8 @@ export default class SongForm extends React.Component {
             firstForm: true,
             secondForm: false,
             musicImageUrl: null,
+            duration: null,
+        
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleFileMusic = this.handleFileMusic.bind(this)
@@ -39,9 +41,13 @@ export default class SongForm extends React.Component {
                 formData.append('song[music]', this.state.music);
                 formData.append('song[metadata]', this.state.metadata);
                 formData.append('song[musicImage]', this.state.musicImage);
-                this.props.createSong(formData).upload.addEventListener("progress", e => {
-                    console.log(e)
-                })
+                formData.append('song[duration]', this.state.duration);
+
+
+                // console.log(this.state.duration)
+
+
+                this.props.createSong(formData)
             })
           
 
@@ -78,8 +84,30 @@ export default class SongForm extends React.Component {
         let file = document.getElementById("song-form-music-file")
         file.click()
     }
+
+    
     handleFileMusic(e) {
-        this.setState({ music: e.currentTarget.files[0], firstForm: false, secondForm: true })
+        const fileReader = new FileReader();
+        const music = e.currentTarget.files[0]
+
+        fileReader.onload = (e) => {
+            const audioElement = document.createElement('audio');
+            audioElement.src = e.target.result;
+            let that = this
+            const timer = setInterval(() => {
+                if (audioElement.readyState === 4) {
+                    let duration = audioElement.duration
+                    that.setState({ music: music, firstForm: false, secondForm: true , duration: duration})
+                    clearInterval(timer);
+                }
+            }, 500)
+
+
+        };
+        if (music) {
+            fileReader.readAsDataURL(music)
+        }
+        
     }
 
     handleFileImageClick(e) {
@@ -88,7 +116,6 @@ export default class SongForm extends React.Component {
     }
     handleFileImage(e) {
         // e.persist();
-        // console.log(e.currentTarget.files[0])
         const image = e.currentTarget.files[0];
         const fileReader = new FileReader();
         fileReader.onloadend = () => {
@@ -98,7 +125,6 @@ export default class SongForm extends React.Component {
         if (image){
             fileReader.readAsDataURL(image);
         }
-        console.log(image)
     }
 
     update(value) {
@@ -120,6 +146,7 @@ export default class SongForm extends React.Component {
             firstForm: true,
             secondForm: false,
             musicImageUrl: null,
+            duration: null,
         })
     }
 

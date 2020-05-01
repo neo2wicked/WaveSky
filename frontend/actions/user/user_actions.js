@@ -13,6 +13,5 @@ export const receiveUser = (user) => ({
 export const fetchUser = (username) => dispatch => (
     UsersAPIUtil.fetchUser(username)
         .then( (user) => dispatch(receiveUser(user)))
-        // .fail(() => console.log(username))
 //errors
 )

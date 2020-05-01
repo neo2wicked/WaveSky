@@ -8,9 +8,9 @@ export default class SongItem extends React.Component {
         this.state = { 
             samplePosition: 0,
             playing: false,
-            wasPlayed: false,
         }
-
+        this.drawing = false;
+        this.wasPlayed = false
         this.newPosition = 0;
         this.handleClick = this.handleClick.bind(this)
         this.handleCanvasClick = this.handleCanvasClick.bind(this)
@@ -34,49 +34,117 @@ export default class SongItem extends React.Component {
     }
         
     componentDidMount(){
-        this.audio = document.getElementById(`audio-${this.props.i}`)
+        // this.audio = document.getElementById(`audio-${this.props.i}`)
 
-        console.log(this.props.song.musicImage)
         
         
-        this.audio.addEventListener("playing", ()=>{
-            this.play()
-        })
-        this.audio.addEventListener("waiting", ()=>{
-            this.pause()
+        // this.audio.addEventListener("playing", ()=>{
+        //     this.play()
+        // })
+        // this.audio.addEventListener("waiting", ()=>{
+        //     this.pause()
 
-        })
+        // })
         this.setCanvasPropertiesAndDraw(this.props.song.metadata, this.props.i)
     }
     handleClick(event) {
         // event.persist();
         // let e = event.nativeEvent
-        if (!this.state.wasPlayed){
-            this.setState({wasPlayed: true})
-        }
         let button = document.getElementById(`play-${this.props.i}`)
-        if (this.audio.paused){
+
+        if (!this.wasPlayed) {
+            this.wasPlayed = true;
+            this.drawing = true;
             button.innerHTML = "<i class='fas fa-pause'></i>"
-            this.audio.play()
+            this.props.receiveCurrentSong(Object.assign({}, this.props.song, {playing: true}))
         }else{
-            button.innerHTML = "<i class='fas fa-play'></i>"
-            this.audio.pause()
+
+            if (this.props.currentSong.playing) {
+                button.innerHTML = "<i class='fas fa-pause'></i>"
+                this.drawing = false;
+                this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false }))
+            } else {
+                button.innerHTML = "<i class='fas fa-play'></i>"
+                this.drawing = true;
+                this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: true }))
+            }
+
         }
+       
+       
+        
+        
+        
+        
+        
+        // if (!this.state.wasPlayed){
+        //     this.setState({wasPlayed: true})
+        //     this.props.receiveCurrentSong(this.props.song)
+        // }
+        // let button = document.getElementById(`play-${this.props.i}`)
+        // if (this.audio.paused){
+        //     button.innerHTML = "<i class='fas fa-pause'></i>"
+        //     this.audio.play()
+        // }else{
+        //     button.innerHTML = "<i class='fas fa-play'></i>"
+        //     this.audio.pause()
+        // }
     }
 
+
+    componentDidUpdate(){
+        let button = document.getElementById(`play-${this.props.i}`)
+        if (this.props.currentSong.id === this.props.song.id){
+            if (this.props.currentSong.playing) {
+                button.innerHTML = "<i class='fas fa-pause'></i>"
+                this.drawing = true;
+            } else {
+                button.innerHTML = "<i class='fas fa-play'></i>"
+                this.drawing = false;
+            }
+
+            if (this.props.currentSong.duration) {
+                if (this.drawing === false) {
+                    this.drawing = true;
+                    this.drawPlayingSong(this.props.i)
+
+                }
+
+            }
+
+
+
+
+        }
+
+        
+        console.log("item updated")
+
+     
+
+    }
 
     handleCanvasClick(event){
         event.persist();
         let e = event.nativeEvent
         
-        if (this.state.wasPlayed){
+        if (this.wasPlayed){
             if (this.state.playing) {
                 let position = e.layerX / event.currentTarget.width
                 let samplePosition = (Math.floor(222 * position))
+                //NO NEED TO PASS
                 this.newPosition = samplePosition;
-
+            
+                //
                 let seconds = (this.audio.duration / 222);
+                
+                
+                //
                 let songPosition = seconds * samplePosition;
+                //
+
+                let song = this.props.song
+                this.props.receiveCurrentSong({song, songPosition, samplePosition})
 
                 this.audio.currentTime = songPosition;
                 this.audio.play()
@@ -89,6 +157,8 @@ export default class SongItem extends React.Component {
 
                 let seconds = (this.audio.duration / 222);
                 let songPosition = seconds * samplePosition;
+                //
+                this.props.receiveCurrentSong({ song, songPosition, samplePosition })
 
                 this.audio.currentTime = songPosition;
             }
@@ -157,7 +227,8 @@ drawPlayingSong(buttonNumber) {
     // const audio = document.getElementById(`audio-${buttonNumber}`);
     const canvas = document.getElementById(`canvas-${buttonNumber}`);
     const ctx = canvas.getContext("2d");
-    let ms = (this.audio.duration / 222) * 1000;
+    let ms = (this.props.currentSong.duration / 222) * 1000;
+   
     
     let alpha = 0;
 
@@ -188,8 +259,8 @@ drawPlayingSong(buttonNumber) {
 } 
 
 play(){
-    this.setState({playing: true})
-    this.drawPlayingSong(this.props.i)
+    // this.setState({playing: true})
+    // this.drawPlayingSong(this.props.i)
 }
 pause(){
     clearInterval(this.eachSample)
@@ -219,7 +290,7 @@ pause(){
         return (
             <div className="song-item-container">
                 {/* <audio onListen={this.onListen} onPause={this.pause} onPlay={this.play} src={this.props.song.musicUrl} id={`audio-${this.props.i}`}></audio> */}
-                <ReactAudioPlayer
+                {/* <ReactAudioPlayer
                     listenInterval={10}
                     src={this.props.song.musicUrl}
                     id={`audio-${this.props.i}`}
@@ -227,7 +298,7 @@ pause(){
                     onEnded={this.onEnded}
                     onPause={this.pause}
                     // onListen={this.onListen}
-                />
+                /> */}
 
                 {this.renderImage()}
 

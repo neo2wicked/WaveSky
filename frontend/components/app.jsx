@@ -5,12 +5,14 @@ import Index from "./index/index"
 import Home from "./home/home"
 import SongFormContainer from "./song_form/song_form_container"
 import NavBarContainer from "./nav_bar/nav_bar_container"
+import Player from "../components/player/player_container"
 
 //test
 
 export default (props) => (
     <div>
         {/* <SongItem/> */}
+        <ProtectedRoute path="/" component={Player}></ProtectedRoute>
         {/* {console.log(props.location.pathname)} */}
         {/* <Route exact path="/" component={FirstForm} /> */}
         <ProtectedRoute path="/" component={NavBarContainer}></ProtectedRoute>
@@ -19,7 +21,6 @@ export default (props) => (
             <ProtectedRoute exact path={'/upload'} component={SongFormContainer}></ProtectedRoute>
             <ProtectedRoute exact path={`/:username/`} component={Home} ></ProtectedRoute> 
         </Switch>
-        
         
         {/* <Route path="/" component={Index} />  */}
         {/* <ProtectedRoute exact path="/" component={Index} ></ProtectedRoute>  */}
