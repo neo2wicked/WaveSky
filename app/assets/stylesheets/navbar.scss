@@ -40,6 +40,11 @@ nav {
     color: white;
 }
 
+.navbar-list-item{
+    position: relative;
+    color: gainsboro;
+}
+
 .logo {
     width: 80px;
     background-color: rgb(253, 101, 33);
@@ -99,7 +104,6 @@ nav {
 
 .profile {
     width: 150px;
-    color: gainsboro;
     text-align: center;
     display: flex;
     flex-direction: row;
@@ -137,6 +141,43 @@ canvas {
 
 .active-page{
     background-color: rgb(17,17,17);
+    color: white;
+}
+
+.dropdown-menu-1{
+    top: 45px;
+    width: 100%;
+    
+    position: absolute;
+    background-color: rgb(18,18,18);
+    // z-index: 2;
+}
+
+.dropdown-menu-1 div{
+    height: 30px;
+    color: rgb(197,197,197);
+}
+.dropdown-menu-1 div:hover{
+    background-color: rgb(51, 51, 51);
+    color: white;
+}
+
+.dropdown-menu-2{
+    position: absolute;
+    width: 100%;
+    height: inherit;
+    background-color: rgb(51, 51, 51);
+    top: 45px;
+    // display: none;
+}
+.dropdown-2{
+    position: relative;
+}
+.dropdown-menu-2 div {
+    height: 30px;
+    color: rgb(197, 197, 197);
+}
+.dropdown-menu-2 div:hover {
     color: white;
 }
 

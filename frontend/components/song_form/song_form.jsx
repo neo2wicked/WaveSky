@@ -6,13 +6,21 @@ export default class SongForm extends React.Component {
         super(props)
         this.state = {
             title: "",
+            genre: "",
+            description: "",
             music: null,
+            musicImage: null,
             metadata: null,
-            firstForm: false,
-            secondForm: false
+            firstForm: true,
+            secondForm: false,
+            musicImageUrl: null,
         }
         this.handleClick = this.handleClick.bind(this)
-        this.handleFile = this.handleFile.bind(this)
+        this.handleFileMusic = this.handleFileMusic.bind(this)
+        this.handleFileImage = this.handleFileImage.bind(this)
+        this.handleFileMusicClick = this.handleFileMusicClick.bind(this)
+        this.handleFileImageClick = this.handleFileImageClick.bind(this)
+        this.cancel = this.cancel.bind(this)
     }
 
     componentDidMount() {
@@ -25,11 +33,17 @@ export default class SongForm extends React.Component {
         this.getSongData()
             .then(() => {
                 formData.append('song[title]', this.state.title);
+                formData.append('song[genre]', this.state.genre);
+                formData.append('song[description]', this.state.description);
                 formData.append('song[username]', this.props.user.username);
                 formData.append('song[music]', this.state.music);
                 formData.append('song[metadata]', this.state.metadata);
-                this.props.createSong(formData)
+                formData.append('song[musicImage]', this.state.musicImage);
+                this.props.createSong(formData).upload.addEventListener("progress", e => {
+                    console.log(e)
+                })
             })
+          
 
     }
 
@@ -60,8 +74,31 @@ export default class SongForm extends React.Component {
     }
 
 
-    handleFile(e) {
+    handleFileMusicClick(e) {
+        let file = document.getElementById("song-form-music-file")
+        file.click()
+    }
+    handleFileMusic(e) {
         this.setState({ music: e.currentTarget.files[0], firstForm: false, secondForm: true })
+    }
+
+    handleFileImageClick(e) {
+        let file = document.getElementById("song-form-image-file")
+        file.click()
+    }
+    handleFileImage(e) {
+        // e.persist();
+        // console.log(e.currentTarget.files[0])
+        const image = e.currentTarget.files[0];
+        const fileReader = new FileReader();
+        fileReader.onloadend = () => {
+            this.setState({ musicImage: image, musicImageUrl: fileReader.result})
+            
+        };
+        if (image){
+            fileReader.readAsDataURL(image);
+        }
+        console.log(image)
     }
 
     update(value) {
@@ -72,23 +109,34 @@ export default class SongForm extends React.Component {
     componentDidUpdate() {
     }
 
+    cancel(){
+        this.setState({
+            title: "",
+            genre: "",
+            description: "",
+            music: null,
+            musicImage: null,
+            metadata: null,
+            firstForm: true,
+            secondForm: false,
+            musicImageUrl: null,
+        })
+    }
+
 
     renderForm() {
         if (this.state.firstForm) {
             return (
                 <div className="song-form-content">
-                    <div className="song-form-upload">
-                        <h3>Drag and drop your tracks &#38; albums here</h3>
-                        <div className="upload-btn-wrapper">
-                            <button className="upload-button">or choose file to upload</button>
-                            <input
-                                type="file"
-                                onChange={this.handleFile}
-                            />
-                        </div>
-
-
-
+                    <div className="first-song-form">
+                        <h3>Drag and drop your track here</h3>
+                        <button onClick={this.handleFileMusicClick} className="music-upload-button">or choose file to upload</button>
+                        <input
+                            id="song-form-music-file"
+                            className="files"        
+                            type="file"
+                            onChange={this.handleFileMusic}
+                        />
                     </div>
                     <img className="song-form-image" src="/assets/music-notes.jpg" alt="" />
                 </div>
@@ -96,7 +144,7 @@ export default class SongForm extends React.Component {
         } else {
             return (
                 <div className="song-form-content">
-                    <div className="song-form-upload second-form">
+                    <div className="second-song-form">
 
                         <div className="song-all-inputs">
 
@@ -107,24 +155,30 @@ export default class SongForm extends React.Component {
                             <div className="song-info">
 
                                 <div className="image-preview">
-                                    <img src="" alt="" />
-                                    <button className="song-form-image-button"><i class="fas fa-camera"></i> Upload image</button>
+                                    {this.state.musicImageUrl ? <img src={this.state.musicImageUrl} alt="" /> : null}
+                                    <button onClick={this.handleFileImageClick} className="song-form-image-button"><i class="fas fa-camera"></i> Upload image</button>
+                                    <input
+                                        id="song-form-image-file"
+                                        className="files"
+                                        type="file"
+                                        onChange={this.handleFileImage}
+                                    />
                                 </div>
 
                                 <div className="song-texts">
                                     <div className="text-field">
                                         <div>Title *</div>
-                                        <input className="song-form-input" type="text" required />
+                                        <input className="song-form-input" type="text" onChange={this.update("title")} required />
                                     </div>
 
                                     <div className="text-field">
                                         <div>Genre</div>
-                                        <input className="song-form-input genre" type="text" required />
+                                        <input className="song-form-input genre" type="text" onChange={this.update("genre")} required />
                                     </div>
 
                                     <div className="">
                                         <div>Description</div>
-                                        <textarea placeholder="Describe your track" className="description" cols="65" rows="10"></textarea>
+                                        <textarea placeholder="Describe your track" className="description" cols="65" rows="10" onChange={this.update("description")}></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +189,7 @@ export default class SongForm extends React.Component {
                             <div>* Required fields</div>
                             
                             <div>
-                                <button className="song-form-bottom-buttons song-form-cancel" >Cancel</button>
+                                <button onClick={this.cancel}className="song-form-bottom-buttons song-form-cancel" >Cancel</button>
                                 <button className="song-form-bottom-buttons song-form-save" onClick={this.handleClick}>Save</button>
                             </div>
 

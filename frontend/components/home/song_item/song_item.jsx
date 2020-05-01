@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
+import {Link } from "react-router-dom"
 
 export default class SongItem extends React.Component {
     constructor(props) {
@@ -21,8 +22,8 @@ export default class SongItem extends React.Component {
     }
 
     renderImage(){
-        if (this.props.song.musicImage){
-            return <img src={this.props.song.musicImage}/>
+        if (this.props.song.imageUrl){
+            return <img src={this.props.song.imageUrl}/>
         }else{
             if (this.props.user.profilePhoto){
                 return <img src={this.props.user.profilePhoto} />
@@ -235,7 +236,7 @@ pause(){
                     <div className="song-item-container-top">
                         <button className="play" id={`play-${this.props.i}`} onClick={this.handleClick}><i class='fas fa-play'></i></button>
                         <div className="song-item-description">
-                            <p className="song-item-description-username">{this.props.song.username}</p>
+                            <Link to={`/${this.props.song.username}`}><p className="song-item-description-username">{this.props.song.username}</p></Link>
                             <p className="song-item-description-title">{this.props.song.title}</p>
                         </div>
                     </div>

@@ -18,6 +18,7 @@ class Api::SongsController < ApplicationController
     def create
         correct_params = song_params.deep_dup
         correct_params[:metadata] = correct_params[:metadata].split(",")
+        # debugger
         song = Song.new(correct_params)
         if (song.save)
             render json: ["Upload was successful"], status: 200
@@ -37,6 +38,6 @@ class Api::SongsController < ApplicationController
 
     private
     def song_params
-        params.require(:song).permit(:title, :username, :music, :metadata, :image)
+        params.require(:song).permit(:title, :username, :music, :metadata, :music_image, :genre, :description)
     end
 end

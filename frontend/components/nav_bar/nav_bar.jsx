@@ -8,26 +8,44 @@ class NavBar extends React.Component {
         this.handleClick = this.handleClick.bind(this)
         this.state = {
             home: "active-page",
-            upload: ""
+            upload: "",
+            displayFirstDropdown: "none",
+            displaySecondDropdown: "none",
         }
         this.handleCurrentPage = this.handleCurrentPage.bind(this)
+        this.openFirstDropdown = this.openFirstDropdown.bind(this)
+        this.openSecondDropdown = this.openSecondDropdown.bind(this)
     }
 
     componentDidUpdate(){
 
     }
 
-    // update(value) {
-    //     return e => {
-    //         this.setState({ [value]: e.currentTarget.value })
-    //     }
-    // }
+   
+
+    componentDidMount(){
+        
+
+    }
 
     handleClick(e) {
         e.preventDefault();
         this.props.logout();
     }
-
+    openFirstDropdown(){
+        if (this.state.displayFirstDropdown === "none") {
+            this.setState({ displayFirstDropdown: "block" });
+        }else{
+            this.setState({ displayFirstDropdown: "none" });
+        }
+    }
+    openSecondDropdown(){
+        if (this.state.displaySecondDropdown === "none") {
+            this.setState({ displaySecondDropdown: "block" });
+        }else{
+            this.setState({ displaySecondDropdown: "none" });
+        }
+    }
 
     renderAvatar(){
         if (this.props.currentUser.profilePhoto){
@@ -44,7 +62,7 @@ class NavBar extends React.Component {
     render() {
         return(
             <div>
-                <button onClick={this.handleClick}>Logout</button>
+                {/* <button onClick={this.handleClick}>Logout</button> */}
                 <header>
                     <nav>
                         <ul className="navbar-list">
@@ -61,7 +79,8 @@ class NavBar extends React.Component {
                             </li>
 
                             <li onClick={() => this.handleCurrentPage("upload")} className={`navbar-list-item upload ${this.state.upload}`}><Link to="/upload">Upload</Link></li>
-                            <li className="navbar-list-item">
+                            
+                            <li className="navbar-list-item" onClick={this.openFirstDropdown}>
                                 <div className="profile">
                                     {this.renderAvatar()}
 
@@ -69,10 +88,21 @@ class NavBar extends React.Component {
                                         <div className="username">ELydiumnfkjkdhfjh</div>
                                         <div className="arrow">↯</div>
                                    </div>
-                                </div>    
+                                </div>
+
+                                <div className="dropdown-menu-1"  style={{ display: this.state.displayFirstDropdown }} >
+                                    <div><Link to={`/${this.props.currentUser.username}`}>Profile</Link></div>
+                                    <div><Link>Likes(not working)</Link></div>
+                                    <div><Link>Following(not working)</Link></div>
+                                </div>
                             
                             </li>
-                            <li><a href="#"><i className="fas fa-ellipsis-h"></i></a></li>
+                            <li onClick={this.openSecondDropdown} className="dropdown-2" >
+                                <a href="#"><i className="fas fa-ellipsis-h"></i></a>
+                                <div className="dropdown-menu-2" style={{ display: this.state.displaySecondDropdown }}>
+                                    <div><Link onClick={this.handleClick}>Logout</Link></div>
+                                </div>
+                            </li>
 
                         </ul>
                     </nav>
