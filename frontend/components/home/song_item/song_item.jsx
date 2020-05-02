@@ -53,7 +53,7 @@ export default class SongItem extends React.Component {
         if (!this.wasPlayed) {
             this.wasPlayed = true;
             // button.innerHTML = "<i class='fas fa-pause'></i>"
-            this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true }))
+            this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true, songPosition: 0, finished: false }))
 
         } else {
 
@@ -133,47 +133,61 @@ export default class SongItem extends React.Component {
 
 
     componentDidUpdate(){
+
         let button = document.getElementById(`play-${this.props.i}`)
-        if(this.props.currentSong){
-            if (this.props.currentSong.id === this.props.song.id) {
-                //setup was played true if you come back from different page
-                this.wasPlayed = true;
-                let seconds = (this.props.song.duration / 222);
-                //getting audio to make sure the time is perfectly syncronized when on another page
-                let audio = document.getElementById("player")
-                this.newPosition = Math.floor(audio.currentTime / seconds)
+        if (!this.props.currentSong.finished){
 
-
-                // this.newPosition = Math.floor(this.props.currentSong.songPosition / seconds)
-
-
+            if (this.props.currentSong) {
                 if (this.props.currentSong.id === this.props.song.id) {
+                    //setup was played true if you come back from different page
+                    this.wasPlayed = true;
+                    let seconds = (this.props.song.duration / 222);
+                    //getting audio to make sure the time is perfectly syncronized when on another page
+                    let audio = document.getElementById("player")
+                    this.newPosition = Math.floor(audio.currentTime / seconds)
 
-                    if (this.props.currentSong.playing) {
-                        button.innerHTML = "<i class='fas fa-pause'></i>"
 
+                    // this.newPosition = Math.floor(this.props.currentSong.songPosition / seconds)
+
+
+                    if (this.props.currentSong.id === this.props.song.id) {
+
+                        if (this.props.currentSong.playing) {
+                            button.innerHTML = "<i class='fas fa-pause'></i>"
+
+                        } else {
+                            button.innerHTML = "<i class='fas fa-play'></i>"
+
+                            clearInterval(this.eachSample)
+                        }
+
+                        if (this.props.currentSong.drawing) {
+                            this.drawPlayingSong(this.props.i)
+                        }
                     } else {
-                        button.innerHTML = "<i class='fas fa-play'></i>"
-                        
-                        clearInterval(this.eachSample)
-                    }
-
-                    if (this.props.currentSong.drawing) {
-                        this.drawPlayingSong(this.props.i)
+                        this.wasPlayed = false;
+                        this.newPosition = 0;
                     }
                 } else {
+                    ////////////////need to wrap it
                     this.wasPlayed = false;
-                    this.newPosition = 0;
+                    button.innerHTML = "<i class='fas fa-play'></i>"
+                    this.songPosition = 0;
+                    clearInterval(this.fading);
+                    clearInterval(this.eachSample)
+                    this.resetCanvas()
+                    this.eachSample = null;
                 }
-            } else {
-                this.wasPlayed = false;
-                button.innerHTML = "<i class='fas fa-play'></i>"
-                this.songPosition = 0;
-                clearInterval(this.fading);
-                clearInterval(this.eachSample)
-                this.resetCanvas()
-                this.eachSample = null;
             }
+        }else{
+            ////need to wrap it 
+            this.wasPlayed = false;
+            button.innerHTML = "<i class='fas fa-play'></i>"
+            this.songPosition = 0;
+            clearInterval(this.fading);
+            clearInterval(this.eachSample)
+            this.resetCanvas()
+            this.eachSample = null;
         }
     }
 

@@ -15,18 +15,15 @@ export default class Player extends React.Component {
         this.eventListener = null;
         this.songPlaying = null;
         this.handlePlayClick = this.handlePlayClick.bind(this)
-        this.handleDotClick = this.handleDotClick.bind(this)
+        this.handleBarClick = this.handleBarClick.bind(this)
         this.onListen = this.onListen.bind(this)
         this.dotPosition = 0;
-        this.handleOnDrag = this.handleOnDrag.bind(this)
         
         
         
     }
 
     handleClick(e) {
-        e.preventDefault();
-        this.props.receiveCurrentSong({})
     }
 
     
@@ -45,6 +42,9 @@ export default class Player extends React.Component {
     componentDidUpdate(){
        
         let audio = document.getElementById("player")
+
+        console.log(this.props.currentSong.songPosition)
+        
 
         // if (!this.eventListener && audio.duration){
 
@@ -127,7 +127,9 @@ export default class Player extends React.Component {
     }
     
     ended(){
-
+        this.dot.style.left = 0;
+        this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false, songPosition: 0, finished: true}))
+        this.playButton.innerHTML = "<i class='fas fa-play'></i>"
         
     }
 
@@ -163,17 +165,16 @@ export default class Player extends React.Component {
     onListen(currentTime){
         
         this.dotPosition = (currentTime / this.props.currentSong.duration) * this.bar.offsetWidth;
-        console.log(this.dotPosition)
         this.dot.style.left = `${this.dotPosition}px`
 
     }
-    handleDotClick(e){
-        
-    }
-    handleOnDrag(e){
+    handleBarClick(e){
+        let audio = document.getElementById("player")
         e.persist()
-        console.log(e)
-        // this.dot.style.left = `${this.dotPosition}px`
+        let songPosition = (e.nativeEvent.layerX / e.nativeEvent.target.offsetWidth) * this.props.currentSong.duration
+        audio.currentTime = songPosition;
+        this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { songPosition }))
+
     }
     render() {
         return (
@@ -184,15 +185,15 @@ export default class Player extends React.Component {
 
                 </div>
 
-                <div className="player-playback">
-                    <div onDrag={this.handleOnDrag}onClick={this.handleDotClick} id="player-playback-dot"></div>
-                    <div id="player-playback-bar"></div>
+                <div onClick={this.handleBarClick} className="player-playback">
+                    <div id="player-playback-dot"></div>
+                    <div  id="player-playback-bar"></div>
 
                 </div>
 
                 {this.checkUrl()}
                 <ReactAudioPlayer
-                    listenInterval = {200}
+                    listenInterval = {30}
                     className="player-audio"
                     id="player"
                     controls
