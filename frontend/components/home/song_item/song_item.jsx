@@ -136,9 +136,13 @@ export default class SongItem extends React.Component {
         let button = document.getElementById(`play-${this.props.i}`)
         if (this.props.currentSong.id === this.props.song.id){
 
-
+            this.wasPlayed = true;
             let seconds = (this.props.song.duration / 222);
-            this.newPosition = Math.floor(this.props.currentSong.songPosition / seconds)
+            let audio = document.getElementById("player")
+            this.newPosition = Math.floor(audio.currentTime / seconds)
+
+
+            // this.newPosition = Math.floor(this.props.currentSong.songPosition / seconds)
 
 
             if (this.props.currentSong.id === this.props.song.id) {
