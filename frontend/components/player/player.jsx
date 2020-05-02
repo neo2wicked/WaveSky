@@ -13,6 +13,7 @@ export default class Player extends React.Component {
         this.songUrl = "";
         this.seeked = this.seeked.bind(this)
         this.eventListener = null;
+        this.songPlaying = null;
         
     }
 
@@ -50,7 +51,14 @@ export default class Player extends React.Component {
 
         // })
         // }
-
+        if(this.props.currentSong){
+            if (this.songPlaying !== this.props.currentSong.id) {
+                this.songPlaying = this.props.currentSong.id;
+                audio.play()
+                    .then(() => this.play(audio.currentTime))
+            }
+        }
+        
         if (this.playing !== this.props.currentSong.playing) {
             this.playing = this.props.currentSong.playing
             if (this.playing) {
