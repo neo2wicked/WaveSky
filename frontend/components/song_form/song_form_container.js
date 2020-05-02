@@ -9,7 +9,7 @@ import {fetchUser} from "../../actions/user/user_actions"
 
 const mapSTP = state => ({
     songs: Object.values(state.entities.songs),
-    user: state.entities.user
+    user: state.session.currentUser
 })
 const mapDTP = dispatch => ({
     fetchUserSongs: (username) => dispatch(fetchUserSongs(username)),

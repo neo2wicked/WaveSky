@@ -17,10 +17,9 @@ class Api::SongsController < ApplicationController
 
     def create
         correct_params = song_params.deep_dup
-        correct_params[:metadata] = correct_params[:metadata].split(",")
         correct_params[:duration] = correct_params[:duration].to_f
-
-        debugger
+        correct_params[:metadata] = correct_params[:metadata].split(",")#.map{|ele| ele.to_f}
+        # debugger
         
         song = Song.new(correct_params)
         if (song.save)
@@ -42,6 +41,6 @@ class Api::SongsController < ApplicationController
 
     private
     def song_params
-        params.require(:song).permit(:title, :username, :music, :metadata, :music_image, :genre, :description, :duration)
+        params.require(:song).permit(:title, :username, :metadata, :music_image, :music, :genre, :description, :duration)
     end
 end

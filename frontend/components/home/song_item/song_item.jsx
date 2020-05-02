@@ -5,13 +5,11 @@ import {Link } from "react-router-dom"
 export default class SongItem extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { 
-            samplePosition: 0,
-            playing: false,
-        }
-        this.drawing = false;
+       
         this.wasPlayed = false
         this.newPosition = 0;
+        this.eachSample = null;
+
         this.handleClick = this.handleClick.bind(this)
         this.handleCanvasClick = this.handleCanvasClick.bind(this)
         
@@ -45,31 +43,73 @@ export default class SongItem extends React.Component {
         //     this.pause()
 
         // })
-        this.setCanvasPropertiesAndDraw(this.props.song.metadata, this.props.i)
+        this.setCanvasPropertiesAndDraw(this.props.song.metadata)
     }
-    handleClick(event) {
-        // event.persist();
-        // let e = event.nativeEvent
+
+
+    clickFunction(){
         let button = document.getElementById(`play-${this.props.i}`)
 
         if (!this.wasPlayed) {
             this.wasPlayed = true;
-            this.drawing = true;
-            button.innerHTML = "<i class='fas fa-pause'></i>"
-            this.props.receiveCurrentSong(Object.assign({}, this.props.song, {playing: true}))
-        }else{
+            // button.innerHTML = "<i class='fas fa-pause'></i>"
+            this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true }))
+
+        } else {
 
             if (this.props.currentSong.playing) {
                 button.innerHTML = "<i class='fas fa-pause'></i>"
-                this.drawing = false;
                 this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false }))
             } else {
                 button.innerHTML = "<i class='fas fa-play'></i>"
-                this.drawing = true;
                 this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: true }))
             }
 
         }
+
+    }
+
+
+    handleClick(event) {
+        // event.persist();
+        // let e = event.nativeEvent
+        // console.log(this.props.currentSong)
+        this.clickFunction();
+        // if (!this.props.currentSong){
+        //     this.clickFunction();
+        // }
+        
+        // }else{
+        //     if (this.props.currentSong.id === this.props.song.id){
+        //         this.clickFunction();
+        //     }else{
+        //         this.clickFunction();
+        //         // clearInterval(this.fading);
+        //         // clearInterval(this.eachSample)
+        //         // this.resetCanvas();
+        //         // this.wasPlayed = true;
+        //         // this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true, songPosition: 0 }))
+
+
+        //     }
+        // }
+
+
+
+
+
+
+
+
+
+
+
+        // if (!this.props.currentSong || this.props.currentSong.id !== this.props.song.id){
+           
+        // }else{
+        //     this.wasPlayed = false;
+        //     this.newPosition = 0;
+        // }
        
        
         
@@ -95,33 +135,38 @@ export default class SongItem extends React.Component {
     componentDidUpdate(){
         let button = document.getElementById(`play-${this.props.i}`)
         if (this.props.currentSong.id === this.props.song.id){
-            if (this.props.currentSong.playing) {
-                button.innerHTML = "<i class='fas fa-pause'></i>"
-                this.drawing = true;
-            } else {
-                button.innerHTML = "<i class='fas fa-play'></i>"
-                this.drawing = false;
-            }
 
-            if (this.props.currentSong.duration) {
-                if (this.drawing === false) {
-                    this.drawing = true;
-                    this.drawPlayingSong(this.props.i)
 
+            let seconds = (this.props.song.duration / 222);
+            this.newPosition = Math.floor(this.props.currentSong.songPosition / seconds)
+
+
+            if (this.props.currentSong.id === this.props.song.id) {
+
+                if (this.props.currentSong.playing) {
+                    button.innerHTML = "<i class='fas fa-pause'></i>"
+
+                } else {
+                    button.innerHTML = "<i class='fas fa-play'></i>"
+                    clearInterval(this.eachSample)
                 }
 
+                if (this.props.currentSong.drawing) {
+                    this.drawPlayingSong(this.props.i)
+                }
+            } else {
+                this.wasPlayed = false;
+                this.newPosition = 0;
             }
-
-
-
-
+        }else{
+            this.wasPlayed = false;
+            button.innerHTML = "<i class='fas fa-play'></i>"
+            this.songPosition = 0;
+            clearInterval(this.fading);
+            clearInterval(this.eachSample)
+            this.resetCanvas()
+            this.eachSample = null;
         }
-
-        
-        console.log("item updated")
-
-     
-
     }
 
     handleCanvasClick(event){
@@ -129,39 +174,36 @@ export default class SongItem extends React.Component {
         let e = event.nativeEvent
         
         if (this.wasPlayed){
-            if (this.state.playing) {
+            // if (this.props.currentSong.playing) {
                 let position = e.layerX / event.currentTarget.width
                 let samplePosition = (Math.floor(222 * position))
                 //NO NEED TO PASS
                 this.newPosition = samplePosition;
             
                 //
-                let seconds = (this.audio.duration / 222);
+                let seconds = (this.props.song.duration / 222);
                 
                 
                 //
                 let songPosition = seconds * samplePosition;
                 //
+                let audio = document.getElementById("player")
+                audio.currentTime = songPosition;
+                this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, {songPosition}))
 
-                let song = this.props.song
-                this.props.receiveCurrentSong({song, songPosition, samplePosition})
 
-                this.audio.currentTime = songPosition;
-                this.audio.play()
-                    .catch(() => this.pause())
-                this.drawPlayingSong(this.props.i);
-            } else {
-                let position = e.layerX / event.currentTarget.width
-                let samplePosition = (Math.floor(222 * position))
-                this.newPosition = samplePosition;
+            // } else {
+            //     let position = e.layerX / event.currentTarget.width
+            //     let samplePosition = (Math.floor(222 * position))
+            //     this.newPosition = samplePosition;
 
-                let seconds = (this.audio.duration / 222);
-                let songPosition = seconds * samplePosition;
-                //
-                this.props.receiveCurrentSong({ song, songPosition, samplePosition })
+            //     let seconds = (this.props.song.duration / 222);
+            //     let songPosition = seconds * samplePosition;
+            //     //
+            //     this.props.receiveCurrentSong({ song, songPosition, samplePosition })
 
-                this.audio.currentTime = songPosition;
-            }
+            //     this.audio.currentTime = songPosition;
+            // }
 
         }
     }
@@ -172,7 +214,7 @@ export default class SongItem extends React.Component {
 
 
 
-setCanvasPropertiesAndDraw(data, i) {
+setCanvasPropertiesAndDraw(data) {
     const canvas = document.getElementById(`canvas-${this.props.i}`);
     const dpr = 1
     const padding = 10;
@@ -181,6 +223,23 @@ setCanvasPropertiesAndDraw(data, i) {
     const ctx = canvas.getContext("2d");
     ctx.translate(1, canvas.height * (2 / 3)); // set Y = 0 to be in the middle of the canvas
     this.draw(data, canvas, ctx)
+}
+
+resetCanvas(){
+    const canvas = document.getElementById(`canvas-${this.props.i}`);
+    const ctx = canvas.getContext("2d");
+    const width = (Math.floor((canvas.width) / this.props.song.metadata.length)) * 1.5;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < this.props.song.metadata.length; i++) {
+        const x = width * i;
+        let height = this.props.song.metadata[i] // * canvas.offsetHeight - padding;
+        this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
+        this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
+    }
+
+
+   
+    // this.draw(this.props.song.metadata, canvas, ctx, this.newPosition, alpha);
 }
 
 
@@ -227,7 +286,7 @@ drawPlayingSong(buttonNumber) {
     // const audio = document.getElementById(`audio-${buttonNumber}`);
     const canvas = document.getElementById(`canvas-${buttonNumber}`);
     const ctx = canvas.getContext("2d");
-    let ms = (this.props.currentSong.duration / 222) * 1000;
+    let ms = (this.props.song.duration / 222) * 1000;
    
     
     let alpha = 0;
@@ -243,19 +302,20 @@ drawPlayingSong(buttonNumber) {
     this.eachSample = setInterval(() => {
         clearInterval(this.fading);
         alpha = 0;
-        
         //just fading effect for each sample
         this.fading = setInterval(() => {
             this.draw(this.props.song.metadata, canvas, ctx, this.newPosition, alpha);
+            // console.log(this.props.i)
+            
             alpha += 0.1;
         }, ms/20)
 
         this.newPosition++;
 
 
+        
+
     }, ms);
-
-
 } 
 
 play(){
@@ -279,7 +339,7 @@ pause(){
     }
 
     onEnded(){
-        this.newPosition = 0;
+        // this.newPosition = 0;
         this.setState({wasPlayed: false})
         clearInterval(this.eachSample)
     }

@@ -5,15 +5,14 @@ export default class Player extends React.Component {
     constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this)
-        this.state = {
-            songPosition: 0,
-            duration: null,
-        }
+        
         this.playing = false,
         this.ended = this.ended.bind(this)
         this.play = this.play.bind(this)
         this.pause = this.pause.bind(this)
         this.songUrl = "";
+        this.seeked = this.seeked.bind(this)
+        this.eventListener = null;
         
     }
 
@@ -24,55 +23,86 @@ export default class Player extends React.Component {
 
     
 
-    play(e){
+    play(currentTime){
         // console.log(e.currentTarget.currentTime)
         this.playing = true;
-        this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: true }, { songPosition: e.currentTarget.currentTime}))
+        this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: true, drawing: true }, { songPosition: currentTime}))
     }
 
-    pause(e){
+    pause(currentTime){
         this.playing = false;
-        this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false }, { songPosition: e.currentTarget.currentTime }))
+        this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false, drawing: false }, { songPosition: currentTime }))
     }
 
     componentDidUpdate(){
-        console.log("plyaer updated")
+       
         let audio = document.getElementById("player")
-        let duration = audio.duration
 
-        if (duration){
-            if (this.playing !== this.props.currentSong.playing) {
-                this.playing = this.props.currentSong.playing
-                if (this.playing) {
-                    // audio.play()
-                   
-                } else {
-                    // audio.pause()
-                }
-                this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, this.state, { duration }, { playing: this.playing }))
+        // if (!this.eventListener && audio.duration){
+
+        // audio.addEventListener("playing", ()=>{
+        //     audio.play()
+        //         .then(() => this.play(audio.currentTime))
+        // })
+        // audio.addEventListener("waiting", ()=>{
+        //     audio.pause()
+        //     this.pause(audio.currentTime)
+
+        // })
+        // }
+
+        if (this.playing !== this.props.currentSong.playing) {
+            this.playing = this.props.currentSong.playing
+            if (this.playing) {
+                audio.play()
+                    .then(() => this.play(audio.currentTime))//this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: this.playing }, { drawing: false })))
+                
+                
+            } else {
+                audio.pause()
+                this.pause(audio.currentTime)
+                //this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: this.playing }, { drawing: false }))
             }
-        }else{
-            this.props.receiveCurrentSong(this.props.currentSong)
-    
         }
     }
 
-    setDuration(){
-        let audio = document.getElementById("player")
-        let duration = audio.duration
-        console.log("plyaer! updated")
-        this.props.receiveCurrentSong(Object.assign(this.props.currentSong, {duration}))
-
-    }
     componentDidMount(){
-        // let audio = document.getElementById("player")
-        // let duration = audio.duration
-        // this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, this.state, { duration }))
+        let audio = document.getElementById("player")
+
+        if (!this.eventListener) {
+            this.eventListener = true;
+            audio.addEventListener("playing", () => {
+                
+                // if (this.playing !== this.props.currentSong.playing) {
+                //     this.playing = this.props.currentSong.playing
+                    if (!this.playing){
+                        audio.play()
+                            .then(() => this.play(audio.currentTime))
+                    }
+                
+            })
+            audio.addEventListener("pause", () => {
+                if(this.playing){
+                    audio.pause()
+                    this.pause(audio.currentTime)
+                }
+            })
+            audio.addEventListener("waiting", () => {
+                if(this.playing){
+                       this.pause(audio.currentTime)
+                }
+            })
+        }
+
     }
     
     ended(){
 
         
+    }
+
+    seeked(e){
+        this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, {songPosition: e.target.currentTime}))
     }
 
 
@@ -94,14 +124,14 @@ export default class Player extends React.Component {
                     id="player"
                     controls
                     src={this.songUrl}
+                    onSeeked={this.seeked}
                     // id={`audio-${this.props.i}`}
                     // onAbort={this.pause}
                     onEnded={this.ended}
-                    onPause={this.pause}
-                    onPlay={this.play}
+                    // onPause={this.pause}
+                    // onPlay={this.play}
                 // onListen={this.onListen}
                 />
-                {this.songUrl !== "" ? this.setDuration() : null}
                  
             </div>
         )

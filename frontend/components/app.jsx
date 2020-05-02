@@ -12,7 +12,6 @@ import Player from "../components/player/player_container"
 export default (props) => (
     <div>
         {/* <SongItem/> */}
-        <ProtectedRoute path="/" component={Player}></ProtectedRoute>
         {/* {console.log(props.location.pathname)} */}
         {/* <Route exact path="/" component={FirstForm} /> */}
         <ProtectedRoute path="/" component={NavBarContainer}></ProtectedRoute>
@@ -22,6 +21,7 @@ export default (props) => (
             <ProtectedRoute exact path={`/:username/`} component={Home} ></ProtectedRoute> 
         </Switch>
         
+        <ProtectedRoute path="/" component={Player}></ProtectedRoute>
         {/* <Route path="/" component={Index} />  */}
         {/* <ProtectedRoute exact path="/" component={Index} ></ProtectedRoute>  */}
         {/* <Route path="/" component={NavBarContainer}/> */}
