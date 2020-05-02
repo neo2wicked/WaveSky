@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch} from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../utils/route_util'
 import Index from "./index/index"
-import Home from "./home/home"
+import HomeContainer from "./home/home_container"
 import SongFormContainer from "./song_form/song_form_container"
 import NavBarContainer from "./nav_bar/nav_bar_container"
 import Player from "../components/player/player_container"
@@ -18,7 +18,7 @@ export default (props) => (
         <AuthRoute exact path="/" component={Index}></AuthRoute>
         <Switch>
             <ProtectedRoute exact path={'/upload'} component={SongFormContainer}></ProtectedRoute>
-            <ProtectedRoute exact path={`/:username/`} component={Home} ></ProtectedRoute> 
+            <ProtectedRoute exact path={`/:username/`} component={HomeContainer} ></ProtectedRoute> 
         </Switch>
         
         <ProtectedRoute path="/" component={Player}></ProtectedRoute>

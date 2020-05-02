@@ -4,6 +4,7 @@ import {
 import { withRouter} from "react-router-dom"
 import App from "./app"
 const mapSTP = (state, ownProps) => ({
+    user: state.entities.user
 })
 
 

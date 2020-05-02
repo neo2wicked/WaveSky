@@ -21,6 +21,7 @@ export default class Player extends React.Component {
         
         
         
+        
     }
 
     handleClick(e) {
@@ -40,10 +41,12 @@ export default class Player extends React.Component {
     }
 
     componentDidUpdate(){
+
+        
        
         let audio = document.getElementById("player")
 
-        console.log(this.props.currentSong.songPosition)
+        // console.log(this.props.currentSong.songPosition)
         
 
         // if (!this.eventListener && audio.duration){
@@ -82,12 +85,23 @@ export default class Player extends React.Component {
                     //this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: this.playing }, { drawing: false }))
                 }
             }
+
+            this.title.innerHTML = this.props.currentSong.title
+            this.author.innerHTML = this.props.currentSong.username
+            this.duration.innerHTML = this.showTime(this.props.currentSong.duration)
         }
 
        
     }
 
     componentDidMount(){
+        this.orangeBar = document.getElementById("player-bar-orange")
+        this.author = document.getElementsByClassName("player-author")[0]
+        this.title = document.getElementsByClassName("player-title")[0]
+        this.time = document.getElementsByClassName("player-time")[0]
+        this.duration = document.getElementsByClassName("player-duration")[0]
+
+
         let audio = document.getElementById("player")
         this.playButton = document.getElementById("player-play")
         this.dot = document.getElementById("player-playback-dot")
@@ -127,9 +141,10 @@ export default class Player extends React.Component {
     }
     
     ended(){
-        this.dot.style.left = 0;
+        this.dot.style.left = "auto";
         this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false, songPosition: 0, finished: true}))
         this.playButton.innerHTML = "<i class='fas fa-play'></i>"
+        this.orangeBar.style.width = `0%`
         
     }
 
@@ -162,10 +177,51 @@ export default class Player extends React.Component {
         }
 
     }
-    onListen(currentTime){
+
+    showTime(time){
+        let allTime = time
+        let hours = 0;
+        let minutes = 0;
+        let printed = ""
         
+        if (allTime >= 3600){
+            hours = Math.floor(allTime / 3600)
+            allTime -= hours * 3600;
+        }
+        if (allTime >= 60){
+            minutes = Math.floor(allTime / 60)
+            allTime -= minutes * 60;
+        }
+        let seconds = allTime;
+        if (hours > 0){
+            printed = `${hours}:`
+        }
+        if(minutes > 0){
+            if (minutes < 10){
+                printed += `0${minutes}:`
+            }else{
+                printed += `${minutes}:`
+            }
+        }else{
+            printed += "00:"
+        }
+        if (seconds < 10){
+            printed += `0${Math.floor(seconds)}`;
+        }else{
+            printed += `${Math.floor(seconds)}`
+        }
+        return printed
+
+    }
+    onListen(currentTime){
+        let audio = document.getElementById("player")
+        let orangeBarPosition = (currentTime / this.props.currentSong.duration) * 100;
+        this.orangeBar.style.width = `${orangeBarPosition}%`
+        this.time.innerHTML = this.showTime(audio.currentTime)
         this.dotPosition = (currentTime / this.props.currentSong.duration) * this.bar.offsetWidth;
-        this.dot.style.left = `${this.dotPosition}px`
+        this.dot.style.left = `${this.dotPosition - 5}px`
+
+
 
     }
     handleBarClick(e){
@@ -176,19 +232,50 @@ export default class Player extends React.Component {
         this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { songPosition }))
 
     }
+
+    renderImage() {
+        if (this.props.currentSong){
+            if (this.props.currentSong.imageUrl) {
+                return this.props.song.imageUrl
+            } else {
+                if (this.props.user.profilePhoto) {
+                    return this.props.user.profilePhoto
+                } else {
+                    return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
+                }
+            }
+        }
+    }
     render() {
         return (
             <div className="player-container">
                 <div>
                     <div onClick={this.handlePlayClick} id="player-play"><i class='fas fa-play'></i></div>
-
-
                 </div>
 
-                <div onClick={this.handleBarClick} className="player-playback">
-                    <div id="player-playback-dot"></div>
-                    <div  id="player-playback-bar"></div>
+               <div className="player-progress">
+                    
+                    <div className="player-time">--:--</div>
+                    
+                    <div className="player-playback">
+                        <div id="player-playback-dot"></div>
+                        <div onClick={this.handleBarClick}  id="player-playback-bar">
+                            <div id="player-bar"></div>
+                            <div id="player-bar-orange"></div>
+                        </div>
+                    </div>
 
+                    <div className="player-duration">--:--</div>
+               </div>
+
+
+                <div className="player-description">
+                    <img className="player-image" src="" alt=""/>
+
+                    <div className="player-title-description">
+                        <div className="player-author">Play any song</div>
+                        <div className="player-title">Just do it</div>
+                    </div>
                 </div>
 
                 {this.checkUrl()}
@@ -199,11 +286,7 @@ export default class Player extends React.Component {
                     controls
                     src={this.songUrl}
                     onSeeked={this.seeked}
-                    // id={`audio-${this.props.i}`}
-                    // onAbort={this.pause}
                     onEnded={this.ended}
-                    // onPause={this.pause}
-                    // onPlay={this.play}
                     onListen={this.onListen}
                 />
                  
