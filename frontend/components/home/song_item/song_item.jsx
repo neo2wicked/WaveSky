@@ -73,7 +73,6 @@ export default class SongItem extends React.Component {
     handleClick(event) {
         // event.persist();
         // let e = event.nativeEvent
-        // console.log(this.props.currentSong)
         this.clickFunction();
         // if (!this.props.currentSong){
         //     this.clickFunction();
@@ -330,7 +329,6 @@ export default class SongItem extends React.Component {
             //just fading effect for each sample
             this.fading = setInterval(() => {
                 this.draw(this.props.song.metadata, canvas, ctx, this.newPosition, alpha);
-                // console.log(this.props.i)
 
                 alpha += 0.1;
             }, ms / 20)

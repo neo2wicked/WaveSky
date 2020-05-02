@@ -19,7 +19,6 @@ class Api::SongsController < ApplicationController
         correct_params = song_params.deep_dup
         correct_params[:duration] = correct_params[:duration].to_f
         correct_params[:metadata] = correct_params[:metadata].split(",")#.map{|ele| ele.to_f}
-        # debugger
         
         song = Song.new(correct_params)
         if (song.save)
@@ -31,7 +30,6 @@ class Api::SongsController < ApplicationController
 
     def update
         song = Song.find(params[:id])
-        # debugger
         if song.update(metadata: song_params[:metadata])
             render json: ["Update was successful"], status: 200
         else

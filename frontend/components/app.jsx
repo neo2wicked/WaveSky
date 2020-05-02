@@ -12,7 +12,6 @@ import Player from "../components/player/player_container"
 export default (props) => (
     <div className="app-container">
         {/* <SongItem/> */}
-        {/* {console.log(props.location.pathname)} */}
         {/* <Route exact path="/" component={FirstForm} /> */}
         <ProtectedRoute path="/" component={NavBarContainer}></ProtectedRoute>
         <AuthRoute exact path="/" component={Index}></AuthRoute>

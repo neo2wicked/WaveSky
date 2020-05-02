@@ -44,7 +44,6 @@ export default class SongForm extends React.Component {
                 formData.append('song[duration]', this.state.duration);
 
 
-                // console.log(this.state.duration)
 
 
                 this.props.createSong(formData)

@@ -30,7 +30,6 @@ export default class Player extends React.Component {
     
 
     play(currentTime){
-        // console.log(e.currentTarget.currentTime)
         this.playing = true;
         this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: true, drawing: true }, { songPosition: currentTime}))
     }
@@ -46,7 +45,6 @@ export default class Player extends React.Component {
        
         let audio = document.getElementById("player")
 
-        // console.log(this.props.currentSong.songPosition)
         
 
         // if (!this.eventListener && audio.duration){
