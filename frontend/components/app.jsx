@@ -10,7 +10,7 @@ import Player from "../components/player/player_container"
 //test
 
 export default (props) => (
-    <div>
+    <div className="app-container">
         {/* <SongItem/> */}
         {/* {console.log(props.location.pathname)} */}
         {/* <Route exact path="/" component={FirstForm} /> */}

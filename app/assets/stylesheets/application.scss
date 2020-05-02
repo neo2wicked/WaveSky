@@ -59,6 +59,7 @@ small {
     box-sizing: inherit;
     font-size: 100%;
     font: inherit;
+    
     /* background: transparent; */
 }
 
@@ -92,13 +93,15 @@ input[type="submit"] {
 
 }
 
-
+html{
+}
 
 /* Main Body Application */
 body {
     font-family: 'Roboto', sans-serif !important;
     background-color: rgb(240, 240, 240);
     font-size: 0.9rem;
+    
     /* font-family: 'Overpass',sans-serif;
 font-family: Arial, Helvetica, sans-serif; */
 
@@ -164,3 +167,29 @@ img {
 button:focus {
     outline: none;
 }
+
+
+
+// .body{
+    //     height: 100%;
+    // }
+    
+    html,
+    body {
+        height: 100%;
+    }
+
+    body{
+        min-height: 100%;
+    }
+    #root{
+        height: 100%;
+    }
+
+    .app-container{
+        height: 100%;
+    }
+
+    .home-container{
+        height: 100%;
+    }

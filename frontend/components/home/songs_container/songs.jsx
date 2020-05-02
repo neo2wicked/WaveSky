@@ -20,7 +20,7 @@ export default class Songs extends React.Component {
 
     render() {
         return (
-            <div style={{ backgroundColor: "lightgray" }}>
+            <div className="home-songs-container" >
                 {this.props.songs.map((song, i) => (
                     <SongItem 
                         song={song} 
