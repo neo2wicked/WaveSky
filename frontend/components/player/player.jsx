@@ -234,7 +234,7 @@ export default class Player extends React.Component {
     renderImage() {
         if (this.props.currentSong){
             if (this.props.currentSong.imageUrl) {
-                return this.props.song.imageUrl
+                return this.props.currentSong.imageUrl
             } else {
                 if (this.props.user.profilePhoto) {
                     return this.props.user.profilePhoto
@@ -268,7 +268,7 @@ export default class Player extends React.Component {
 
 
                 <div className="player-description">
-                    <img className="player-image" src="" alt=""/>
+                    <img className="player-image" src={this.renderImage()} alt=""/>
 
                     <div className="player-title-description">
                         <div className="player-author">Play any song</div>
