@@ -23,6 +23,7 @@ export default class Songs extends React.Component {
             <div className="home-songs-container" >
                 {this.props.songs.map((song, i) => (
                     <SongItem 
+                        key={`song-${i}`}
                         song={song} 
                         user={this.props.user} 
                         i={i} 

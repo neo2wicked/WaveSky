@@ -62,7 +62,7 @@ export default class Player extends React.Component {
         if(this.props.currentSong){
             if (this.songPlaying !== this.props.currentSong.id) {
 
-                this.playButton.innerHTML = "<i class='fas fa-pause'></i>"
+                // this.playButton.innerHTML = "<i class='fas fa-pause'></i>"
                 this.songPlaying = this.props.currentSong.id;
                 audio.play()
                     .then(() => this.play(audio.currentTime))
@@ -71,9 +71,12 @@ export default class Player extends React.Component {
             if (this.playing !== this.props.currentSong.playing) {
                 this.playing = this.props.currentSong.playing
                 if (this.playing) {
-                    this.playButton.innerHTML = "<i class='fas fa-pause'></i>"
+                    // this.playButton.innerHTML = "<i class='fas fa-pause'></i>"
                     audio.play()
-                        .then(() => this.play(audio.currentTime))//this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: this.playing }, { drawing: false })))
+                        .then(() => {
+                            this.playButton.innerHTML = "<i class='fas fa-pause'></i>"
+                            this.play(audio.currentTime
+                            )})//this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: this.playing }, { drawing: false })))
 
 
                 } else {
@@ -143,6 +146,7 @@ export default class Player extends React.Component {
         this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false, songPosition: 0, finished: true}))
         this.playButton.innerHTML = "<i class='fas fa-play'></i>";
         this.orangeBar.style.width = "0%";
+        this.time.innerHTML = "-- : --"
         
     }
 
@@ -248,12 +252,12 @@ export default class Player extends React.Component {
         return (
             <div className="player-container">
                 <div>
-                    <div onClick={this.handlePlayClick} id="player-play"><i class='fas fa-play'></i></div>
+                    <div onClick={this.handlePlayClick} id="player-play"><i className='fas fa-play'></i></div>
                 </div>
 
                <div className="player-progress">
                     
-                    <div className="player-time">--:--</div>
+                    <div className="player-time">-- : --</div>
                     
                     <div className="player-playback">
                         <div id="player-playback-dot"></div>
@@ -263,7 +267,7 @@ export default class Player extends React.Component {
                         </div>
                     </div>
 
-                    <div className="player-duration">--:--</div>
+                    <div className="player-duration">-- : --</div>
                </div>
 
 

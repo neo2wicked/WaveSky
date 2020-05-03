@@ -66,9 +66,9 @@ class NavBar extends React.Component {
                 <header>
                     <nav>
                         <ul className="navbar-list">
-                            <li className="navbar-list-item logo"><Link to={`/${this.props.currentUser.username}`}><i className="fas fa-water"></i><i
+                            <li className="navbar-list-item logo"><Link to={`/`}><i className="fas fa-water"></i><i
                                 className="fas fa-cloud"></i></Link></li>
-                            <li onClick={() => this.handleCurrentPage("home")} className={`navbar-list-item home ${this.state.home}`}><Link to={`/${this.props.currentUser.username}`}>Home</Link></li>
+                            <li onClick={() => this.handleCurrentPage("home")} className={`navbar-list-item home ${this.state.home}`}><Link to={`/`}>Home</Link></li>
                             <li className="navbar-list-item playlist"><a href="#">Playlist</a></li>
 
                             <li>
@@ -84,7 +84,7 @@ class NavBar extends React.Component {
                                 <div className="profile">
                                     {this.renderAvatar()}
 
-                                   <div class="username-box">
+                                   <div className="username-box">
                                         <div className="username">{this.props.currentUser.username}</div>
                                         <div className="arrow">↯</div>
                                    </div>
@@ -92,15 +92,15 @@ class NavBar extends React.Component {
 
                                 <div className="dropdown-menu-1"  style={{ display: this.state.displayFirstDropdown }} >
                                     <div><Link to={`/${this.props.currentUser.username}`}>Profile</Link></div>
-                                    <div><Link>Likes(not working)</Link></div>
-                                    <div><Link>Following(not working)</Link></div>
+                                    {/* <div><Link>Likes(not working)</Link></div>
+                                    <div><Link>Following(not working)</Link></div> */}
                                 </div>
                             
                             </li>
                             <li onClick={this.openSecondDropdown} className="dropdown-2" >
                                 <a href="#"><i className="fas fa-ellipsis-h"></i></a>
                                 <div className="dropdown-menu-2" style={{ display: this.state.displaySecondDropdown }}>
-                                    <div><Link onClick={this.handleClick}>Logout</Link></div>
+                                    <div onClick={this.handleClick}><a>Logout</a></div>
                                 </div>
                             </li>
 

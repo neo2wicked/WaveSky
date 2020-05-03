@@ -71,63 +71,7 @@ export default class SongItem extends React.Component {
 
 
     handleClick(event) {
-        // event.persist();
-        // let e = event.nativeEvent
         this.clickFunction();
-        // if (!this.props.currentSong){
-        //     this.clickFunction();
-        // }
-
-        // }else{
-        //     if (this.props.currentSong.id === this.props.song.id){
-        //         this.clickFunction();
-        //     }else{
-        //         this.clickFunction();
-        //         // clearInterval(this.fading);
-        //         // clearInterval(this.eachSample)
-        //         // this.resetCanvas();
-        //         // this.wasPlayed = true;
-        //         // this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true, songPosition: 0 }))
-
-
-        //     }
-        // }
-
-
-
-
-
-
-
-
-
-
-
-        // if (!this.props.currentSong || this.props.currentSong.id !== this.props.song.id){
-
-        // }else{
-        //     this.wasPlayed = false;
-        //     this.newPosition = 0;
-        // }
-
-
-
-
-
-
-
-        // if (!this.state.wasPlayed){
-        //     this.setState({wasPlayed: true})
-        //     this.props.receiveCurrentSong(this.props.song)
-        // }
-        // let button = document.getElementById(`play-${this.props.i}`)
-        // if (this.audio.paused){
-        //     button.innerHTML = "<i class='fas fa-pause'></i>"
-        //     this.audio.play()
-        // }else{
-        //     button.innerHTML = "<i class='fas fa-play'></i>"
-        //     this.audio.pause()
-        // }
     }
 
 
@@ -152,7 +96,11 @@ export default class SongItem extends React.Component {
                     if (this.props.currentSong.id === this.props.song.id) {
 
                         if (this.props.currentSong.playing) {
-                            button.innerHTML = "<i class='fas fa-pause'></i>"
+                            setTimeout(()=>{
+                                if (this.props.currentSong.playing){
+                                    button.innerHTML = "<i class='fas fa-pause'></i>"
+                                }
+                            },30)
 
                         } else {
                             button.innerHTML = "<i class='fas fa-play'></i>"
@@ -388,7 +336,7 @@ export default class SongItem extends React.Component {
                 <div className="song-item-elements">
 
                     <div className="song-item-container-top">
-                        <button className="play" id={`play-${this.props.i}`} onClick={this.handleClick}><i class='fas fa-play'></i></button>
+                        <button className="play" id={`play-${this.props.i}`} onClick={this.handleClick}><i className='fas fa-play'></i></button>
                         <div className="song-item-description">
                             <Link to={`/${this.props.song.username}`}><p className="song-item-description-username">{this.props.song.username}</p></Link>
                             <p className="song-item-description-title">{this.props.song.title}</p>
