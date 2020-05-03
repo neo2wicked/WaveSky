@@ -13,7 +13,7 @@ class Api::UsersController < ApplicationController
     end
 
     def index
-        username = user_params[:username].to_s.downcase!
+        username = user_params[:username].to_s.downcase
         @user = User.find_by(username: username)
         if (@user)
             render :index
