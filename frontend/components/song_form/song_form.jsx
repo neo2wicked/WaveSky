@@ -164,7 +164,7 @@ export default class SongForm extends React.Component {
                             onChange={this.handleFileMusic}
                         />
                     </div>
-                    <img className="song-form-image" src={window.music-notes} alt="" />
+                    <img className="song-form-image" src={window.musicNotes} alt="" />
                 </div>
             )
         } else {
