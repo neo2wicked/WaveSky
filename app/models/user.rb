@@ -13,7 +13,8 @@ class User < ApplicationRecord
     has_many :songs,
         primary_key: :username,
         foreign_key: :username,
-        class_name: :Song
+        class_name: :Song,
+        dependent: :destroy
 
     def self.find_by_credentials(username,password)
         user = User.find_by(username: username)

@@ -141,8 +141,8 @@ export default class Player extends React.Component {
     ended(){
         this.dot.style.left = "auto";
         this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false, songPosition: 0, finished: true}))
-        this.playButton.innerHTML = "<i class='fas fa-play'></i>"
-        this.orangeBar.style.width = `0%`
+        this.playButton.innerHTML = "<i class='fas fa-play'></i>";
+        this.orangeBar.style.width = "0%";
         
     }
 

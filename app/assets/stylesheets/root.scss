@@ -4,23 +4,8 @@
     
 }
 
-.index-party-container {
-    height: 500px;
-}
-
-
-.party-single-img {
-    filter: brightness(80%);
-}
-
-.party-2 {
-    position: relative;
-    bottom: 150px;
-    filter: brightness(55%);
-}
-
-.carousel-inner {
-    height: 600px;
+a{
+    cursor: pointer;
 }
 
 .orange-line {
@@ -92,35 +77,90 @@
     font-weight: 300;
 }
 
-.slideshow-indicator {
-    margin: 0px 8px 5px;
-    border-radius: 1000px;
-    width: 15px;
-    height: 15px;
-    background-color: transparent;
-    border: 1px solid white;
+.index-carousel{
+    height: 600px;
+    position: relative;
+    
+}
+.carousel{
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+}
+.carousel-images{
+    position: absolute;
+    filter: brightness(75%); 
 }
 
-.active {
+#slide-1{
+    position: relative;
+}
+
+#slide-1 img{
+    top: -50px
+}
+#slide-2{
+    position: absolute;
+    top: 0;
+    left: 1240px;
+}
+
+#slide-2 img{
+    bottom: -50px;
+}
+
+
+.carousel-buttons{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 50px;
+    z-index: 2;
+    left:0;
+    right: 0;
+    margin: auto;
+    bottom: 25px;
+}
+
+.carousel-button{
+    border: 1px solid white;
+    background-color: transparent;
+    height: 13px;
+    width: 13px;
+    border-radius: 10px;
+}
+
+.active{
     background-color: white;
 }
 
-.slideshow-indicator:focus {
-    outline: 0;
-}
-
-.carousel-caption {
-    margin-bottom: 180px;
+.carousel-item{
+    position: absolute;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 1240px;
 }
 
 .carousel-text {
+    position: absolute;
+    text-align: center;
     color: white;
     font-size: 1.8em;
     font-weight: 100;
     text-shadow: 3px 3px 5px #000000;
     width: 800px;
+    left: 0;
+    right: 0;
     margin: auto;
     height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .carousel-text-button {
@@ -138,15 +178,6 @@
     background-color: rgba(255, 77, 0, 0.822);
 }
 
-.carousel-text-button:focus {
-    outline: 0;
-}
-
-.github:visited {
-    text-decoration: none;
-    color: white;
-}
-
 .github:hover {
     text-decoration: none;
     color: white;
@@ -157,9 +188,6 @@
     font-weight: bold;
 }
 
-.carousel-item {
-    display: flex;
-}
 
 .index-search-container {
     padding: 20px 0px;
@@ -230,8 +258,6 @@ h4 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-
-
 }
 
 .index-trending-single-track h4 {
@@ -337,6 +363,7 @@ h4 {
 .index-container-singer-text-single h3 {
     color: yellow;
     text-shadow: 3px 3px 5px #000000;
+    font-size: 2rem;
 }
 
 .index-singer-signup {
@@ -353,25 +380,24 @@ h4 {
 }
 
 .index-container-bottom {
-    height: 250px;
+    height: 300px;
     display: flex;
     align-items: center;
     padding: 50px 0px;
 }
 
 .index-container-bottom-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
     color: black;
     font-size: 1.5em;
     font-weight: 100;
-    /* text-shadow: 3px 3px 5px #000000; */
     width: 800px;
     margin: auto;
-    height: 200px;
     text-align: center;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    height: 240px;
 }
 
 .index-container-bottom-button {
@@ -383,6 +409,9 @@ h4 {
     border-radius: 4px;
     padding: 13px 35px;
 
+}
+.index-container-bottom-text p{
+    margin-bottom: 20px;
 }
 
 .index-container-bottom-button-signin {
@@ -402,7 +431,6 @@ h4 {
     justify-content: space-evenly;
     align-items: center;
     width: 300px;
-    margin: auto;
     margin-top: 15px;
 }
 
@@ -414,7 +442,7 @@ h4 {
 .index-container-footer {
     display: flex;
     flex-direction: column;
-    height: 150px;
+    height: 70px;
     padding-left: 40px;
     font-weight: 400;
     color: rgb(142, 142, 142);

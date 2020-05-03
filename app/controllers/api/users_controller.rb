@@ -1,6 +1,8 @@
 class Api::UsersController < ApplicationController
     def create
-        @user = User.new(user_params)
+        correct_params = user_params.deep_dup
+        correct_params[:username] = correct_params[:username].downcase
+        @user = User.new(correct_params)
         if @user.save
             login!(@user)
             render "/api/users/show"
@@ -11,7 +13,7 @@ class Api::UsersController < ApplicationController
     end
 
     def index
-        username = user_params[:username].to_s
+        username = user_params[:username].to_s.downcase!
         @user = User.find_by(username: username)
         if (@user)
             render :index
@@ -31,10 +33,12 @@ class Api::UsersController < ApplicationController
     end
 
     def update
-        username = user_params[:username].to_s
+        username = user_params[:username].to_s.downcase!
         @user = User.find_by(username: username)
+        correct_params = user_params.deep_dup
+        correct_params[:username] = correct_params[:username].downcase
         if (@user)
-            @user.update(user_params)
+            @user.update(correct_params)
             render json: ["successful update."], status: 200
         else
             render json: ["The user was not found."], status: 404

@@ -1,7 +1,7 @@
 class Api::SessionsController < ApplicationController
 
     def show       
-        @user = User.find_by(username: params[:user][:username])
+        @user = User.find_by(username: params[:user][:username].downcase)
         if (@user)
             render json: ["user was found"], status: 200
         else
@@ -11,7 +11,7 @@ class Api::SessionsController < ApplicationController
 
     def create
         @user = User.find_by_credentials(
-            params[:user][:username],
+            params[:user][:username].downcase,
             params[:user][:password]
         )
         if (@user)

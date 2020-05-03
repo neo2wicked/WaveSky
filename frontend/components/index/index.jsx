@@ -1,5 +1,6 @@
 import React from 'react';
 import FirstFormContainer from '../session/first_form_container'
+import Carousel from "./carousel"
 
 
 export default class Index extends React.Component{
@@ -29,6 +30,7 @@ export default class Index extends React.Component{
                 <div className="index-top-container">
                     <div className="index-top-container-text">
                         <i className="fas fa-water index-wave"></i>
+                        <span> </span>
                         <i className="fas fa-cloud index-cloud"></i>
                         <span className="index-skywave">WAVESKY</span>
                     </div>
@@ -37,51 +39,8 @@ export default class Index extends React.Component{
                         <button onClick={this.handleClick} className="create-account-button">Create Account</button>
                     </div>
                 </div>
-                {/* 
-            <div id="carouselExampleIndicators" className="carousel slide party-img" data-ride="carousel">
-                <ol className="carousel-indicators">
-                    <button data-target="#carouselExampleIndicators" data-slide-to="0"
-                        className="slideshow-indicator active"></button>
-                    <button data-target="#carouselExampleIndicators" data-slide-to="1"
-                        className="slideshow-indicator"></button>
-                </ol>
 
-                <div className="carousel-inner">
-
-                    <div className="carousel-item active">
-                        <img src="/assets/party1.jpg" className="d-block w-100 party-single-/assetsg" alt="party1"/>
-
-                        <div className="carousel-caption">
-                            <div className="carousel-text">
-                                <h3>The music you love and enjoy</h3>
-                                    <p>Listen to the best songs from around the globe!
-                                        <br/>Upload your own and share with friends!
-                                        <br/>Just chill and feel the vibe.
-                                    </p>
-                                    <button className="carousel-text-button">Start listening</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="carousel-item">
-                        <img src="../party-2.jpg" className="d-block w-100 party-single-img party-2" alt="party-2"/>
-
-                        <div className="carousel-caption">
-                            <div className="carousel-text git">
-                                <h3>This project is the clone of SoundCloud</h3>
-                                    <p>My name is <span className="name">Dias Iskrayev</span>.
-                                        <br/>I am a creator of this fun little project.
-                                        <br/>Link to GitHub repo for this project is down below!
-                                    </p>
-                                    <button className="carousel-text-button"><a href="https://github.com/iskraev/WaveSky"
-                                            className="github">GitHub</a></button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div> */}
+                <Carousel />
 
                 <div className="index-search-container">
                     <ul className="index-search">
@@ -93,7 +52,7 @@ export default class Index extends React.Component{
                             </div>
                         </li>
                         <li><span style={{ fontSize: 'medium', fontWeight: 400 }}>or</span></li>
-                        <li><button className="index-search-upload">Upload your own</button></li>
+                        <li><button onClick={this.handleClick} className="index-search-upload">Upload your own</button></li>
                     </ul>
                 </div>
 
@@ -101,19 +60,19 @@ export default class Index extends React.Component{
                     <h3>Hear what’s trending in the WaveSky community</h3>
                     <div className="index-trending-tracks">
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src="/assets/images/party1.jpg" />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src="/party1.jpg" />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src="/images/party1.jpg" />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
@@ -213,12 +172,12 @@ export default class Index extends React.Component{
                         <h3>Thanks for listening. Now join in.</h3>
                         <p>Save tracks, follow artists and build playlists. All for free.</p>
                         <div>
-                            <button className="index-container-bottom-button">Create Account</button>
+                            <button onClick={this.handleClick} className="index-container-bottom-button">Create Account</button>
                         </div>
 
                         <div className="index-container-bottom-signin-container">
                             <span>Already have an account?</span>
-                            <button className="index-container-bottom-button-signin">Sign in</button>
+                            <button onClick={this.handleClick} className="index-container-bottom-button-signin">Sign in</button>
                         </div>
                     </div>
                 </div>
@@ -228,9 +187,9 @@ export default class Index extends React.Component{
                     <ul className="index-footer-list">
                         <li><a href="">About us</a></li>
                         <li>-</li>
-                        <li><a href="">Sign in</a></li>
+                        <li><a onClick={this.handleClick}>Sign in</a></li>
                         <li>-</li>
-                        <li><a href="">Sing up</a></li>
+                        <li><a onClick={this.handleClick}>Sing up</a></li>
                         <li>-</li>
                         <li><a href="https://github.com/iskraev/WaveSky">GitHub</a></li>
                     </ul>
