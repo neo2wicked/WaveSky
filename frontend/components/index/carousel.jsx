@@ -121,7 +121,7 @@ export default class Carousel extends React.Component {
 
                 <div className="carousel">
                     <div id="slide-1" className={`carousel-item ${this.state.slide1}`}>
-                        <img src="/assets/party1.jpg" className="carousel-images" alt="party1" />
+                        <img src={window.party1} className="carousel-images" alt="party1" />
                         <div className="carousel-text">
                             <h3>The music you love and enjoy</h3>
                             <p>Listen to the best songs from around the globe!
@@ -133,7 +133,7 @@ export default class Carousel extends React.Component {
                     </div>
 
                     <div id="slide-2" className={`carousel-item ${this.state.slide2}`}>
-                        <img src="/assets/party2.jpg" className="carousel-images" alt="party2" />
+                        <img src={window.party2} className="carousel-images" alt="party2" />
                         <div className="carousel-text git">
                             <h3>This project is the clone of SoundCloud</h3>
                             <p>My name is <span className="name">Dias Iskrayev</span>.

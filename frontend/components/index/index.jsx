@@ -60,73 +60,73 @@ export default class Index extends React.Component{
                     <h3>Hear what’s trending in the WaveSky community</h3>
                     <div className="index-trending-tracks">
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/images/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/images/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
 
                         <div className="index-trending-single-track">
-                            <img className="track-img" src="/assets/party1.jpg" />
+                            <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
                         </div>
@@ -139,7 +139,7 @@ export default class Index extends React.Component{
 
                 <div className="index-container-other">
                     <div className="index-container-other-img">
-                        <img src="/assets/apple.png" alt="" />
+                        <img src={window.apple} alt="" />
                     </div>
                     <div className="index-container-other-text">
                         <h3>Not mobile friendly</h3>
@@ -150,7 +150,7 @@ export default class Index extends React.Component{
 
                 <div className="index-container-singer">
                     <div className="index-container-singer-img">
-                        <img src="/assets/singer.jpg" alt="singer" />
+                        <img src={window.singer} alt="singer" />
                     </div>
                     <div className="index-container-singer-text">
                         <div className="index-container-singer-text-single">
