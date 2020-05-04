@@ -33,10 +33,13 @@ class Api::UsersController < ApplicationController
     end
 
     def update
-        @user = User.find(params[:id])
-        if (@user)
-            @user.update(user_params)
-            render json: ["successful update."], status: 200
+        user = User.find(params[:id])
+        if (user)
+            if(user.update(user_params))
+                render json: ["successful update."], status: 200
+            else
+                render json: user.errors.full_messages, status: 422
+            end
         else
             render json: ["The user was not found."], status: 404
         end

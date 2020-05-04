@@ -7,7 +7,10 @@ class User < ApplicationRecord
     after_initialize :ensure_session_token
 
     has_one_attached :profile_photo
+    validates :profile_photo, content_type: ['image/jpg', 'image/png', 'image/jpeg']
+
     has_one_attached :profile_background
+     validates :profile_background, content_type: ['image/jpg', 'image/png', 'image/jpeg']
 
 
     has_many :songs,

@@ -5,7 +5,8 @@ import Home from "./home"
 import {updateUser} from "../../actions/user/user_actions"
 const mapSTP = state => ({
     user: state.entities.user,
-    currentUser: state.session.currentUser
+    currentUser: state.session.currentUser,
+    imageErrors: state.errors.user
 })
 
 const mapDTP = dispatch => ({

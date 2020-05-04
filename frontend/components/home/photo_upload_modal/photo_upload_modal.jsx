@@ -11,7 +11,6 @@ class PhotoUploadModal extends React.Component{
             formData.append('user[profile_photo]', this.props.photoImage);
         }
         if (this.props.backgroundImage){
-            console.log("OOOO")
             formData.append('user[profile_background]', this.props.backgroundImage);
         }
 
@@ -29,8 +28,13 @@ class PhotoUploadModal extends React.Component{
                         <div>Would you like to continue?</div>
                     </div>
                     <div className="photo-upload-modal-content-buttons" >
-                        <button className="photo-upload-modal-content-buttons-cancel">Cancel</button>
+                        <button onClick={()=>this.props.cancelUpload()} className="photo-upload-modal-content-buttons-cancel">Cancel</button>
                         <button onClick={this.handleClick} className="photo-upload-modal-content-buttons-save">Save</button>
+                    </div>
+                    <div className="photo-errors">
+                        {this.props.errors.map((error, i)=>(
+                            <li key={`photo-error-${i}`}>{error}</li>
+                        ))}
                     </div>
                 </div>
             </div>

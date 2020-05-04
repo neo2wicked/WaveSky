@@ -6,10 +6,12 @@ class Song < ApplicationRecord
     
     
     has_one_attached :music
+    
     validate :ensure_music
     
     
     has_one_attached :music_image
+    validates :music_image, content_type: ['image/jpg', 'image/png', 'image/jpeg']
     # validates :music_image, allow_nil: true
     # validate :ensure_image
 

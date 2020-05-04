@@ -16,7 +16,8 @@ export default class SongForm extends React.Component {
             secondForm: false,
             musicImageUrl: null,
             duration: null,
-            counter: 4
+            counter: 4,
+            songErrors: null
         
         }
         this.handleClick = this.handleClick.bind(this)
@@ -51,20 +52,22 @@ export default class SongForm extends React.Component {
 
 
                 this.props.createSong(formData)
-                    .then(() => this.props.history.push("/"))
-                    .fail( () => {
-                        if (!(this.props.errors.length === 1 && this.props.errors[0] === "Title can't be blank")){
-                            let timer = setInterval(() => {
-                                this.setState({ counter: this.state.counter -= 1 })
-
-                            }, 1000)
-
-                            setTimeout(() => {
-                                clearInterval(timer)
-                                window.location.reload(false)
-                            }, 4000)
-                        }
+                    .then(() => { this.props.history.push("/")
+                        window.location.reload();
                     })
+                    // .fail( () => {
+                    //     if (!(this.props.errors.length === 1 && this.props.errors[0] === "Title can't be blank")){
+                    //         let timer = setInterval(() => {
+                    //             this.setState({ counter: this.state.counter -= 1 })
+
+                    //         }, 1000)
+
+                    //         setTimeout(() => {
+                    //             clearInterval(timer)
+                    //             window.location.reload(false)
+                    //         }, 4000)
+                    //     }
+                    // })
             })
           
 
@@ -106,6 +109,7 @@ export default class SongForm extends React.Component {
     handleFileMusic(e) {
         const fileReader = new FileReader();
         const music = e.currentTarget.files[0]
+        
 
         fileReader.onload = (e) => {
             const audioElement = document.createElement('audio');
@@ -116,6 +120,8 @@ export default class SongForm extends React.Component {
                     let duration = audioElement.duration
                     that.setState({ music: music, firstForm: false, secondForm: true , duration: duration})
                     clearInterval(timer);
+                }else{
+                    this.setState({songErrors: true})
                 }
             }, 500)
 
@@ -168,24 +174,25 @@ export default class SongForm extends React.Component {
     }
 
     printErrors(){
-        if (this.props.errors.length !== 0){
-            if (!(this.props.errors.length === 1 && this.props.errors[0] === "Title can't be blank")){
-                return (
-                    <div className="song-form-errors"> 
-                        <div>Failed to upload. Page will be refreshed in: {this.state.counter}</div>
-                        <div>Errors:</div>
-                        <ul className="song-form-errors-list">
+       
+            // if (!(this.props.errors.length === 1 && this.props.errors[0] === "Title can't be blank")){
+            //     return (
+            //         <div className="song-form-errors"> 
+            //             <div>Failed to upload. Page will be refreshed in: {this.state.counter}</div>
+            //             <div>Errors:</div>
+            //             <ul className="song-form-errors-list">
 
-                            {this.props.errors.map((error) => (
-                                <li>{error}</li>
-                            ))}
-                        </ul>
-                    </div>
-                )
-            }else{
+            //                 {this.props.errors.map((error) => (
+            //                     <li>{error}</li>
+            //                 ))}
+            //             </ul>
+            //         </div>
+            //     )
+            // }else{
+             if (this.props.errors.length !== 0){
                 return (
                     <div className="song-form-errors">
-                        <div>Errors:</div>
+                        <div>Failed to upload. Errors: </div>
                         <ul className="song-form-errors-list">
                             {this.props.errors.map((error, index) => (
                                 <li key={index}>{error}</li>
@@ -196,7 +203,7 @@ export default class SongForm extends React.Component {
             }
             
              
-        }
+        // }
     }
 
 
@@ -213,6 +220,7 @@ export default class SongForm extends React.Component {
                             type="file"
                             onChange={this.handleFileMusic}
                         />
+                        {this.state.songErrors ? <div className="song-form-errors">Please provide audio file in MP3/WAV format.</div> : null}
                     </div>
                     <img className="song-form-image" src={window.musicNotes} alt="" />
                 </div>

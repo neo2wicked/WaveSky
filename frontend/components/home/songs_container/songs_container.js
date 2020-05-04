@@ -21,7 +21,8 @@ import Songs from "./songs"
 const mapSTP = state => ({
     songs: Object.values(state.entities.songs),
     user: state.entities.user,
-    currentSong: state.session.currentSong
+    currentSong: state.session.currentSong,
+    
 })
 const mapDTP = dispatch => ({
     fetchUserSongs: (username) => dispatch(fetchUserSongs(username)),

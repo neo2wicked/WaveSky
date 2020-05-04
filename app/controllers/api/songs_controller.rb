@@ -19,7 +19,7 @@ class Api::SongsController < ApplicationController
         correct_params = song_params.deep_dup
         correct_params[:duration] = correct_params[:duration].to_f
         correct_params[:metadata] = correct_params[:metadata].split(",")#.map{|ele| ele.to_f}
-        
+        # debugger
         song = Song.new(correct_params)
         if (song.save)
             render json: ["Upload was successful"], status: 200
