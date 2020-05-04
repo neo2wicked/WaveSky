@@ -31,6 +31,18 @@ class FirstForm extends React.Component{
     }
 
     componentWillUnmount(){
+        //remove event listeners
+        let form = document.getElementsByClassName("modal-form")[0]
+        form.removeEventListener("click", (e) => {
+            if (e.target === form) {
+                this.resetForm()
+            }
+        })
+        //remove event listeners
+        let close = document.getElementsByClassName("close")[0]
+        close.removeEventListener("click", () => {
+            this.resetForm()
+        })
       
     }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import SongItem from "../home/song_item/song_item"
+import { Redirect } from 'react-router-dom';
 
 export default class SongForm extends React.Component {
     constructor(props) {
@@ -15,6 +16,7 @@ export default class SongForm extends React.Component {
             secondForm: false,
             musicImageUrl: null,
             duration: null,
+            counter: 4
         
         }
         this.handleClick = this.handleClick.bind(this)
@@ -26,6 +28,7 @@ export default class SongForm extends React.Component {
     }
 
     componentDidMount() {
+       
 
     }
 
@@ -40,13 +43,28 @@ export default class SongForm extends React.Component {
                 formData.append('song[username]', this.props.user.username);
                 formData.append('song[music]', this.state.music);
                 formData.append('song[metadata]', this.state.metadata);
-                formData.append('song[musicImage]', this.state.musicImage);
+                if (this.state.musicImage){
+                    formData.append('song[music_image]', this.state.musicImage);
+                }
                 formData.append('song[duration]', this.state.duration);
 
 
 
-
                 this.props.createSong(formData)
+                    .then(() => this.props.history.push("/"))
+                    .fail( () => {
+                        if (!(this.props.errors.length === 1 && this.props.errors[0] === "Title can't be blank")){
+                            let timer = setInterval(() => {
+                                this.setState({ counter: this.state.counter -= 1 })
+
+                            }, 1000)
+
+                            setTimeout(() => {
+                                clearInterval(timer)
+                                window.location.reload(false)
+                            }, 4000)
+                        }
+                    })
             })
           
 
@@ -149,6 +167,38 @@ export default class SongForm extends React.Component {
         })
     }
 
+    printErrors(){
+        if (this.props.errors.length !== 0){
+            if (!(this.props.errors.length === 1 && this.props.errors[0] === "Title can't be blank")){
+                return (
+                    <div className="song-form-errors"> 
+                        <div>Failed to upload. Page will be refreshed in: {this.state.counter}</div>
+                        <div>Errors:</div>
+                        <ul className="song-form-errors-list">
+
+                            {this.props.errors.map((error) => (
+                                <li>{error}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )
+            }else{
+                return (
+                    <div className="song-form-errors">
+                        <div>Errors:</div>
+                        <ul className="song-form-errors-list">
+                            {this.props.errors.map((error, index) => (
+                                <li key={index}>{error}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )
+            }
+            
+             
+        }
+    }
+
 
     renderForm() {
         if (this.state.firstForm) {
@@ -182,7 +232,7 @@ export default class SongForm extends React.Component {
 
                                 <div className="image-preview">
                                     {this.state.musicImageUrl ? <img src={this.state.musicImageUrl} alt="" /> : null}
-                                    <button onClick={this.handleFileImageClick} className="song-form-image-button"><i class="fas fa-camera"></i> Upload image</button>
+                                    <button onClick={this.handleFileImageClick} className="song-form-image-button"><i className="fas fa-camera"></i> Upload image</button>
                                     <input
                                         id="song-form-image-file"
                                         className="files"
@@ -206,6 +256,8 @@ export default class SongForm extends React.Component {
                                         <div>Description</div>
                                         <textarea placeholder="Describe your track" className="description" cols="65" rows="10" onChange={this.update("description")}></textarea>
                                     </div>
+                                    
+                                    {this.printErrors()}
                                 </div>
                             </div>
 

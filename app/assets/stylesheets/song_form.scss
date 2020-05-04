@@ -10,7 +10,15 @@
     margin: auto;
 
 }
-
+.song-form-errors{
+    color: red;
+    font-weight: 500;
+    list-style: circle;
+}
+.song-form-errors-list{
+    font-weight: 400;
+    list-style: circle;
+}
 .song-form-image{
     position: relative;
     margin: auto;

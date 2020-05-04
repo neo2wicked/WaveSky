@@ -3,12 +3,12 @@
     position: relative;
     background-color: "lightgray";
     overflow: hidden;
-    height: 100%
 }
 
 .home-container{
     width: 1240px;
     margin: auto;
+    position: relative;
 }
 .home-top{
     position: relative;
@@ -59,4 +59,37 @@
     color: white;
     text-shadow: 0 0 3px #000;
 
+}
+
+.home-photo-container{
+    position: relative;
+}
+
+.home-photo-button{
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 35px;
+    padding: 5px 10px;
+    background-color: rgb(255,75,0);
+    color: white;
+    border-radius: 3px;
+    border: 1px solid white;
+}
+.home-background-button{
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    padding: 5px 10px;
+    background-color: rgb(255,75,0);
+    color: white;
+    border-radius: 3px;
+    border: 1px solid white;
+}
+
+.home-button-show{
+    display: block;
 }

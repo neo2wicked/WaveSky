@@ -38,7 +38,26 @@ export default class Player extends React.Component {
         this.playing = false;
         this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false, drawing: false }, { songPosition: currentTime }))
     }
+    componentWillUnmount(){
+        let audio = document.getElementById("player")
+        
+            audio.removeEventListener("playing", () => {
+                if (!this.playing) {
+                    this.playButton.innerHTML = "<i class='fas fa-pause'></i>"
+                    audio.play()
+                        .then(() => this.play(audio.currentTime))
+                }
 
+            })
+            
+            audio.removeEventListener("waiting", () => {
+                if (this.playing) {
+                    this.playButton.innerHTML = "<i class='fas fa-play'></i>"
+                    // audio.pause();//////////////////////////
+                    this.pause(audio.currentTime)
+                }
+            })
+    }
     componentDidUpdate(){
 
         

@@ -36,6 +36,7 @@ class Api::UsersController < ApplicationController
         username = user_params[:username].to_s.downcase!
         @user = User.find_by(username: username)
         correct_params = user_params.deep_dup
+        debugger
         correct_params[:username] = correct_params[:username].downcase
         if (@user)
             @user.update(correct_params)

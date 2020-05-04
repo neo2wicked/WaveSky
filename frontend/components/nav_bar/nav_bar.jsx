@@ -24,22 +24,42 @@ class NavBar extends React.Component {
    
 
     componentDidMount(){
-        
+        window.addEventListener("click", () => {
+            this.closeFirstDropdown()
+            this.closeSecondDropdown();
+        });
 
+    }
+    componentWillUnmount(){
+        window.removeEventListener("click", () => {
+            this.closeFirstDropdown()
+            this.closeSecondDropdown();
+        });
+    }
+
+    closeFirstDropdown(){
+        this.setState({ displayFirstDropdown: "none" })
+    }
+    closeSecondDropdown(){
+        this.setState({ displaySecondDropdown: "none" })
     }
 
     handleClick(e) {
         e.preventDefault();
         this.props.logout();
     }
-    openFirstDropdown(){
+    openFirstDropdown(e){
+        e.stopPropagation()
+        this.closeSecondDropdown()
         if (this.state.displayFirstDropdown === "none") {
             this.setState({ displayFirstDropdown: "block" });
         }else{
             this.setState({ displayFirstDropdown: "none" });
         }
     }
-    openSecondDropdown(){
+    openSecondDropdown(e){
+        e.stopPropagation()
+        this.closeFirstDropdown()
         if (this.state.displaySecondDropdown === "none") {
             this.setState({ displaySecondDropdown: "block" });
         }else{
@@ -61,8 +81,8 @@ class NavBar extends React.Component {
 
     render() {
         return(
-            <div>
-                {/* <button onClick={this.handleClick}>Logout</button> */}
+       //     <div>
+               // {/* <button onClick={this.handleClick}>Logout</button> */}
                 <header>
                     <nav>
                         <ul className="navbar-list">
@@ -91,7 +111,7 @@ class NavBar extends React.Component {
                                 </div>
 
                                 <div className="dropdown-menu-1"  style={{ display: this.state.displayFirstDropdown }} >
-                                    <div><Link to={`/${this.props.currentUser.username}`}>Profile</Link></div>
+                                    <div><Link to={`/`}>Profile</Link></div>
                                     {/* <div><Link>Likes(not working)</Link></div>
                                     <div><Link>Following(not working)</Link></div> */}
                                 </div>
@@ -100,14 +120,17 @@ class NavBar extends React.Component {
                             <li onClick={this.openSecondDropdown} className="dropdown-2" >
                                 <a href="#"><i className="fas fa-ellipsis-h"></i></a>
                                 <div className="dropdown-menu-2" style={{ display: this.state.displaySecondDropdown }}>
-                                    <div onClick={this.handleClick}><a>Logout</a></div>
+                                    <div onClick={this.handleClick}>Logout</div>
                                 </div>
                             </li>
 
                         </ul>
                     </nav>
+                    <div className="fake-header">
+
+                    </div>
                 </header>
-            </div>
+            //</div>
         )
     }
 }
