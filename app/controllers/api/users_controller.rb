@@ -33,13 +33,9 @@ class Api::UsersController < ApplicationController
     end
 
     def update
-        username = user_params[:username].to_s.downcase!
-        @user = User.find_by(username: username)
-        correct_params = user_params.deep_dup
-        debugger
-        correct_params[:username] = correct_params[:username].downcase
+        @user = User.find(params[:id])
         if (@user)
-            @user.update(correct_params)
+            @user.update(user_params)
             render json: ["successful update."], status: 200
         else
             render json: ["The user was not found."], status: 404
@@ -48,6 +44,6 @@ class Api::UsersController < ApplicationController
     end
     private
     def user_params
-        params.require(:user).permit(:username, :password, :profile_photo, :background_photo)
+        params.require(:user).permit(:username, :password, :profile_photo, :profile_background)
     end
 end

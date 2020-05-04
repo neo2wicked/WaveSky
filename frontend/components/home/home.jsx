@@ -55,23 +55,32 @@ export default class Home extends React.Component {
         let file = document.getElementById("home-photo-file")
         file.click()
     }
-
+    handleBackgroundImageClick() {
+        let file = document.getElementById("home-background-file")
+        file.click()
+    }
+    
     handlePhotoImage(e){
         let image = e.currentTarget.files[0]
         this.setState({photoImage: image})
 
     }
 
-    handleBackgroundImage(){
+    handleBackgroundImage(e){
+        let image = e.currentTarget.files[0]
+        this.setState({ backgroundImage: image })
 
     }
     componentDidUpdate(){
         
     }
 
-    updateUsersPhotos(user){
-        this.props.updateUser(user)
-            .then(()=> this.props.history.push("/"))
+    updateUsersPhotos(info){
+        this.props.updateUser(info)
+            .then(()=> {
+                this.setState({photoImage: null, backgroundImage: null}); 
+                this.props.history.push("/");
+            })
 
     }
     render() {
@@ -97,8 +106,8 @@ export default class Home extends React.Component {
                         </div>
                     </div>
                     <div onMouseOver={this.showBackgroundButton} onMouseOut={this.hideBackgroundButton} className="home-profile-background">
-                        <img  src={this.props.user.profileBackground ? this.props.user.profileBackground : ""} alt="" />
-                        <button className={this.state.showBackgroundButton ? "home-button-show home-background-button" : "home-background-button"}><i className="fas fa-camera"></i> Upload image</button>
+                        <img className="home-background-image"  src={this.props.user.profileBackground ? this.props.user.profileBackground : ""} alt="" />
+                        <button onClick={this.handleBackgroundImageClick} className={this.state.showBackgroundButton ? "home-button-show home-background-button" : "home-background-button"}><i className="fas fa-camera"></i> Upload image</button>
                         <input
                             id="home-background-file"
                             className="files"

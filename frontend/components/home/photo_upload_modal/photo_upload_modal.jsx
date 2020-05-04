@@ -11,10 +11,12 @@ class PhotoUploadModal extends React.Component{
             formData.append('user[profile_photo]', this.props.photoImage);
         }
         if (this.props.backgroundImage){
-            formData.append('user[background_photo]', this.props.backgroundImage);
+            console.log("OOOO")
+            formData.append('user[profile_background]', this.props.backgroundImage);
         }
 
-        this.props.updateUsersPhotos(formData)
+
+        this.props.updateUsersPhotos({user: this.props.currentUser, form: formData})
 
     }
     
