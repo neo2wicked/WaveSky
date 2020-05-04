@@ -8,7 +8,10 @@ export default class Index extends React.Component{
         super(props)
         this.handleClick = this.handleClick.bind(this)
     }
-
+    componentWillUnmount(){
+        document.body.style.overflowY = "auto";
+        document.body.style.overflowX = "auto";
+    }
 
 
     handleClick(e){
