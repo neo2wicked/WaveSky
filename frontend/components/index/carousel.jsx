@@ -35,78 +35,36 @@ export default class Carousel extends React.Component {
 
 
     handleClick(e) {
-        let that = this
-        if(!this.slideInterval2 && !this.slideInterval1){
-            if (e.currentTarget === this.button1) {
-                if (this.state.slide1 !== "active-slide") {
-                    let counter1 = 0
-                    this.slideInterval1 = setInterval(() => {
-                        if (counter1 < 1240) {
-                            counter1 += 10;
-                            that.slide2.style.left = `${counter1}px`;
-                        } else {
-                            clearInterval(this.slideInterval1)
-                            this.slideInterval1 = null;
-                        }
-                    }, 5)
-                    let counter2 = 1240
-
-                    this.slideInterval2 = setInterval(() => {
-                        if (counter2 > 0) {
-                            counter2 -= 10;
-                            that.slide1.style.left = `-${counter2}px`;
-                        } else {
-                            clearInterval(this.slideInterval2)
-                            this.slideInterval2 = null;
-                        }
-                    }, 5)
-
-                    this.setState({
-                        button1: "active",
-                        button2: "",
-                        slide1: "active-slide",
-                        slide2: ""
-                    })
-
-                }
-
+        clearInterval(this.randomInterval)
+        this.randomInterval = setInterval(() => {
+            if (this.state.button1 === "active") {
+                this.button2.click()
             } else {
-                if (this.state.slide2 !== "active-slide") {
-                    let counter1 = 0
-                    this.slideInterval1 = setInterval(() => {
-                        if (counter1 < 1240) {
-                            counter1 += 10;
-                            that.slide1.style.left = `-${counter1}px`;
-
-                        } else {
-                            clearInterval(this.slideInterval1)
-                            this.slideInterval1 = null;
-                        }
-                    }, 5)
-                    let counter2 = 1240
-
-                    this.slideInterval2 = setInterval(() => {
-                        if (counter2 > 0) {
-                            counter2 -= 10;
-                            that.slide2.style.left = `${counter2}px`;
-
-                        } else {
-                            clearInterval(this.slideInterval2)
-                            this.slideInterval2 = null;
-                        }
-                    }, 5)
-
-
-                    this.setState({
-                        button1: "",
-                        button2: "active",
-                        slide1: "",
-                        slide2: "active-slide"
-                    })
-
-                }
+                this.button1.click()
             }
+        }, 4000)
+
+        let slide1 = document.getElementById("slide-1");
+        let slide2 = document.getElementById("slide-2");
+
+        if (e.currentTarget === this.button1 && this.state.slide1 !== "active-slide") {
+            slide1.style.transform = "translateX(0%)"
+            slide1.style.transition = "transform 0.6s ease-in-out 0s"
+
+            slide2.style.transform = "translateX(100%)"
+            slide2.style.transition = "transform 0.6s ease-in-out 0s"
+            this.setState({slide1: "active-slide", slide2:"", button1: "active", button2: ""})
+            
+        } else if (e.currentTarget === this.button2 && this.state.slide2 !== "active-slide"){
+
+            slide1.style.transform = "translateX(-100%)"
+            slide1.style.transition = "transform 0.6s ease-in-out 0s"
+
+            slide2.style.transform = "translateX(0%)"
+            slide2.style.transition = "transform 0.6s ease-in-out 0s"
+            this.setState({ slide1: "", slide2: "active-slide", button1: "", button2: "active" })
         }
+       
         
     }
     render() {
