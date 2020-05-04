@@ -53,7 +53,11 @@ export default class SongItem extends React.Component {
         if (!this.wasPlayed) {
             this.wasPlayed = true;
             // button.innerHTML = "<i class='fas fa-pause'></i>"
-            this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true, songPosition: 0, finished: false }))
+            if(this.props.currentSong){
+                this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true, songPosition: 0, finished: false, volume: this.props.currentSong.volume }))
+            }else{
+                this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true, songPosition: 0, finished: false, volume: 1.0 }))
+            }
 
         } else {
 

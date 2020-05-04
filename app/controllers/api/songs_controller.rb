@@ -1,9 +1,9 @@
 class Api::SongsController < ApplicationController
 
     def index
-        user = User.find_by(username: song_params[:username])
-        if (user)
-            @songs = user.songs
+        @user = User.find_by(username: song_params[:username])
+        if (@user)
+            @songs = @user.songs
             render "/api/songs/index"
         else
             render json: ["The user was not found. Can not fetch songs."], status: 404
@@ -12,6 +12,7 @@ class Api::SongsController < ApplicationController
 
     def show
         @song = Song.find(params[:id])
+        @user = User.find_by(username: @song.username)
         render :show
     end
 

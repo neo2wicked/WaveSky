@@ -18,7 +18,13 @@ export default class Player extends React.Component {
         this.handleBarClick = this.handleBarClick.bind(this)
         this.onListen = this.onListen.bind(this)
         this.dotPosition = 0;
-        
+        this.showVolumeBar = this.showVolumeBar.bind(this)
+        this.hideVolumeBar = this.hideVolumeBar.bind(this)
+        this.handleVolume = this.handleVolume.bind(this)
+
+        this.state = {
+            showVolume: ""
+        }
         
         
         
@@ -78,13 +84,14 @@ export default class Player extends React.Component {
 
         // })
         // }
-        if(this.props.currentSong){
+        if(this.props.currentSong && this.props.currentSong.id){
             if (this.songPlaying !== this.props.currentSong.id) {
 
                 // this.playButton.innerHTML = "<i class='fas fa-pause'></i>"
                 this.songPlaying = this.props.currentSong.id;
                 audio.play()
-                    .then(() => this.play(audio.currentTime))
+                    .then(() => {
+                        this.play(audio.currentTime)})
             }
 
             if (this.playing !== this.props.currentSong.playing) {
@@ -94,8 +101,8 @@ export default class Player extends React.Component {
                     audio.play()
                         .then(() => {
                             this.playButton.innerHTML = "<i class='fas fa-pause'></i>"
-                            this.play(audio.currentTime
-                            )})//this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: this.playing }, { drawing: false })))
+                            this.play(audio.currentTime)
+                        })//this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: this.playing }, { drawing: false })))
 
 
                 } else {
@@ -139,7 +146,9 @@ export default class Player extends React.Component {
                     if (!this.playing){
                         this.playButton.innerHTML = "<i class='fas fa-pause'></i>"
                         audio.play()
-                            .then(() => this.play(audio.currentTime))
+                            .then(() => {
+                                this.play(audio.currentTime)
+                   })
                     }
                 
             })
@@ -242,6 +251,8 @@ export default class Player extends React.Component {
         this.dotPosition = (currentTime / this.props.currentSong.duration) * this.bar.offsetWidth;
         this.dot.style.left = `${this.dotPosition - 5}px`
 
+        // audio.volume = this.props.currentSong.volume
+
 
 
     }
@@ -259,12 +270,52 @@ export default class Player extends React.Component {
             if (this.props.currentSong.imageUrl) {
                 return this.props.currentSong.imageUrl
             } else {
-                if (this.props.user.profilePhoto) {
-                    return this.props.user.profilePhoto
+                if (this.props.currentSong.profilePhoto) {
+                    return this.props.currentSong.profilePhoto
                 } else {
                     return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
                 }
             }
+        }
+    }
+
+    showVolumeBar(e){
+        e.stopPropagation()
+        this.setState({showVolume: "show-player-volume"})
+    }
+    hideVolumeBar(e){
+        e.persist()
+        let playerBar = document.getElementsByClassName("player-volume-bar")[0]
+        if ((e.relatedTarget) !== playerBar){
+            this.setState({ showVolume: "" })
+        }
+    }
+
+    handleVolume(e){
+        // e.persist()
+        let bar = document.getElementsByClassName("player-volume-bar-container")[0]
+        console.log(e.nativeEvent.layerY)
+        let volume = ((bar.offsetHeight - e.nativeEvent.layerY) / bar.offsetHeight)
+        
+        
+        let orangeBar = document.getElementsByClassName("player-volume-bar-orange")[0]
+        orangeBar.style.height = `${volume*100}%`
+
+        let dot = document.getElementsByClassName("player-volume-bar-dot")[0]
+        dot.style.top = `${bar.offsetHeight - volume * bar.offsetHeight - 5}px`
+        
+        if(this.props.currentSong){
+            this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { volume }))
+        }else{
+            this.props.receiveCurrentSong(Object.assign({}, { volume }))
+        }
+
+    }
+    checkVolume(){
+        if (this.props.currentSong){
+            return this.props.currentSong.volume
+        }else{
+            return 1;
         }
     }
     render() {
@@ -289,18 +340,37 @@ export default class Player extends React.Component {
                     <div className="player-duration">-- : --</div>
                </div>
 
+                <div className="player-volume">
+
+                    <div onMouseLeave={this.hideVolumeBar}  className={`player-volume-container ${this.state.showVolume}`}>
+                        <div className="player-volume-bar-container">
+                            <div className="player-volume-bar">
+                                <div className="player-volume-bar-dot"></div>
+                            </div>
+                            <div className="player-volume-bar-orange">
+                                
+                            </div>
+                        </div>
+
+                        <div onClick={this.handleVolume} className="player-volume-bar-container-fake">
+
+                        </div>
+                    </div>
+                    <button onMouseOver={this.showVolumeBar} ><i className="fas fa-volume-up"></i></button>
+                </div>
 
                 <div className="player-description">
                     <img className="player-image" src={this.renderImage()} alt=""/>
 
                     <div className="player-title-description">
-                        <div className="player-author">Play any song</div>
+                        <div onClick={()=> this.props.history.push(`/${this.props.currentSong.username}`)} className="player-author">Play any song</div>
                         <div className="player-title">Just do it</div>
                     </div>
                 </div>
 
                 {this.checkUrl()}
                 <ReactAudioPlayer
+                    volume={this.checkVolume()}
                     listenInterval = {30}
                     className="player-audio"
                     id="player"
