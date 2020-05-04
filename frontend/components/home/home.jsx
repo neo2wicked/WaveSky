@@ -5,6 +5,7 @@ import NavBarContainer from "../nav_bar/nav_bar_container"
 import SongsContainer from "./songs_container/songs_container"
 import PhotoUploadModal from "./photo_upload_modal/photo_upload_modal"
 import {Link} from "react-router-dom"
+import UserEditModal from './user_edit_modal.jsx/user_edit_modal';
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -26,6 +27,9 @@ export default class Home extends React.Component {
 
         this.updateUsersPhotos = this.updateUsersPhotos.bind(this)
         this.cancelUpload = this.cancelUpload.bind(this)
+
+        this.showUserEditModal = this.showUserEditModal.bind(this)
+        this.hideUserEditModal = this.hideUserEditModal.bind(this)
 
     }
 
@@ -102,9 +106,19 @@ export default class Home extends React.Component {
             backgroundImage: null
         })
     }
+
+    showUserEditModal(){
+        this.setState({showUserEditModal: true})
+    }
+
+    hideUserEditModal(){
+        this.setState({ showUserEditModal: false })
+
+    }
     render() {
         return (
             <div className="home-container">
+                {this.state.showUserEditModal ? <UserEditModal hideUserEditModal={this.hideUserEditModal} currentUser={this.props.currentUser} /> : null}
 
                 {this.state.photoImage || this.state.backgroundImage ? <PhotoUploadModal cancelUpload={this.cancelUpload} errors={this.props.imageErrors} backgroundImage={this.state.backgroundImage} photoImage={this.state.photoImage} currentUser={this.props.currentUser} updateUsersPhotos={this.updateUsersPhotos}/> : null}
                 <div className="home-top">
@@ -135,7 +149,60 @@ export default class Home extends React.Component {
                         /> : null}
                     </div>
                 </div>
-                <SongsContainer/>
+
+                <div className="home-middle-container">
+                    <div className="home-page-info-container">
+                        <div className="home-page-info-container-all">All</div>
+
+                        <button onClick={this.showUserEditModal}><i className="fas fa-pencil-alt"></i> Edit</button>
+                    </div>
+
+                   <div className="home-songs-middle">
+                        <div className="home-recent-songs-containers">
+
+                            <div className="home-page-recent">Recent</div>
+
+
+                            <SongsContainer />
+                        </div>
+
+                        <div className="home-right-panel-container">
+                            <div className="home-right-panel-container-top">
+                                <div className="home-right-panel-columns">
+                                    <div className="home-right-panel-columns-followers">
+                                        <div>Followers</div>
+                                        <div className="home-right-panel-counters">0</div>
+                                    </div>
+                                    <div className="home-right-panel-columns-following">
+                                        <div>Following</div>
+                                        <div className="home-right-panel-counters">0</div>
+                                    </div>
+                                    <div className="home-right-panel-columns-tracks">
+                                        <div>Tracks</div>
+                                        <div className="home-right-panel-counters">0</div>
+                                    </div>
+                                </div>
+
+                                <div className="home-right-panel-description">
+                                    Description lololol fjdfjdskjfkldjfjkldsjkfd
+                                    mdsmfdms. msd,.fm sdf ndmsfnd,smnf, dn,n,
+                                    sd,mf dsfmdnsfns d,fnmd,s n,sdnf,dsndsnf,mnsm,n
+                                    ds,ffdsfkdkjsdnfdn lsf dfndsmnf, dnsfnsd nm,fn,sdnfs
+                                    dfnmsdnfsdnf,mdsn,fmsdnm, nsdf
+                                    sdnfm,sdnfmsdnf,sdnf,sdnf,mnsd 
+                                    dnsf,msdnf,mnsd,fn,fnsd,fns
+                                </div>
+                            </div>
+
+
+
+
+                            <div>
+                                like and other stuff
+                            </div>
+                        </div>
+                   </div>
+                </div>
                 
             </div>
         )

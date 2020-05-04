@@ -1,0 +1,219 @@
+.home-songs-container{
+    padding-top: 20px;
+    position: relative;
+    background-color: "lightgray";
+    overflow: hidden;
+    // height: 105%;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-between;
+}
+
+.home-container{
+    width: 1240px;
+    margin: auto;
+    position: relative;
+    background-color: white;
+}
+.home-top{
+    position: relative;
+}
+.home-profile-photo{
+    // position: absolute;
+   
+    // top: auto;
+    
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    background-color: red;
+}
+
+.home-photo-user{
+    position: absolute;
+    display: flex;
+    top: 35px;
+    left: 35px;
+   
+}
+
+.home-profile-background{
+    width: inherit;
+    height: 270px;
+    background-color: #21D4FD;
+    background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+
+
+}
+.home-page-welcome{
+    margin-left: 50px;
+}
+.home-profile-username{
+    font-size: 1.7rem;
+    color: white;
+    text-shadow: 0 0 3px rgb(255, 66, 66);
+
+}
+.home-page-of{
+    color: white;
+    font-size: 1.2rem;
+}
+
+.home-welcome{
+    font-size: 2.5rem;
+    color: white;
+    text-shadow: 0 0 3px #000;
+
+}
+
+.home-photo-container{
+    position: relative;
+}
+
+.home-photo-button{
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 35px;
+    padding: 5px 10px;
+    background-color: rgb(255,75,0);
+    color: white;
+    border-radius: 3px;
+    border: 1px solid white;
+}
+.home-background-button{
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    padding: 5px 10px;
+    background-color: rgb(255,75,0);
+    color: white;
+    border-radius: 3px;
+    border: 1px solid white;
+}
+
+.home-button-show{
+    display: block;
+}
+
+.home-background-image{
+    height: 100%;
+    object-fit: cover;
+}
+.home-middle-container{
+    width: 95%;
+    margin: auto;
+    background-color: white;
+    // display: flex;
+}
+.home-songs-middle{
+    display: flex;
+    margin-top: 25px;
+    // justify-content: space-between;
+}
+.home-recent-songs-containers{
+  
+    border-right: 1px solid rgb(226, 226, 226);
+    padding-right: 20px;
+}
+.home-page-info-container{
+    // position: relative;
+   
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // width: 90%;
+    height: 50px;
+    border-bottom: 1px solid rgb(226, 226, 226);
+    //   margin-top: 30px;
+}
+
+.home-page-info-container-all{
+    color: rgb(255, 75, 0);
+    height: 100%;
+    border-bottom: 1px solid rgb(255,75,0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+}
+
+.home-page-info-container button{
+    margin-right: 30px;
+    // position: relative;
+    padding: 7px 15px;
+    border: 1px solid rgb(226, 226, 226);
+    border-radius: 3px;
+    text-align: center;
+    
+}
+
+
+
+.home-page-recent{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    height: 30px;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+.home-right-panel-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    // align-items: center;
+    justify-content: space-between;
+    height: 250px;
+}
+
+.home-right-panel-columns{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 0.85rem;
+    color: rgb(145, 145, 145);
+    font-weight: 400;
+    
+}
+
+.home-right-panel-columns-followers{
+width: 33.3%;
+ padding-left: 20px;
+
+}
+
+.home-right-panel-columns-following{
+    border-left: 1px solid rgb(226, 226, 226);
+    border-right: 1px solid rgb(226, 226, 226);
+
+width: 33.3%;
+ padding-left: 20px;
+}
+
+.home-right-panel-columns-tracks{
+    width: 33.3%;
+     padding-left: 20px;
+}
+.home-right-panel-counters{
+    font-size: 1.4rem;
+}
+
+.home-right-panel-container-top{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+}
+.home-right-panel-description{
+    height: 100px;
+    overflow-y: scroll;
+    border: 1px solid rgb(226, 226, 226);
+    width: 90%;
+    border-radius: 3px;
+    margin: auto;
+    padding: 5px;
+}
