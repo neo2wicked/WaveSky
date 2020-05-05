@@ -4,26 +4,82 @@ class UserEditModal extends React.Component {
     constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this)
+        this.state = {
+            facebook: "",
+            instagram: "",
+            description: "",
+            image: null
+        }
+        this.handleFileImage = this.handleFileImage.bind(this)
+        this.handleFileImageClick = this.handleFileImageClick.bind(this)
     }
+
+    componentDidMount() {
+        let info = {}
+        if (this.props.currentUser.facebook) {
+            info = Object.assign(info, { facebook: this.props.currentUser.facebook })
+        }
+        if (this.props.currentUser.instagram) {
+            info = Object.assign(info, { instagram: this.props.currentUser.instagram })
+        }
+        if (this.props.currentUser.description) {
+            info = Object.assign(info, { description: this.props.currentUser.description })
+        }
+        this.setState(info)
+    }
+    
     handleClick() {
         const formData = new FormData();
-        if (this.props.photoImage) {
-            formData.append('user[profile_photo]', this.props.photoImage);
+        if(this.state.facebook){
+            formData.append('user[facebook]', this.state.facebook); 
         }
-        if (this.props.backgroundImage) {
-            formData.append('user[profile_background]', this.props.backgroundImage);
+        if(this.state.instagram){
+            formData.append('user[instagram]', this.state.instagram); 
+        }
+        if(this.state.description){
+            formData.append('user[description]', this.state.description); 
+        }
+        if(this.state.image){
+            formData.append('user[profile_photo]', this.state.image); 
         }
 
 
-        this.props.updateUsersPhotos({ user: this.props.currentUser, form: formData })
+        this.props.updateUser({ user: this.props.currentUser, form: formData })
+            .then(() => this.props.history.push("/"))
 
     }
     printErrors(){
 
     }
 
-    update(){
+    update(value) {
+        return e => (this.setState({ [value]: e.currentTarget.value }))
+    }
 
+    handleFileImage(e){
+        const image = e.currentTarget.files[0];
+        const fileReader = new FileReader();
+        fileReader.onloadend = () => {
+            this.setState({ image, imageUrl: fileReader.result})
+
+        };
+        if (image) {
+            fileReader.readAsDataURL(image);
+        }
+
+    }
+    handleFileImageClick(){
+        document.getElementById("song-form-image-file").click()
+    }
+
+    renderImage(){
+        if (this.state.imageUrl){
+            return this.state.imageUrl
+        }
+        if (this.props.currentUser.profilePhoto){
+            return this.props.currentUser.profilePhoto
+        }
+        return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
     }
 
     render() {
@@ -44,31 +100,50 @@ class UserEditModal extends React.Component {
                             <div className="user-edit-info">
 
                                 <div className="image-preview">
-                                    {this.props.currentUser.profilePhoto ? <img src={this.props.currentUser.profilePhoto} alt="" /> : null}
+                                    <img src={this.renderImage()} alt="" />
                                     <button onClick={this.handleFileImageClick} className="song-form-image-button"><i className="fas fa-camera"></i> Upload image</button>
                                     <input
                                         id="song-form-image-file"
                                         className="files"
                                         type="file"
                                         onChange={this.handleFileImage}
+                                        
                                     />
                                 </div>
 
                                 <div className="user-edit-texts">
                                     <div className="user-edit-text-field">
                                         <div>Facebook</div>
-                                        <input className="song-form-input" type="text" onChange={this.update("facebook")} required />
+                                        <input 
+                                            className="song-form-input" 
+                                            type="text" 
+                                            value={this.state.facebook} 
+                                            onChange={this.update("facebook")} 
+                                            />
                                     </div>
 
                                     <div className="user-edit-text-field">
                                         <div>Instagram</div>
-                                    <input className="song-form-input" type="text" onChange={this.update("instagram")} required />
+                                        <input 
+                                            className="song-form-input"
+                                            type="text" 
+                                            value={this.state.instagram}
+                                            onChange={this.update("instagram")} 
+                                            />
 
                                     </div>
 
                                     <div className="user-edit-text-field">
                                         <div>Description</div>
-                                        <textarea placeholder="Tell us more about yourself" className="user-description" cols="40" rows="10" onChange={this.update("description")}></textarea>
+                                        <textarea 
+                                            placeholder="Tell us more about yourself" 
+                                            className="user-description" 
+                                            cols="40" 
+                                            rows="10"
+                                            value={this.state.description}
+                                            onChange={this.update("description")}
+                                            >
+                                        </textarea>
                                     </div>
 
                                     {/* {this.printErrors()} */}

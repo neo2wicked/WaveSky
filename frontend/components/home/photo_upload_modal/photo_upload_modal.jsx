@@ -19,6 +19,7 @@ class PhotoUploadModal extends React.Component{
 
     }
     
+    
     render(){
         return(
             <div className="photo-upload-modal">

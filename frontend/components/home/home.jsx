@@ -115,10 +115,18 @@ export default class Home extends React.Component {
         this.setState({ showUserEditModal: false })
 
     }
+    printSocialMedia(){
+        if(this.props.user.instagram || this.props.user.facebook){
+            return <div className="home-social-media">
+                {this.props.user.facebook ? <a href={`http://${this.props.user.facebook}`}><i className="fab fa-facebook-f"></i> Facebook</a> : null}
+                {this.props.user.instagram ? <a href={`http://${this.props.user.instagram}`}><i className="fab fa-instagram"></i> Instagram</a> : null}
+            </div>
+        }
+    }
     render() {
         return (
             <div className="home-container">
-                {this.state.showUserEditModal ? <UserEditModal hideUserEditModal={this.hideUserEditModal} currentUser={this.props.currentUser} /> : null}
+                {this.state.showUserEditModal ? <UserEditModal hideUserEditModal={this.hideUserEditModal} currentUser={this.props.currentUser} updateUser={this.props.updateUser} history={this.props.history}/> : null}
 
                 {this.state.photoImage || this.state.backgroundImage ? <PhotoUploadModal cancelUpload={this.cancelUpload} errors={this.props.imageErrors} backgroundImage={this.state.backgroundImage} photoImage={this.state.photoImage} currentUser={this.props.currentUser} updateUsersPhotos={this.updateUsersPhotos}/> : null}
                 <div className="home-top">
@@ -183,15 +191,12 @@ export default class Home extends React.Component {
                                     </div>
                                 </div>
 
-                                <div className="home-right-panel-description">
-                                    Description lololol fjdfjdskjfkldjfjkldsjkfd
-                                    mdsmfdms. msd,.fm sdf ndmsfnd,smnf, dn,n,
-                                    sd,mf dsfmdnsfns d,fnmd,s n,sdnf,dsndsnf,mnsm,n
-                                    ds,ffdsfkdkjsdnfdn lsf dfndsmnf, dnsfnsd nm,fn,sdnfs
-                                    dfnmsdnfsdnf,mdsn,fmsdnm, nsdf
-                                    sdnfm,sdnfmsdnf,sdnf,sdnf,mnsd 
-                                    dnsf,msdnf,mnsd,fn,fnsd,fns
-                                </div>
+                                {this.props.user.description ? <div className="home-right-panel-description" >
+                                    {this.props.user.description}
+                                </div> : null}
+
+                                {this.printSocialMedia()}
+
                             </div>
 
 
