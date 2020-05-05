@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 export default class SongItem extends React.Component {
     constructor(props) {
         super(props)
+        this.state = { heart: '<i class="far fa-heart"></i>', showlike: "" }
 
         this.wasPlayed = false
         this.newPosition = 0;
@@ -16,6 +17,8 @@ export default class SongItem extends React.Component {
         this.play = this.play.bind(this)
         this.pause = this.pause.bind(this)
         this.onEnded = this.onEnded.bind(this)
+        this.handleLike = this.handleLike.bind(this)
+
         // this.onListen = this.onListen.bind(this)
     }
 
@@ -319,7 +322,27 @@ export default class SongItem extends React.Component {
         clearInterval(this.eachSample)
     }
 
+    handleLike(){
+        let song = this.props.song
+        let songId = song.id;
+        let userId = this.props.currentUser.id
+        let like = { songId, userId}
+        if (song.likes[userId]) {
+            delete song.likes[userId]
+        } else {
+            song.likes[userId] = like
+        }
+        this.props.createDeleteLike({ song, like })
+       
+    }
 
+    printLikes(){
+        if (this.props.song.likes[this.props.currentUser.id]) {
+            return <div onClick={this.handleLike} className="song-item-like">{Object.values(this.props.song.likes).length}<i class="fas fa-heart"></i></div>
+        } else {
+            return <div onClick={this.handleLike} className="song-item-like show-like">{Object.values(this.props.song.likes).length} <i class="far fa-heart"></i></div>
+        }
+    }
 
     render() {
         return (
@@ -355,7 +378,8 @@ export default class SongItem extends React.Component {
 
 
                     <div className="song-item-container-bottom">
-                        <div>Like</div>
+                        {this.printLikes()}
+            {/* <div onClick={this.handleLike} className={this.state.showlike}>{Object.values(this.props.song.likes).length} {this.state.heart}</div> */}
                         <div>Comment</div>
                     </div>
                 </div>

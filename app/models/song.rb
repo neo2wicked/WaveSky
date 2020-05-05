@@ -15,7 +15,17 @@ class Song < ApplicationRecord
     # validates :music_image, allow_nil: true
     # validate :ensure_image
 
+    has_many :likes,
+        primary_key: :id,
+        foreign_key: :song_id,
+        class_name: :Like
 
+
+
+    belongs_to :author,
+        primary_key: :username,
+        foreign_key: :username,
+        class_name: :User
 
     def ensure_music
         unless self.music.attached?
@@ -30,9 +40,4 @@ class Song < ApplicationRecord
     # end
 
 
-
-    belongs_to :author,
-        primary_key: :username,
-        foreign_key: :username,
-        class_name: :User
 end

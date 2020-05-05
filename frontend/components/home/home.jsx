@@ -162,7 +162,7 @@ export default class Home extends React.Component {
                     <div className="home-page-info-container">
                         <div className="home-page-info-container-all">All</div>
 
-                        <button onClick={this.showUserEditModal}><i className="fas fa-pencil-alt"></i> Edit</button>
+                        {this.props.currentUser.id === this.props.user.id ? <button onClick={this.showUserEditModal}><i className="fas fa-pencil-alt"></i> Edit</button> : null }
                     </div>
 
                    <div className="home-songs-middle">

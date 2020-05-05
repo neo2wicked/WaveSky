@@ -10,7 +10,8 @@ const mapSTP = state => ({
 })
 
 const mapDTP = dispatch => ({
-    updateUser: (user) => dispatch(updateUser(user))
+    updateUser: (user) => dispatch(updateUser(user)),
+   
 })
 
 export default connect(mapSTP, mapDTP)(Home)
