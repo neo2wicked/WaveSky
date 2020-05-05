@@ -69,6 +69,7 @@ class NavBar extends React.Component {
 
     renderAvatar(){
         if (this.props.currentUser.profilePhoto){
+            console.log(this.props.currentUser.profilePhoto)
             return <img className="profile-picture" src={this.props.currentUser.profilePhoto} alt="avatar" />
         }else{
             return <img className="profile-picture" src="https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png" alt="avatar" />
