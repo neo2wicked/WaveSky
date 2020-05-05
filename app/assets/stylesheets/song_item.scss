@@ -74,7 +74,7 @@
     padding: 0px 5px;
     display: flex;
     align-items: center;
-    border: 1px solid rgb(197, 196, 196);
+   
     border-radius: 3px;
 
 }
@@ -84,8 +84,29 @@
 
 
 .song-item-like{
+    width: 50px;
+    text-align: center;
+    white-space: 2px;
+    border: 1px solid rgb(197, 196, 196);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 400;
+   
+}
+.song-item-like p{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
 
 }
 .show-like{
-    
+    color: rgb(255,75,0);
+    border: 1px solid rgb(255,75,0);
+    background-color: rgb(253, 253, 253);
+}
+.fa-heart{
+    margin: 0;
+    padding-top: 2px;
 }

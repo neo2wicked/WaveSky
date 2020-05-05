@@ -327,6 +327,7 @@ export default class SongItem extends React.Component {
         let songId = song.id;
         let userId = this.props.currentUser.id
         let like = { songId, userId}
+
         if (song.likes[userId]) {
             delete song.likes[userId]
         } else {
@@ -338,9 +339,9 @@ export default class SongItem extends React.Component {
 
     printLikes(){
         if (this.props.song.likes[this.props.currentUser.id]) {
-            return <div onClick={this.handleLike} className="song-item-like">{Object.values(this.props.song.likes).length}<i class="fas fa-heart"></i></div>
+            return <div onClick={this.handleLike} className="song-item-like show-like"><i className="fas fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
         } else {
-            return <div onClick={this.handleLike} className="song-item-like show-like">{Object.values(this.props.song.likes).length} <i class="far fa-heart"></i></div>
+            return <div onClick={this.handleLike} className="song-item-like"><i className="far fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
         }
     }
 
