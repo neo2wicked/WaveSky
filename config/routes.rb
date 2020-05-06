@@ -7,9 +7,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create, :update, :index]
     resource :session, only: [:destroy, :create, :show]
-    resources :songs, only: [:index, :create]
-    resources :likes, only: [:index, :create]
-
+    resources :songs, only: [:index, :create, :update]
+    resources :likes, only: [:create]
+    resources :followers, only: [:create]
   end
 
   get '/:username/', to: 'static_pages#root'

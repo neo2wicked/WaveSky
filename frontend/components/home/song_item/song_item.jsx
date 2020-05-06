@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { Link } from "react-router-dom"
+import SongEditFormContainer from "../song_edit_form/song_edit_container"
 
 export default class SongItem extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { heart: '<i class="far fa-heart"></i>', showlike: "" }
+        this.state = { showModal: false }
 
         this.wasPlayed = false
         this.newPosition = 0;
@@ -18,6 +19,10 @@ export default class SongItem extends React.Component {
         this.pause = this.pause.bind(this)
         this.onEnded = this.onEnded.bind(this)
         this.handleLike = this.handleLike.bind(this)
+
+        this.showEditModal = this.showEditModal.bind(this)
+        this.hideEditModal = this.hideEditModal.bind(this)
+
 
         // this.onListen = this.onListen.bind(this)
     }
@@ -226,22 +231,24 @@ export default class SongItem extends React.Component {
 
         // draw the initial canvas
         // const width = Math.floor((canvas.width) / normalizedData.length) * 1.5;
-        const width = (Math.floor((canvas.width) / normalizedData.length)) * 1.5;
+        if (normalizedData){
+            const width = (Math.floor((canvas.width) / normalizedData.length)) * 1.5;
 
-        // if (this.state.samplePosition >= counter){
-        for (let i = 0; i < normalizedData.length; i++) {
-            const x = width * i;
-            let height = normalizedData[i] // * canvas.offsetHeight - padding;
+            // if (this.state.samplePosition >= counter){
+            for (let i = 0; i < normalizedData.length; i++) {
+                const x = width * i;
+                let height = normalizedData[i] // * canvas.offsetHeight - padding;
 
-            if (i < counter) {
-                this.drawLineSegment(ctx, x, height * 120, `rgba(255,66,0,${alpha})`);
-                this.drawLineSegment(ctx, x, -height * 60, `rgb(255,165,127, ${alpha})`);
-            } else {
+                if (i < counter) {
+                    this.drawLineSegment(ctx, x, height * 120, `rgba(255,66,0,${alpha})`);
+                    this.drawLineSegment(ctx, x, -height * 60, `rgb(255,165,127, ${alpha})`);
+                } else {
 
-                this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
-                this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
+                    this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
+                    this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
+                }
+
             }
-
         }
 
     };
@@ -338,13 +345,22 @@ export default class SongItem extends React.Component {
     }
 
     printLikes(){
-        if (this.props.song.likes[this.props.currentUser.id]) {
-            return <div onClick={this.handleLike} className="song-item-like show-like"><i className="fas fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
-        } else {
-            return <div onClick={this.handleLike} className="song-item-like"><i className="far fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
+        if(this.props.song.likes){
+            if (this.props.song.likes[this.props.currentUser.id]) {
+                return <div onClick={this.handleLike} className="song-item-like show-like"><i className="fas fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
+            } else {
+                return <div onClick={this.handleLike} className="song-item-like"><i className="far fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
+            }
         }
     }
+    showEditModal(){
+        this.setState({showModal: true})
 
+    }
+    hideEditModal(){
+        this.setState({showModal: false})
+
+    }
     render() {
         return (
             <div className="song-item-container">
@@ -382,8 +398,12 @@ export default class SongItem extends React.Component {
                         {this.printLikes()}
             {/* <div onClick={this.handleLike} className={this.state.showlike}>{Object.values(this.props.song.likes).length} {this.state.heart}</div> */}
                         <div>Comment</div>
+                        <div onClick={this.showEditModal} className="song-item-edit"><i className="fas fa-pencil-alt"></i> Edit</div>
+                        <div className="song-item-delete"><i className="fas fa-trash-alt"></i> Delete</div>
                     </div>
                 </div>
+
+                {this.state.showModal ? <SongEditFormContainer hideEditModal={this.hideEditModal} song={this.props.song}/> : null}
             </div>
         )
     }

@@ -16,35 +16,31 @@ class UserEditModal extends React.Component {
 
     componentDidMount() {
         let info = {}
-        if (this.props.currentUser.facebook) {
-            info = Object.assign(info, { facebook: this.props.currentUser.facebook })
+        if (this.props.user.facebook) {
+            info = Object.assign(info, { facebook: this.props.user.facebook })
         }
-        if (this.props.currentUser.instagram) {
-            info = Object.assign(info, { instagram: this.props.currentUser.instagram })
+        if (this.props.user.instagram) {
+            info = Object.assign(info, { instagram: this.props.user.instagram })
         }
-        if (this.props.currentUser.description) {
-            info = Object.assign(info, { description: this.props.currentUser.description })
+        if (this.props.user.description) {
+            info = Object.assign(info, { description: this.props.user.description })
         }
         this.setState(info)
     }
     
     handleClick() {
         const formData = new FormData();
-        if(this.state.facebook){
-            formData.append('user[facebook]', this.state.facebook); 
-        }
-        if(this.state.instagram){
-            formData.append('user[instagram]', this.state.instagram); 
-        }
-        if(this.state.description){
-            formData.append('user[description]', this.state.description); 
-        }
+        let updatedUser = Object.assign({}, this.props.user, {facebook: this.state.facebook, instagram: this.state.instagram, description: this.state.description})
+        
+        formData.append('user[facebook]', this.state.facebook); 
+        formData.append('user[instagram]', this.state.instagram); 
+        formData.append('user[description]', this.state.description);
         if(this.state.image){
             formData.append('user[profile_photo]', this.state.image); 
         }
 
 
-        this.props.updateUser({ user: this.props.currentUser, form: formData })
+        this.props.updateUser({ user: updatedUser, form: formData })
             .then(() => this.props.history.push("/"))
 
     }
@@ -76,8 +72,8 @@ class UserEditModal extends React.Component {
         if (this.state.imageUrl){
             return this.state.imageUrl
         }
-        if (this.props.currentUser.profilePhoto){
-            return this.props.currentUser.profilePhoto
+        if (this.props.user.profilePhoto){
+            return this.props.user.profilePhoto
         }
         return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
     }
@@ -152,7 +148,7 @@ class UserEditModal extends React.Component {
 
                         </div>
 
-                        <div className="song-form-bottom">
+                    <div className="song-form-bottom user-edit-bottom">
                             <div>(DO NOT PROVIDE YOUR REAL INFORMATION)</div>
 
                             <div>
@@ -160,8 +156,8 @@ class UserEditModal extends React.Component {
                                 <button className="song-form-bottom-buttons song-form-save" onClick={this.handleClick}>Save</button>
                             </div>
 
-                        </div>
                     </div>
+                    {/* </div> */}
                     
                     
                     
@@ -180,7 +176,7 @@ class UserEditModal extends React.Component {
                             <li key={`photo-error-${i}`}>{error}</li>
                         ))}
                     </div> */}
-                {/* </div> */}
+                </div>
             </div>
         )
     }

@@ -12,6 +12,7 @@ class FirstForm extends React.Component{
         super(props)
         this.state = { username: "", form: null}
         this.handleClick = this.handleClick.bind(this)
+        this.demoLogin = this.demoLogin.bind(this)
         
     }
 
@@ -81,6 +82,9 @@ class FirstForm extends React.Component{
                 .fail(() => this.setState({ form: <SignupFormContainer username={this.state.username} resetForm={this.resetForm}/>, username: "" }))
         }
     }
+    demoLogin(){
+        this.props.login({username: "iamdemouser", password: "123456"})
+    }
 
     render(){
         return(
@@ -88,7 +92,7 @@ class FirstForm extends React.Component{
                 <div className="close"><span>&times;</span></div>
                 <div className="modal-form-content first-form">
                     <div className="modal-form-container">
-                        <button className="demo-button">DEMO LOGIN</button>
+                        <button onClick={this.demoLogin} className="demo-button">DEMO LOGIN</button>
                         <div className="separator">or</div>
                         
                         <input

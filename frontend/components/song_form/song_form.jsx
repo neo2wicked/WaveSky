@@ -53,7 +53,7 @@ export default class SongForm extends React.Component {
 
                 this.props.createSong(formData)
                     .then(() => { this.props.history.push("/")
-                        window.location.reload();
+                        // window.location.reload();
                     })
                     // .fail( () => {
                     //     if (!(this.props.errors.length === 1 && this.props.errors[0] === "Title can't be blank")){

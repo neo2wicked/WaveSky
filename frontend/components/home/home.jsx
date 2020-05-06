@@ -31,6 +31,10 @@ export default class Home extends React.Component {
         this.showUserEditModal = this.showUserEditModal.bind(this)
         this.hideUserEditModal = this.hideUserEditModal.bind(this)
 
+        this.handleFollow = this.handleFollow.bind(this)
+
+        this.printFollowerButton = this.printFollowerButton.bind(this)
+
     }
 
     handleClick(e) {
@@ -123,10 +127,37 @@ export default class Home extends React.Component {
             </div>
         }
     }
+
+    handleFollow(){
+            let user = this.props.user
+            let userId = user.id;
+            let currentUserId = this.props.currentUser.id
+            let follower = { userId, follower: currentUserId }
+
+            if (user.followers[currentUserId]) {
+                delete user.followers[currentUserId]
+            } else {
+                user.followers[currentUserId] = { username: this.props.currentUser.username }
+            }
+            this.props.createDeleteFollower({ user, follower })
+    }
+
+    printFollowerButton(){
+        if (this.props.currentUser.id !== this.props.user.id){
+            if(this.props.user.followers){
+                if (this.props.user.followers[this.props.currentUser.id]) {
+                    return <button className="home-follow-button following" onClick={this.handleFollow}><i class="fas fa-user-check"></i><p>Following</p></button>
+                } else {
+                    return <button className="home-follow-button " onClick={this.handleFollow}><i class="fas fa-user-plus"></i><p>Follow</p></button>
+                }
+            }
+        }
+        
+    }
     render() {
         return (
             <div className="home-container">
-                {this.state.showUserEditModal ? <UserEditModal hideUserEditModal={this.hideUserEditModal} currentUser={this.props.currentUser} updateUser={this.props.updateUser} history={this.props.history}/> : null}
+                {this.state.showUserEditModal ? <UserEditModal hideUserEditModal={this.hideUserEditModal} user={this.props.user} updateUser={this.props.updateUser} history={this.props.history}/> : null}
 
                 {this.state.photoImage || this.state.backgroundImage ? <PhotoUploadModal cancelUpload={this.cancelUpload} errors={this.props.imageErrors} backgroundImage={this.state.backgroundImage} photoImage={this.state.photoImage} currentUser={this.props.currentUser} updateUsersPhotos={this.updateUsersPhotos}/> : null}
                 <div className="home-top">
@@ -162,7 +193,8 @@ export default class Home extends React.Component {
                     <div className="home-page-info-container">
                         <div className="home-page-info-container-all">All</div>
 
-                        {this.props.currentUser.id === this.props.user.id ? <button onClick={this.showUserEditModal}><i className="fas fa-pencil-alt"></i> Edit</button> : null }
+                        {this.props.currentUser.id === this.props.user.id ? <button className="home-profile-edit" onClick={this.showUserEditModal}><i className="fas fa-pencil-alt"></i>Edit</button> : null }
+                        {this.printFollowerButton()}
                     </div>
 
                    <div className="home-songs-middle">
@@ -179,15 +211,15 @@ export default class Home extends React.Component {
                                 <div className="home-right-panel-columns">
                                     <div className="home-right-panel-columns-followers">
                                         <div>Followers</div>
-                                        <div className="home-right-panel-counters">0</div>
+                                        <div className="home-right-panel-counters">{this.props.user.followers ? Object.values(this.props.user.followers).length : "-"}</div>
                                     </div>
                                     <div className="home-right-panel-columns-following">
                                         <div>Following</div>
-                                        <div className="home-right-panel-counters">0</div>
+                                        <div className="home-right-panel-counters">{this.props.user.followers ? Object.values(this.props.user.following).length : "-"}</div>
                                     </div>
                                     <div className="home-right-panel-columns-tracks">
                                         <div>Tracks</div>
-                                        <div className="home-right-panel-counters">0</div>
+                                        <div className="home-right-panel-counters">{this.props.songs ? Object.values(this.props.songs).length : "0"}</div>
                                     </div>
                                 </div>
 

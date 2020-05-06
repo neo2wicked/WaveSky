@@ -294,7 +294,6 @@ export default class Player extends React.Component {
     handleVolume(e){
         // e.persist()
         let bar = document.getElementsByClassName("player-volume-bar-container")[0]
-        console.log(e.nativeEvent.layerY)
         let volume = ((bar.offsetHeight - e.nativeEvent.layerY) / bar.offsetHeight)
         
         

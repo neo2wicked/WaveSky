@@ -93,7 +93,8 @@ input[type="submit"] {
 
 }
 
-html{
+html, #root, .app-container{
+    height: 100%;
 }
 
 /* Main Body Application */
@@ -101,6 +102,7 @@ body {
     font-family: 'Roboto', sans-serif !important;
     background-color: rgb(240, 240, 240);
     font-size: 0.9rem;
+    padding-bottom: 75px;
     
     /* font-family: 'Overpass',sans-serif;
 font-family: Arial, Helvetica, sans-serif; */

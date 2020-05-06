@@ -39,8 +39,8 @@ export const createSong = (song) => dispatch => (
         .fail((errors) => dispatch(receiveSongErrors(errors.responseJSON)))
 )
 
-export const updateSong = (song) => dispatch => (
-    SongsAPIUtil.updateSong(song)
-        .then(() => dispatch(receiveSong(song)))
+export const updateSong = (info) => dispatch => (
+    SongsAPIUtil.updateSong(info)
+        .then(() => dispatch(receiveSong(info.song)))
         .fail((errors) => dispatch(receiveSongErrors(errors.responseJSON)))
 )

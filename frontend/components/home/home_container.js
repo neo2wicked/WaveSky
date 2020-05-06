@@ -2,8 +2,9 @@ import {
     connect
 } from 'react-redux'
 import Home from "./home"
-import {updateUser} from "../../actions/user/user_actions"
+import {updateUser, createDeleteFollower} from "../../actions/user/user_actions"
 const mapSTP = state => ({
+    songs: Object.values(state.entities.songs),
     user: state.entities.user,
     currentUser: state.session.currentUser,
     imageErrors: state.errors.user
@@ -11,6 +12,7 @@ const mapSTP = state => ({
 
 const mapDTP = dispatch => ({
     updateUser: (user) => dispatch(updateUser(user)),
+    createDeleteFollower: (payload) => dispatch(createDeleteFollower(payload))
    
 })
 

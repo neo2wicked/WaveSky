@@ -15,6 +15,7 @@ class NavBar extends React.Component {
         this.handleCurrentPage = this.handleCurrentPage.bind(this)
         this.openFirstDropdown = this.openFirstDropdown.bind(this)
         this.openSecondDropdown = this.openSecondDropdown.bind(this)
+        this.closeAllDropDowns = this.closeAllDropDowns.bind(this)
     }
 
     componentDidUpdate(){
@@ -24,17 +25,14 @@ class NavBar extends React.Component {
    
 
     componentDidMount(){
-        window.addEventListener("click", () => {
-            this.closeFirstDropdown()
-            this.closeSecondDropdown();
-        });
-
+        window.addEventListener("click", this.closeAllDropDowns);
     }
     componentWillUnmount(){
-        window.removeEventListener("click", () => {
-            this.closeFirstDropdown()
-            this.closeSecondDropdown();
-        });
+        window.removeEventListener("click", this.closeAllDropDowns);
+    }
+    closeAllDropDowns(){
+        this.closeFirstDropdown()
+        this.closeSecondDropdown();
     }
 
     closeFirstDropdown(){
@@ -69,7 +67,6 @@ class NavBar extends React.Component {
 
     renderAvatar(){
         if (this.props.currentUser.profilePhoto){
-            console.log(this.props.currentUser.profilePhoto)
             return <img className="profile-picture" src={this.props.currentUser.profilePhoto} alt="avatar" />
         }else{
             return <img className="profile-picture" src="https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png" alt="avatar" />

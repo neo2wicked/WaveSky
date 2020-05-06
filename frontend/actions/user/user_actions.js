@@ -1,4 +1,5 @@
 import * as UsersAPIUtil from '../../utils/users_api_util'
+import * as FollowersAPIUtil from "../../utils/followers_api_util"
 
 export const RECEIVE_USER = "RECEIVE_USER"
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS"
@@ -17,12 +18,17 @@ export const receiveUserErrors = (errors) => ({
 
 export const fetchUser = (username) => dispatch => (
     UsersAPIUtil.fetchUser(username)
-        .then( (user) => dispatch(receiveUser(user)))
-//errors
+        .then((user) => dispatch(receiveUser(user)))
+    //errors
 )
 
 export const updateUser = (info) => dispatch => (
     UsersAPIUtil.updateUser(info)
-        .then(()=>dispatch(receiveUser(info.user)))
-        .fail((errors)=>dispatch(receiveUserErrors(errors.responseJSON)))
+        .then(() => dispatch(receiveUser(info.user)))
+        .fail((errors) => dispatch(receiveUserErrors(errors.responseJSON)))
+)
+
+export const createDeleteFollower = ({user, follower}) => dispatch => (
+    FollowersAPIUtil.createDeleteFollower(follower)
+        .then(() => dispatch(receiveUser(user)))
 )

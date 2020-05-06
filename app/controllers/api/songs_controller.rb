@@ -31,7 +31,7 @@ class Api::SongsController < ApplicationController
 
     def update
         song = Song.find(params[:id])
-        if song.update(metadata: song_params[:metadata])
+        if song.update(song_params)
             render json: ["Update was successful"], status: 200
         else
             render json: song.errors.full_messages, status: 422

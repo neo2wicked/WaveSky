@@ -93,6 +93,7 @@
     align-items: center;
     font-size: 0.8rem;
     font-weight: 400;
+    cursor: pointer;
    
 }
 .song-item-like p{
@@ -109,4 +110,41 @@
 .fa-heart{
     margin: 0;
     padding-top: 2px;
+}
+
+.song-item-delete, .song-item-edit{
+    color: rgb(97, 97, 97);
+    font-size: 0.8rem;
+    font-weight: 400;
+    width: 60px;
+    display: flex;
+    justify-content: space-evenly;
+    border: 1px solid rgb(197, 196, 196);
+    background-color: white;
+    cursor: pointer;
+    
+}
+.song-item-delete{
+    transition: background-color 2s ease,
+    color 0.5s ease;
+    
+}
+
+.song-item-edit:hover{
+    border: 1px solid rgb(150, 150, 150);
+    color: rgb(54, 54, 54);
+    transition: color 0.6s;
+    transition: border 0.6s;
+
+}
+.song-item-delete:hover{
+    border: 1px solid rgb(255, 255, 255);
+    color: white;
+    
+    background-color: rgb(209, 35, 35);
+    transition: background-color 1.5s ease,
+    color 0.5s ease;
+    
+    // transition: border 0.6s;
+
 }

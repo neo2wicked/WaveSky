@@ -5,19 +5,19 @@
     right: 0;
     z-index: 3;
     height: 100%;
-    width: 200%;
+    // width: 200%;
     background-color: rgba(49, 49, 49, 0.5);
     object-fit: cover;
 }
 
 .user-edit-modal-content {
     width: 800px;
-    height: 500px;
+    // height: 100%;
     background-color: white;
     position: fixed;
     left: 0;
     right: 0;
-    top: 150px;
+    top: 10%;
     margin: auto;
     display: flex;
     justify-content: space-evenly;
@@ -29,6 +29,7 @@
 
 }
 .user-edit-info{
+    // height: ;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -63,4 +64,10 @@
     border-radius: 3px;
     padding: 5px;
     margin-top: 10px;
+    // margin-bottom: 400px;
+}
+
+.user-edit-bottom{
+    margin-top: 80px;
+    // margin-bottom: 40px;
 }

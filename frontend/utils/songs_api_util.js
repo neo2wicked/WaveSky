@@ -16,10 +16,12 @@ export const createSong = (song) => (
 )
 
 
-export const updateSong = (song) => (
+export const updateSong = (info) => (
     $.ajax({
-        url: `api/songs/${song.id}`,
+        url: `/api/songs/${info.song.id}`,
         method: "PATCH",
-        data: { song }
+        data: info.form,
+        contentType: false,
+        processData: false,
     })
 )
