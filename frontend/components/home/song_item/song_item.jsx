@@ -361,6 +361,8 @@ export default class SongItem extends React.Component {
         this.setState({showModal: false})
 
     }
+
+   
     render() {
         return (
             <div className="song-item-container">
@@ -398,8 +400,10 @@ export default class SongItem extends React.Component {
                         {this.printLikes()}
             {/* <div onClick={this.handleLike} className={this.state.showlike}>{Object.values(this.props.song.likes).length} {this.state.heart}</div> */}
                         <div>Comment</div>
-                        <div onClick={this.showEditModal} className="song-item-edit"><i className="fas fa-pencil-alt"></i> Edit</div>
-                        <div className="song-item-delete"><i className="fas fa-trash-alt"></i> Delete</div>
+
+                        {this.props.song.username === this.props.currentUser.username ? <div onClick={this.showEditModal} className="song-item-edit"><i className="fas fa-pencil-alt"></i> Edit</div> : null}
+                        {this.props.song.username === this.props.currentUser.username ? <div className="song-item-delete"><i className="fas fa-trash-alt"></i> Delete</div> : null}
+
                     </div>
                 </div>
 
