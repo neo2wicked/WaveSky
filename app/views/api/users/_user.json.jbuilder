@@ -1,6 +1,7 @@
 json.extract! user, :id, :username, :instagram, :facebook, :description
 json.profilePhoto  user.profile_photo.attached? ? url_for(user.profile_photo) : false
 json.profileBackground user.profile_background.attached? ? url_for(user.profile_background) : false
+json.tracks user.songs.length
 if(user.followers.length != 0)
     json.followers do
         user.followers.each do |person|

@@ -1,7 +1,8 @@
 class Api::CommentsController < ApplicationController
 
     def index
-        @comments = Comment.find_by(song_id: comments_params[:song_id])
+        song = Song.find(comments_params[:song_id])
+        @comments = song.comments
         if (@comments)
             render "/api/comments/index"
         else

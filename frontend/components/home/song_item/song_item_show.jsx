@@ -6,7 +6,8 @@ import SongEditFormContainer from "../song_edit_form/song_edit_container"
 export default class SongItemShow extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { showModal: false }
+        this.state = { showModal: false,
+        }
 
         this.wasPlayed = false
         this.newPosition = 0;
@@ -22,6 +23,8 @@ export default class SongItemShow extends React.Component {
 
         this.showEditModal = this.showEditModal.bind(this)
         this.hideEditModal = this.hideEditModal.bind(this)
+
+        this.handleComment = this.handleComment.bind(this)
 
 
         // this.onListen = this.onListen.bind(this)
@@ -359,9 +362,9 @@ export default class SongItemShow extends React.Component {
     printLikes() {
         if (this.props.song.likes) {
             if (this.props.song.likes[this.props.currentUser.id]) {
-                return <div onClick={this.handleLike} className="song-item-like show-like"><i className="fas fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
+                return <div onClick={this.handleLike} className="song-item-like show-like show-page-item-buttons"><i className="fas fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
             } else {
-                return <div onClick={this.handleLike} className="song-item-like"><i className="far fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
+                return <div onClick={this.handleLike} className="song-item-like show-page-item-buttons"><i className="far fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
             }
         }
     }
@@ -373,7 +376,19 @@ export default class SongItemShow extends React.Component {
         this.setState({ showModal: false })
 
     }
-
+    update(value) {
+        return e => (this.setState({ [value]: e.currentTarget.value }))
+    }
+    handleComment(){
+        if(this.state.commentBody.length !==0){
+            const formData = new FormData();
+            formData.append('comment[body]', this.state.commentBody);
+            formData.append('comment[song_id]', this.props.song.id);
+            formData.append('comment[author_id]', this.props.currentUser.id);
+            this.props.createComment(formData)
+            this.setState({commentBody: ""})
+        }
+    }
 
     render() {
         return (
@@ -416,11 +431,8 @@ export default class SongItemShow extends React.Component {
                 </div>
 
 
-                <div>
-                    <div className="show-page-comment-input">
-                        <img className="show-page-comment-img" src={this.renderUserImage()} alt=""/>
-                        <input className="show-page-input" placeholder="Write a comment" type="text"/>
-                    </div>
+                <div className="show-page-comment-container">
+                    
 
                 </div>
 

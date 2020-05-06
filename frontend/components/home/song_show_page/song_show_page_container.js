@@ -9,17 +9,25 @@ import {
 
 import SongShowPage from "./song_show_page"
 
-import {fetchSong} from "../../../actions/songs/songs_actions"
+import {
+    fetchSong,
+    createDeleteLike
+} from "../../../actions/songs/songs_actions"
 
 import {fetchComments, createComment, deleteComment} from "../../../actions/comments/comments_actions"
 
 import { receiveCurrentSong } from "../../../actions/session/session_actions"
+import {
+    fetchUser,
+    createDeleteFollower
+} from "../../../actions/user/user_actions"
 
 const mapSTP = (state, ownProps) => ({
     user: state.entities.user,
     song: state.entities.songs[ownProps.match.params.songId],
     currentUser: state.session.currentUser,
-    currentSong: state.session.currentSong
+    currentSong: state.session.currentSong,
+    comments: state.entities.comments
 })
 const mapDTP = dispatch => ({
     fetchUser: (username) => dispatch(fetchUser(username)),
@@ -29,7 +37,7 @@ const mapDTP = dispatch => ({
     deleteComment: (commentId) => dispatch(deleteComment(commentId)),
     receiveCurrentSong: (song) => dispatch(receiveCurrentSong(song)),
     createDeleteLike: (payload) => dispatch(createDeleteLike(payload)),
-
+    createDeleteFollower: (payload) => dispatch(createDeleteFollower(payload))
 })
 
 export default withRouter(connect(mapSTP, mapDTP)(SongShowPage))

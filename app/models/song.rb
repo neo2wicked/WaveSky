@@ -30,7 +30,8 @@ class Song < ApplicationRecord
     has_many :comments,
         primary_key: :id,
         foreign_key: :song_id,
-        class_name: :Comment
+        class_name: :Comment,
+        dependent: :destroy
 
     def ensure_music
         unless self.music.attached?
