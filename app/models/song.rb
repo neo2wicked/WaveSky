@@ -27,6 +27,11 @@ class Song < ApplicationRecord
         foreign_key: :username,
         class_name: :User
 
+    has_many :comments,
+        primary_key: :id,
+        foreign_key: :song_id,
+        class_name: :Comment
+
     def ensure_music
         unless self.music.attached?
             errors[:music] << "The audio file was not attached."

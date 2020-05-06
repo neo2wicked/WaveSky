@@ -14,7 +14,11 @@ class Api::SongsController < ApplicationController
     def show
         @song = Song.find(params[:id])
         @user = User.find_by(username: @song.username)
-        render :show
+        if (@song)
+            render "/api/songs/show"
+        else
+            render json: ["The song was not found."], status: 404
+        end
     end
 
     def create

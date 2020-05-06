@@ -1,7 +1,7 @@
 import {
-    RECEIVE_SONGS, RECEIVE_SONG
+    RECEIVE_SONGS,
+    RECEIVE_SONG
 } from "../../../actions/songs/songs_actions"
-/* NEEDS ATTENTION */
 
 const songsReducers = (state = {}, action) => {
     Object.freeze(state)

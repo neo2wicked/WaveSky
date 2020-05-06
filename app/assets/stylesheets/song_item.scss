@@ -18,6 +18,10 @@
     margin-top: 5px;
     width: 660px;
     height: 60px;
+    //  image-rendering: -moz-crisp-edges;
+    //  image-rendering: -webkit-crisp-edges;
+    //  image-rendering: pixelated;
+    //  image-rendering: crisp-edges;
 }
 .song-item-container-top{
     display: flex;

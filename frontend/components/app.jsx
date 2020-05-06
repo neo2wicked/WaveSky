@@ -6,6 +6,7 @@ import HomeContainer from "./home/home_container"
 import SongFormContainer from "./song_form/song_form_container"
 import NavBarContainer from "./nav_bar/nav_bar_container"
 import Player from "../components/player/player_container"
+import SongShowPageContainer from "./home/song_show_page/song_show_page_container"
 
 //test
 
@@ -18,6 +19,7 @@ export default (props) => (
         <Switch>
             <ProtectedRoute exact path={'/upload'} component={SongFormContainer}></ProtectedRoute>
             <ProtectedRoute exact path={`/:username/`} component={HomeContainer} ></ProtectedRoute> 
+            <ProtectedRoute exact path={`/:username/:songId`} component={SongShowPageContainer} ></ProtectedRoute> 
         </Switch>
         
         <ProtectedRoute path="/" component={Player}></ProtectedRoute>

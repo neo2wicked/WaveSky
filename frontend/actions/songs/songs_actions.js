@@ -33,6 +33,11 @@ export const fetchUserSongs = (username) => dispatch => (
         .then((songs) => dispatch(receiveSongs(songs)))
 )
 
+export const fetchSong = (songId) => dispatch => (
+    SongsAPIUtil.fetchSong(songId)
+        .then((song) => dispatch(receiveSong(song)))
+)
+
 export const createSong = (song) => dispatch => (
     SongsAPIUtil.createSong(song)
         .then(() => dispatch(receiveSong(song)))

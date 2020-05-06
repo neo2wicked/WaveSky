@@ -5,6 +5,12 @@ export const fetchUserSongs = (username) => (
         data: { song: {username: username}}
     })
 )
+export const fetchSong = (songId) => (
+    $.ajax({
+        url: `/api/songs/${songId}`,
+        method: 'GET',
+    })
+)
 export const createSong = (song) => (
     $.ajax({
         url: "/api/songs",

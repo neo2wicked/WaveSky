@@ -1,0 +1,99 @@
+.show-page-container{
+    width: 1240px;
+    margin: auto;
+}
+.song-show-canvas{
+    margin-top: 5px;
+    width: 660px;
+    height: 60px;
+    
+    //  image-rendering: -moz-crisp-edges;
+    //  image-rendering: -webkit-crisp-edges;
+    //  image-rendering: pixelated;
+    //  image-rendering: crisp-edges;
+}
+.show-page-top-container{
+
+}
+.show-page-top{
+    display: flex;
+    height: 350px;
+    width: 100%;
+        background-image: radial-gradient(circle 827px at 47.3% 48%, rgba(255, 255, 255, 1) 0%, rgba(138, 192, 216, 1) 90%);
+
+}
+
+.show-page-song-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-left: 50px;
+    width: 60%;
+}
+.show-page-img{
+    margin: auto;
+    width: 300px;
+    height: 300px;
+}
+
+.show-page-song-play-title{
+    display: flex;
+}
+
+.show-play-button{
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    background-color: rgb(255,75,0);
+}
+
+.show-page-creator-title{
+    padding-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    // width: 100%;
+    // text-align: start;
+
+}
+.show-page-creator{
+    // width: fit-content;
+    margin: auto;
+    width: inherit;
+    background-color: black;
+    color: rgb(170, 170, 170);
+    padding: 5px 10px;
+
+}
+
+.show-page-title{
+    background-color: black;
+    color: white;
+    padding: 5px 10px;
+    font-size: 1.5rem;
+
+
+}
+.show-page-comment-input{
+    display: flex;
+    margin: auto;
+    width: 600px;
+    background-color: rgb(219, 219, 219);
+}
+.show-page-comment-img{
+    
+    width: 40px;
+    height: 40px;
+}
+
+.show-page-input{
+    width: 100%;
+    margin: 5px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    border: 1px solid rgb(165, 165, 165);
+    padding: 3px 5px;
+}
