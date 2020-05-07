@@ -31,3 +31,10 @@ export const updateSong = (info) => (
         processData: false,
     })
 )
+
+export const deleteSong = (songId) => (
+    $.ajax({
+        url: `/api/songs/${songId}`,
+        method: "DELETE",
+    })
+)

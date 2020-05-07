@@ -31,6 +31,7 @@ export default class Songs extends React.Component {
                         currentSong = {this.props.currentSong}
                         createDeleteLike = {this.props.createDeleteLike}
                         currentUser = {this.props.currentUser}
+                        deleteSong = {this.props.deleteSong}
                     />
                 ))}
             </div>

@@ -4,6 +4,7 @@ import * as LikesAPIUtil from "../../utils/like_utils"
 export const RECEIVE_SONGS = "RECEIVE_SONGS"
 export const RECEIVE_SONG = "RECEIVE_SONG"
 export const RECEIVE_SONG_ERRORS = "RECEIVE_SONG_ERRORS"
+export const REMOVE_SONG = "REMOVE_SONG"
 
 //actions
 
@@ -20,6 +21,10 @@ export const receiveSong = ( song ) => ({
 export const receiveSongErrors = (errors) => ({
     type: RECEIVE_SONG_ERRORS,
     errors
+})
+export const removeSong = (songId) => ({
+    type: REMOVE_SONG,
+    songId
 })
 
 //thunk
@@ -48,4 +53,9 @@ export const updateSong = (info) => dispatch => (
     SongsAPIUtil.updateSong(info)
         .then(() => dispatch(receiveSong(info.song)))
         .fail((errors) => dispatch(receiveSongErrors(errors.responseJSON)))
+)
+
+export const deleteSong = ({songId,username}) => dispatch => (
+    SongsAPIUtil.deleteSong(songId)
+        .then(() => dispatch(fetchUserSongs(username)))
 )

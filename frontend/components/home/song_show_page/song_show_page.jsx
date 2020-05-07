@@ -1,12 +1,14 @@
 import React from 'react';
 import SongItemShow from "../song_item/song_item_show"
-import { fetchUser } from '../../../utils/users_api_util';
 import SongComments from '../song_comments/song_comments';
+import SongEditFormContainer from "../song_edit_form/song_edit_container"
+import PageBottom from "../page_bottom"
 
 export default class SongShowPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { commentBody: "" }
+        this.state = { commentBody: "",
+        showModal:false }
         this.handleLike = this.handleLike.bind(this)
 
         this.showEditModal = this.showEditModal.bind(this)
@@ -56,9 +58,9 @@ export default class SongShowPage extends React.Component {
         if (this.props.currentUser.id !== this.props.user.id) {
             if (this.props.user.followers) {
                 if (this.props.user.followers[this.props.currentUser.id]) {
-                    return <button className="home-follow-button following show-page-middle-follow-button" onClick={this.handleFollow}><i class="fas fa-user-check"></i><p>Following</p></button>
+                    return <button className="home-follow-button following show-page-middle-follow-button" onClick={this.handleFollow}><i className="fas fa-user-check"></i><p>Following</p></button>
                 } else {
-                    return <button className="home-follow-button show-page-middle-follow-button" onClick={this.handleFollow}><i class="fas fa-user-plus"></i><p>Follow</p></button>
+                    return <button className="home-follow-button show-page-middle-follow-button" onClick={this.handleFollow}><i className="fas fa-user-plus"></i><p>Follow</p></button>
                 }
             }
         }
@@ -130,6 +132,8 @@ export default class SongShowPage extends React.Component {
     render() {
         return (
             <div className="show-page-container" >
+                {/* {console.log(this.props.comments)} */}
+                {this.state.showModal ? <SongEditFormContainer hideEditModal={this.hideEditModal} song={this.props.song} /> : null}
                 {this.props.song ?
                     <SongItemShow
 
@@ -176,9 +180,13 @@ export default class SongShowPage extends React.Component {
                             </div>
                         </div>
 
-                        <div className="show-page-comments-amount">
-                            <div><i class="fas fa-comment-alt"></i> {this.props.comments ? this.props.comments.length : "0"} Comments</div>
-                            {Array.isArray(this.props.comments) ? <SongComments song={this.props.song} comments={this.props.comments} /> : null}
+                        <div className="show-page-comments-box">
+                            {console.log(this.props.comments)}
+                            {this.props.song ? <div className="show-page-description">{this.props.song.description ? this.props.song.description : "The song doesn't have any description yet." }</div> : null}
+                            <div className="show-page-comments-amount"><i className="fas fa-comment-alt"></i> {this.props.comments ? Object.values(this.props.comments).length : "0"} Comments</div>
+                            {/* {Array.isArray(this.props.comments) ? <SongComments song={this.props.song} currentUser={this.props.currentUser} comments={Object.values(this.props.comments)} deleteComment={this.props.deleteComment}/> : null} */}
+                            <SongComments song={this.props.song} currentUser={this.props.currentUser} comments={Object.values(this.props.comments)} deleteComment={this.props.deleteComment}/>
+                            <PageBottom/>
                         </div>
                     </div>
 

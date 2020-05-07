@@ -195,3 +195,42 @@ button:focus {
     // .home-container{
     //     height: 100%;
     // }
+
+
+    .page-bottom{
+        color: rgb(255,75,0);
+        padding-bottom: 20px;
+        padding-top: 20px;
+        border-color: white;
+        // font-size: 1.5rem;
+    }
+
+    .page-bottom-text{
+        width: 60px;
+    }
+
+    .page-bottom-wave{
+        font-size: 1rem;
+    }
+
+    .page-bottom {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+
+    .page-bottom::before,
+    .page-bottom::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid rgb(126, 126, 126);
+    }
+
+    .page-bottom::before {
+        margin-right: 10px;
+    }
+
+    .page-bottom::after {
+        margin-left: 10px;
+    }

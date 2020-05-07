@@ -1,12 +1,14 @@
 import React from 'react';
-import ReactAudioPlayer from 'react-audio-player';
 import { Link } from "react-router-dom"
 import SongEditFormContainer from "../song_edit_form/song_edit_container"
+import SongDelete from "./song_delete"
+
 
 export default class SongItem extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { showModal: false }
+        this.state = { showModal: false,
+        showDelete: false}
 
         this.wasPlayed = false
         this.newPosition = 0;
@@ -23,8 +25,11 @@ export default class SongItem extends React.Component {
         this.showEditModal = this.showEditModal.bind(this)
         this.hideEditModal = this.hideEditModal.bind(this)
 
+        this.handleDelete = this.handleDelete.bind(this)
 
-        // this.onListen = this.onListen.bind(this)
+        this.hideDelete = this.hideDelete.bind(this)
+
+        this.deleteSong = this.deleteSong.bind(this)
     }
 
     renderImage() {
@@ -40,24 +45,11 @@ export default class SongItem extends React.Component {
     }
 
     componentDidMount() {
-        // this.audio = document.getElementById(`audio-${this.props.i}`)
-
-
-
-        // this.audio.addEventListener("playing", ()=>{
-        //     this.play()
-        // })
-        // this.audio.addEventListener("waiting", ()=>{
-        //     this.pause()
-
-        // })
         this.setCanvasPropertiesAndDraw(this.props.song.metadata)
     }
 
 
     clickFunction() {
-        // let button = document.getElementById(`play-${this.props.i}`)
-
         if (!this.wasPlayed) {
             this.wasPlayed = true;
             // button.innerHTML = "<i class='fas fa-pause'></i>"
@@ -348,13 +340,15 @@ export default class SongItem extends React.Component {
     }
 
     printLikes(){
-        if(this.props.song.likes){
-            if (this.props.song.likes[this.props.currentUser.id]) {
-                return <div onClick={this.handleLike} className="song-item-like show-like"><i className="fas fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
-            } else {
-                return <div onClick={this.handleLike} className="song-item-like"><i className="far fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
-            }
-        }
+       if(this.props.song){
+           if (this.props.song.likes) {
+               if (this.props.song.likes[this.props.currentUser.id]) {
+                   return <div onClick={this.handleLike} className="song-item-like show-like"><i className="fas fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
+               } else {
+                   return <div onClick={this.handleLike} className="song-item-like"><i className="far fa-heart"></i><p>{Object.values(this.props.song.likes).length}</p></div>
+               }
+           }
+       }
     }
     showEditModal(){
         this.setState({showModal: true})
@@ -364,21 +358,31 @@ export default class SongItem extends React.Component {
         this.setState({showModal: false})
 
     }
+    handleDelete(e){
+        if(this.state.showDelete){
+            this.hideDelete()
+        }else{
+            this.showDelete()
+        }
+    }
+    showDelete(){
+        this.setState({ showDelete: true })
+    }
+    hideDelete(){
+        this.setState({ showDelete: false })
+    }
 
-   
+
+    deleteSong(){
+        this.props.deleteSong({songId:this.props.song.id, username: this.props.currentUser.username})
+    }
+
+
+
+
     render() {
         return (
             <div className="song-item-container">
-                {/* <audio onListen={this.onListen} onPause={this.pause} onPlay={this.play} src={this.props.song.musicUrl} id={`audio-${this.props.i}`}></audio> */}
-                {/* <ReactAudioPlayer
-                    listenInterval={10}
-                    src={this.props.song.musicUrl}
-                    id={`audio-${this.props.i}`}
-                    onAbort={this.pause}
-                    onEnded={this.onEnded}
-                    onPause={this.pause}
-                    // onListen={this.onListen}
-                /> */}
 
                 {this.renderImage()}
 
@@ -401,16 +405,19 @@ export default class SongItem extends React.Component {
 
                     <div className="song-item-container-bottom">
                         {this.printLikes()}
-            {/* <div onClick={this.handleLike} className={this.state.showlike}>{Object.values(this.props.song.likes).length} {this.state.heart}</div> */}
-                        <div>Comment</div>
+                        {this.props.song && this.props.song.comments ? <div className="song-item-comment"><Link to={`/${this.props.user.username}/${this.props.song.id}`} ><i className="fas fa-comment-alt home-fa-comment-alt"></i> {this.props.song.comments.length} Comments</Link> </div> : null}
 
-                        {this.props.song.username === this.props.currentUser.username ? <div onClick={this.showEditModal} className="song-item-edit"><i className="fas fa-pencil-alt"></i> Edit</div> : null}
-                        {this.props.song.username === this.props.currentUser.username ? <div className="song-item-delete"><i className="fas fa-trash-alt"></i> Delete</div> : null}
-
+                        {this.props.song && (this.props.song.username === this.props.currentUser.username ) ? <div onClick={this.showEditModal} className="song-item-edit"><i className="fas fa-pencil-alt"></i> Edit</div> : null}
+                        {this.props.song && (this.props.song.username === this.props.currentUser.username) ? 
+                            <div className="song-item-delete"><div onClick={this.handleDelete}><i className="fas fa-trash-alt"></i> Delete</div>
+                                {this.state.showDelete ? <SongDelete deleteSong={this.deleteSong} hideDelete={this.hideDelete}/> : null}
+                            </div>
+                        : null}
                     </div>
+                    {this.state.showDelete ? <div className="song-delete-modal"></div> : null}
                 </div>
 
-                {this.state.showModal ? <SongEditFormContainer hideEditModal={this.hideEditModal} song={this.props.song}/> : null}
+                {this.state.showModal ? <SongEditFormContainer  hideEditModal={this.hideEditModal} song={this.props.song}/> : null}
             </div>
         )
     }

@@ -73,7 +73,7 @@
     text-align: center;
    
 }
-.song-item-container-bottom div{
+.song-item-container-bottom > div{
     height: 20px;
     padding: 0px 5px;
     display: flex;
@@ -82,7 +82,7 @@
     border-radius: 3px;
 
 }
-.song-item-container-bottom div:nth-child(n+2) {
+.song-item-container-bottom > div:nth-child(n+2) {
     margin-left: 5px;
 }
 
@@ -99,6 +99,30 @@
     font-weight: 400;
     cursor: pointer;
    
+}
+.song-item-comment{
+    color: rgb(97, 97, 97);
+    text-align: center;
+    white-space: 2px;
+    border: 1px solid rgb(197, 196, 196);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.home-fa-comment-alt{
+    padding-top:2px;
+    padding-right: 4px;
+}
+
+.song-item-comment:hover{
+    border: 1px solid rgb(150, 150, 150);
+    color: rgb(54, 54, 54);
+    transition: color 0.6s;
+    transition: border 0.6s;
 }
 .song-item-like p{
     overflow:hidden;
@@ -117,6 +141,7 @@
 }
 
 .song-item-delete, .song-item-edit{
+    position: relative;
     color: rgb(97, 97, 97);
     font-size: 0.8rem;
     font-weight: 400;
@@ -151,4 +176,80 @@
     
     // transition: border 0.6s;
 
+}
+
+
+
+.song-delete-window:hover{
+    background-color: rgb(238, 238, 238);
+
+}
+.song-delete-window-question{
+    font-weight: 600;
+    color: rgb(56, 56, 56);
+    font-size: 1rem;
+}
+
+.song-delete-window-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: 600;
+}
+
+.song-delete-window-buttons button:nth-child(1) {
+    border: 1px solid rgb(142,142,142);
+    border-radius: 3px;
+     padding: 3px 5px;
+    width: 40px;
+    color: green;
+}
+
+.song-delete-window-buttons button:nth-child(2) {
+    padding: 3px 5px;
+     border-radius: 3px;
+    color: red;
+    border: 1px solid rgb(142, 142, 142);
+    width: 40px;
+}
+
+.song-delete-window-buttons button:nth-child(1):hover {
+    color: white;
+    background-color: green;
+    border: 1px solid rgb(255, 255, 255);
+
+    
+}
+
+.song-delete-window-buttons button:nth-child(2):hover{
+   background-color: red;
+   color: white;
+   border: 1px solid white;
+}
+
+.song-delete-modal{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    // z-index: -1;
+}
+
+.song-delete-window {
+    position: absolute;
+    z-index: 2;
+    height: 80px;
+    width: 150px;
+    border: 1px solid rgb(142, 142, 142);
+    background-color: rgb(253, 253, 253);
+    top: 25px;
+    
+    // top: 500px;
+    // left: 500px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }

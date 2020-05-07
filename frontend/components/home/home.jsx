@@ -6,6 +6,7 @@ import SongsContainer from "./songs_container/songs_container"
 import PhotoUploadModal from "./photo_upload_modal/photo_upload_modal"
 import {Link} from "react-router-dom"
 import UserEditModal from './user_edit_modal.jsx/user_edit_modal';
+import PageBottom from "./page_bottom"
 
 export default class Home extends React.Component {
     constructor(props) {
@@ -204,6 +205,7 @@ export default class Home extends React.Component {
 
 
                             <SongsContainer />
+                            <PageBottom/>
                         </div>
 
                         <div className="home-right-panel-container">

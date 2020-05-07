@@ -102,6 +102,7 @@
 }
 
 .show-page-edit-bar{
+    margin-top: 20px;
     height: 40px;
     width: 300px;
     display: flex;
@@ -119,6 +120,7 @@
     width: 95%;
     margin: auto;
     padding-top: 30px;
+    padding-bottom: 15px;
 }
 
 .show-page-comment-container{
@@ -176,26 +178,39 @@
     width: 100%;
 }
 
-.show-page-comments-amount{
-    width: 100%;
-}
+
 
 .show-page-all-comments{
     display: flex;
+    // width: 95%;
+    margin: auto;
+    border-top: 1px solid rgb(177, 177, 177);
+    // margin-top: 20px;
 }
 
 .show-page-each-comment-image{
+   
     height: 50px;
     width: 50px;
     border-radius: 50px;
 }
 .show-page-each-comment-content{
-    padding-bottom: 15px;
+    border-bottom: 1px solid rgb(236, 236, 236);
+    border-top: 1px solid rgb(236, 236, 236);
+    
+    padding: 10px 0px;
     display: flex;
-    // align-items: center;
+    // align-items: center; 
+    // justify-content: space-between;
+    height: 100%;
+}
+
+.show-page-each-comment-content:hover{
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(212, 212, 212, 0.2) 50%, rgba(255, 255, 255, 1) 100%);
 }
 .show-page-comment-username-text{
-    width: 100%;
+    width: 925px;
     // height: 60px;
     // display: flex;
     // flex-direction: column;
@@ -212,8 +227,14 @@
     
 }
 .show-page-comment-text {
+    height: 100%;
+    // width: 80%;
     font-weight: 400;
+    // padding-right: 25px;
+     overflow-wrap: break-word;
 }
+
+
 
 .show-comment-post-button{
     padding: 0 10px;
@@ -229,4 +250,42 @@
 .show-comment-post-button:hover{
     background-color: rgb(230, 70, 1);
     color: white;
+}
+
+.show-page-comments-amount{
+    width: 100%;
+    font-size: 0.9rem;
+    color: rgb(165, 165, 165);
+    font-weight: 300;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+.show-page-comments-box{
+    padding-top: 25px;
+    padding-left: 30px;
+    width: 100%;
+}
+
+.show-page-description{
+    height: 100px;
+    width: 400px;
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 5px;
+    overflow-y: scroll;
+    padding: 10px;
+    color: rgb(122, 122, 122);
+
+}
+
+.show-page-delete-comment{
+    color: rgb(48, 48, 48);
+    font-size: 1rem;
+    height: 20px;
+    margin: auto;
+    
+}
+
+.show-page-delete-comment:hover{
+    color: red;
+    font-size: 1rem;
 }

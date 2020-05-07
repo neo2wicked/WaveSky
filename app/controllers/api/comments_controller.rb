@@ -2,7 +2,7 @@ class Api::CommentsController < ApplicationController
 
     def index
         song = Song.find(comments_params[:song_id])
-        @comments = song.comments
+        @comments = song.comments.order(created_at: :desc)
         if (@comments)
             render "/api/comments/index"
         else

@@ -19,6 +19,7 @@ class User < ApplicationRecord
         foreign_key: :username,
         class_name: :Song,
         dependent: :destroy
+        
 
 
     has_many :liked_songs,

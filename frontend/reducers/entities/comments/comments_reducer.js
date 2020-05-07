@@ -14,7 +14,7 @@ const commentsReducers = (state = [], action) => {
             nextState = action.comments
             return nextState;
         case RECEIVE_COMMENT:
-            nextState.push(action.comment)
+            nextState.unshift(action.comment)
             return nextState;
         case DELETE_COMMENT:
             delete nextState[action.commentId]

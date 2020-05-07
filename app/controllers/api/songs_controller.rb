@@ -3,7 +3,8 @@ class Api::SongsController < ApplicationController
     def index
         @user = User.find_by(username: song_params[:username])
         if (@user)
-            @songs = @user.songs
+            @songs = @user.songs.order(created_at: :desc)
+           
 
             render "/api/songs/index"
         else
@@ -41,7 +42,15 @@ class Api::SongsController < ApplicationController
             render json: song.errors.full_messages, status: 422
         end
     end
-
+    def destroy
+        song = Song.find(params[:id])
+        if song
+            song.destroy
+            render json: ["Song deleted."], status: 200
+        else
+            render json: ["The song was not found."], status: 404
+        end
+    end
     private
     def song_params
         params.require(:song).permit(:title, :username, :metadata, :music_image, :music, :genre, :description, :duration)

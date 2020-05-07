@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { Link } from "react-router-dom"
-import SongEditFormContainer from "../song_edit_form/song_edit_container"
 
 export default class SongItemShow extends React.Component {
     constructor(props) {
@@ -25,9 +24,6 @@ export default class SongItemShow extends React.Component {
         this.hideEditModal = this.hideEditModal.bind(this)
 
         this.handleComment = this.handleComment.bind(this)
-
-
-        // this.onListen = this.onListen.bind(this)
     }
 
     renderImage() {
@@ -395,7 +391,7 @@ export default class SongItemShow extends React.Component {
 
             <div className="show-page-top-container">
                 <div className="show-page-top">
-                    <ReactAudioPlayer
+                    {/* <ReactAudioPlayer
                         listenInterval={10}
                         src={this.props.song.musicUrl}
                         id={`audio-${this.props.i}`}
@@ -403,7 +399,7 @@ export default class SongItemShow extends React.Component {
                         onEnded={this.onEnded}
                         onPause={this.pause}
                     // onListen={this.onListen}
-                    />
+                    /> */}
                     <div className="show-page-song-info">
                         <div className="show-page-song-play-title">
                             <button className="show-play-button" id={`play-${this.props.i}`} onClick={this.handleClick}><i className='fas fa-play'></i></button>

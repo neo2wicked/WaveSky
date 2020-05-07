@@ -105,7 +105,7 @@ export default class SongEditForm extends React.Component {
                         <div>Failed to upload. Errors: </div>
                         <ul className="song-form-errors-list">
                             {this.props.errors.map((error, index) => (
-                                <li key={index}>{error}</li>
+                                <li key={`errors-song-edit-${index}`}>{error}</li>
                             ))}
                         </ul>
                     </div>
