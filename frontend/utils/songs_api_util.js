@@ -38,3 +38,18 @@ export const deleteSong = (songId) => (
         method: "DELETE",
     })
 )
+
+
+export const fetchRandomSongs = () => (
+    $.ajax({
+        url: `/api/random_songs`,
+        method: "GET"
+    })
+)
+
+export const fetchRandomNoInfoSongs = () => (
+    $.ajax({
+        url: `/api/random_no_info_songs`,
+        method: "GET"
+    })
+)

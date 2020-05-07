@@ -6,6 +6,7 @@ export default class SongItemShow extends React.Component {
     constructor(props) {
         super(props)
         this.state = { showModal: false,
+            showDelete: false
         }
 
         this.wasPlayed = false
@@ -24,6 +25,8 @@ export default class SongItemShow extends React.Component {
         this.hideEditModal = this.hideEditModal.bind(this)
 
         this.handleComment = this.handleComment.bind(this)
+
+        
     }
 
     renderImage() {
@@ -386,6 +389,8 @@ export default class SongItemShow extends React.Component {
         }
     }
 
+
+
     render() {
         return (
 
@@ -427,10 +432,7 @@ export default class SongItemShow extends React.Component {
                 </div>
 
 
-                <div className="show-page-comment-container">
-                    
-
-                </div>
+              
 
 
                 

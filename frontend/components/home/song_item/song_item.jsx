@@ -36,8 +36,8 @@ export default class SongItem extends React.Component {
         if (this.props.song.imageUrl) {
             return <img src={this.props.song.imageUrl} />
         } else {
-            if (this.props.user.profilePhoto) {
-                return <img src={this.props.user.profilePhoto} />
+            if (this.props.song.profilePhoto) {
+                return <img src={this.props.song.profilePhoto} />
             } else {
                 return <img src="https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png" />
             }
@@ -374,7 +374,7 @@ export default class SongItem extends React.Component {
 
 
     deleteSong(){
-        this.props.deleteSong({songId:this.props.song.id, username: this.props.currentUser.username})
+        this.props.deleteSong(this.props.song.id)
     }
 
 
@@ -405,7 +405,7 @@ export default class SongItem extends React.Component {
 
                     <div className="song-item-container-bottom">
                         {this.printLikes()}
-                        {this.props.song && this.props.song.comments ? <div className="song-item-comment"><Link to={`/${this.props.user.username}/${this.props.song.id}`} ><i className="fas fa-comment-alt home-fa-comment-alt"></i> {this.props.song.comments.length} Comments</Link> </div> : null}
+                        {this.props.song && this.props.song.comments ? <div className="song-item-comment"><Link to={`/${this.props.song.username}/${this.props.song.id}`} ><i className="fas fa-comment-alt home-fa-comment-alt"></i> {this.props.song.comments.length} Comments</Link> </div> : null}
 
                         {this.props.song && (this.props.song.username === this.props.currentUser.username ) ? <div onClick={this.showEditModal} className="song-item-edit"><i className="fas fa-pencil-alt"></i> Edit</div> : null}
                         {this.props.song && (this.props.song.username === this.props.currentUser.username) ? 

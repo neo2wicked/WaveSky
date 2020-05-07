@@ -55,7 +55,16 @@ export const updateSong = (info) => dispatch => (
         .fail((errors) => dispatch(receiveSongErrors(errors.responseJSON)))
 )
 
-export const deleteSong = ({songId,username}) => dispatch => (
+export const deleteSong = (songId) => dispatch => (
     SongsAPIUtil.deleteSong(songId)
         .then(() => dispatch(removeSong(songId)))
+)
+
+export const fetchRandomSongs = () => dispatch => (
+    SongsAPIUtil.fetchRandomSongs()
+        .then((songs) => dispatch(receiveSongs(songs)) )
+)
+export const fetchRandomNoInfoSongs = () => dispatch => (
+    SongsAPIUtil.fetchRandomNoInfoSongs()
+        .then((songs) => dispatch(receiveSongs(songs)) )
 )

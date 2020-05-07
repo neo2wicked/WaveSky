@@ -163,7 +163,6 @@ export default class SongShowPage extends React.Component {
                             {this.printLikes()}
 
                             {this.props.song && (this.props.song.username === this.props.currentUser.username) ? <div onClick={this.showEditModal} className="song-item-edit show-page-item-buttons"><i className="fas fa-pencil-alt"></i> Edit</div> : null}
-                            {this.props.song && (this.props.song.username === this.props.currentUser.username) ? <div className="song-item-delete show-page-item-buttons"><i className="fas fa-trash-alt"></i> Delete</div> : null}
                         </div>
                     </div>
 

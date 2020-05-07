@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'static_pages#root'
 
   get '/upload/', to: 'static_pages#root'
+  get '/explore/', to: 'static_pages#root'
 
   namespace :api, defaults: {format: :json} do
     resources :users, only: [:create, :update, :index]
@@ -11,6 +12,8 @@ Rails.application.routes.draw do
     resources :likes, only: [:create]
     resources :followers, only: [:create]
     resources :comments, only: [:index, :create, :destroy]
+    resources :random_songs, only: [:index]
+    resources :random_no_info_songs, only: [:index]
   end
 
   get '/:username/', to: 'static_pages#root'

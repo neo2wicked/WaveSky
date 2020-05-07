@@ -7,12 +7,16 @@ export default class Index extends React.Component{
     constructor(props){
         super(props)
         this.handleClick = this.handleClick.bind(this)
+        this.songs = []
     }
     componentWillUnmount(){
         document.body.style.overflowY = "auto";
         document.body.style.overflowX = "auto";
     }
 
+    componentDidMount(){
+        this.props.fetchRandomNoInfoSongs();
+    }
 
     handleClick(e){
         e.preventDefault();
@@ -22,6 +26,55 @@ export default class Index extends React.Component{
         document.body.style.overflowX = "hidden";
 
         
+    }
+
+    renderImage(song){
+        if(song.imageUrl){
+            return song.imageUrl
+        }else{
+            if(song.profilePhoto){
+                return song.profilePhoto
+            }else{
+                return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
+            }
+        }
+    }
+
+    renderTrack(song){
+        if(song){
+           return(
+               <div className="index-trending-single-track">
+                   <img className="track-img" src={this.renderImage(song)} />
+                   <h4>{song.title}</h4>
+                   <p>{song.username}</p>
+               </div>
+
+           )
+        }else{
+            return(
+                <div className="index-trending-single-track">
+                    <div className="track-img"/>
+                    <h4>Comming soon</h4>
+                    <p>Comming soon</p>
+                </div>
+            )
+        }
+    }
+
+    renderAllTracks(){
+        
+        if (Object.keys(this.props.songs).length !== 0){
+
+            this.songs = this.songs.concat(this.props.songs)
+            while (this.songs.length !== 12) {
+                this.songs.push(null)
+            }
+        }
+
+        return this.songs.map((song) => (
+            this.renderTrack(song)        
+        ))
+            
     }
     render(){
         return(
@@ -62,7 +115,15 @@ export default class Index extends React.Component{
                 <div className="index-trending-container">
                     <h3>Hear what’s trending in the WaveSky community</h3>
                     <div className="index-trending-tracks">
-                        <div className="index-trending-single-track">
+
+
+
+                    {this.renderAllTracks()}
+
+
+
+
+                        {/* <div className="index-trending-single-track">
                             <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
@@ -132,7 +193,7 @@ export default class Index extends React.Component{
                             <img className="track-img" src={window.party1} />
                             <h4><a href="#">Name of the Song</a></h4>
                             <p><a href="#">creatorname</a></p>
-                        </div>
+                        </div> */}
 
                         <button className="index-trending-signup">Sign up now!</button>
 

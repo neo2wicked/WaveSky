@@ -104,7 +104,7 @@
 .show-page-edit-bar{
     margin-top: 20px;
     height: 40px;
-    width: 300px;
+    width: 170px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -144,7 +144,7 @@
     display: flex;
     justify-content: space-evenly;
     
-    color: rgb(153, 153, 153);
+    color: rgb(105, 105, 105);
     font-size: 0.8rem;
     font-weight: 300;
     width: 80px;
@@ -255,7 +255,7 @@
 .show-page-comments-amount{
     width: 100%;
     font-size: 0.9rem;
-    color: rgb(165, 165, 165);
+    color: rgb(122, 122, 122);
     font-weight: 300;
     padding-bottom: 15px;
     padding-top: 15px;
@@ -273,7 +273,7 @@
     border-radius: 5px;
     overflow-y: scroll;
     padding: 10px;
-    color: rgb(122, 122, 122);
+    color: rgb(102, 102, 102);
 
 }
 

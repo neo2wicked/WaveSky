@@ -30,7 +30,7 @@
         json.extract! song, :id, :title, :username, :metadata, :duration, :genre, :description
         json.musicUrl url_for(song.music)
         json.imageUrl (song.music_image.attached?) ? url_for(song.music_image) : false
-        json.profilePhoto  (@user.profile_photo.attached?) ? url_for(@user.profile_photo) : false
+        json.profilePhoto  (song.author.profile_photo.attached?) ? url_for(song.author.profile_photo) : false
         json.comments do
             json.array! song.comments do |comment|
                 json.extract! comment, :id 
