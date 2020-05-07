@@ -27,4 +27,15 @@ else
 end
 
 
+# songs = []
+# user.songs.order(created_at: :desc).each do |song|
+#     songs << song.id
+# end
+
+# json.songs songs
+
+
+
+
+
 

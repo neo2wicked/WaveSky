@@ -19,7 +19,7 @@ import Songs from "./songs"
 
 
 const mapSTP = state => ({
-    songs: Object.values(state.entities.songs),
+    songs: state.entities.songs,
     user: state.entities.user,
     currentSong: state.session.currentSong,
     currentUser: state.session.currentUser

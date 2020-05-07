@@ -3,7 +3,7 @@ class Api::SongsController < ApplicationController
     def index
         @user = User.find_by(username: song_params[:username])
         if (@user)
-            @songs = @user.songs.order(created_at: :desc)
+            @songs = @user.songs
            
 
             render "/api/songs/index"

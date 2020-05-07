@@ -205,7 +205,7 @@ export default class Home extends React.Component {
 
 
                             <SongsContainer />
-                            <PageBottom/>
+                            {/* <PageBottom/> */}
                         </div>
 
                         <div className="home-right-panel-container">

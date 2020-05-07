@@ -17,13 +17,12 @@ end
 
 
 if(@song.comments.length != 0)
-    json.comments do
-        json.array! @song.comments do |comment|
-            json.set! comment.id do
-                json.extract! comment, :body, :author_id     #, :parent_id
-            end
-        end
+    comments = []
+    @song.comments.order(created_at: :desc).each do |comment|
+        comments << comment.id
     end
+
+    json.comments comments
 else
     json.comments ([])
 end

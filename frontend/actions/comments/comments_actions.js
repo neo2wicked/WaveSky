@@ -29,7 +29,7 @@ export const fetchComments = (songId) => dispatch => (
 )
 export const createComment = (comment) => dispatch => (
     CommentAPIUtil.createComment(comment)
-    .then(() => dispatch(receiveComment(comment)))
+    .then(() => dispatch(fetchComments(comment.songId)))
 )
 export const deleteComment = (commentId) => dispatch => (
     CommentAPIUtil.deleteComment(commentId)

@@ -24,7 +24,7 @@ export default class SongComments extends React.Component {
         return (
             <div className="show-page-comments-section" >
                 {/* {console.log(this.props)} */}
-                {this.props.comments.map((comment, i) => (
+                {Object.values(this.props.comments).reverse().map((comment, i) => (
                     <SongSingleComment song={this.props.song} deleteComment={this.props.deleteComment} currentUser={this.props.currentUser} comment={comment} key={`comment-${this.props.song.id}-${i}` }/>
                 ))}
             </div>

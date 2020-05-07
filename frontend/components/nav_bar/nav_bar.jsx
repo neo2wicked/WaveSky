@@ -84,8 +84,8 @@ class NavBar extends React.Component {
                 <header>
                     <nav>
                         <ul className="navbar-list">
-                            <li className="navbar-list-item logo"><Link to={`/`}><i className="fas fa-water"></i><i
-                                className="fas fa-cloud"></i></Link></li>
+                        <li className="navbar-list-item logo-box"><Link to={`/`}><div className="logo"><i className="fas fa-water"></i><i
+                            className="fas fa-cloud"></i></div></Link></li>
                             <li onClick={() => this.handleCurrentPage("home")} className={`navbar-list-item home ${this.state.home}`}><Link to={`/`}>Home</Link></li>
                             <li className="navbar-list-item playlist"><a href="#">Playlist</a></li>
 

@@ -57,5 +57,5 @@ export const updateSong = (info) => dispatch => (
 
 export const deleteSong = ({songId,username}) => dispatch => (
     SongsAPIUtil.deleteSong(songId)
-        .then(() => dispatch(fetchUserSongs(username)))
+        .then(() => dispatch(removeSong(songId)))
 )

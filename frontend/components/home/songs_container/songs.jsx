@@ -1,5 +1,6 @@
 import React from 'react';
 import SongItem from "../song_item/song_item"
+import PageBottom from "../page_bottom"
 
 export default class Songs extends React.Component {
     constructor(props) {
@@ -21,9 +22,10 @@ export default class Songs extends React.Component {
     render() {
         return (
             <div className="home-songs-container" >
-                {this.props.songs.map((song) => (
+                {console.log(this.props.songs)}
+                {Object.values(this.props.songs).reverse().map((song) => (
                     <SongItem 
-                        key={`song-${song.id}`}
+                        key={`song-${song.username}-${song.id}`}
                         song={song} 
                         user={this.props.user} 
                         i={song.id} 
@@ -34,6 +36,8 @@ export default class Songs extends React.Component {
                         deleteSong = {this.props.deleteSong}
                     />
                 ))}
+
+                <PageBottom />
             </div>
         )
     }
