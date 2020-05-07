@@ -234,11 +234,11 @@ export default class Home extends React.Component {
                             </div>
 
 
-
+{/* 
 
                             <div>
                                 like and other stuff
-                            </div>
+                            </div> */}
                         </div>
                    </div>
                 </div>

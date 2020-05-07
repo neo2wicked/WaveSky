@@ -40,10 +40,10 @@ export default class Index extends React.Component{
         }
     }
 
-    renderTrack(song){
+    renderTrack(song, i){
         if(song){
            return(
-               <div className="index-trending-single-track">
+               <div key={`song-index-${song.id}`} className="index-trending-single-track">
                    <img className="track-img" src={this.renderImage(song)} />
                    <h4>{song.title}</h4>
                    <p>{song.username}</p>
@@ -52,7 +52,7 @@ export default class Index extends React.Component{
            )
         }else{
             return(
-                <div className="index-trending-single-track">
+                <div key={`song-index-non-${i}`} className="index-trending-single-track">
                     <div className="track-img"/>
                     <h4>Comming soon</h4>
                     <p>Comming soon</p>
@@ -71,8 +71,8 @@ export default class Index extends React.Component{
             }
         }
 
-        return this.songs.map((song) => (
-            this.renderTrack(song)        
+        return this.songs.map((song, i) => (
+            this.renderTrack(song, i)        
         ))
             
     }

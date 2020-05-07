@@ -12,19 +12,20 @@ class NavBar extends React.Component {
             displayFirstDropdown: "none",
             displaySecondDropdown: "none",
         }
-        this.handleCurrentPage = this.handleCurrentPage.bind(this)
         this.openFirstDropdown = this.openFirstDropdown.bind(this)
         this.openSecondDropdown = this.openSecondDropdown.bind(this)
         this.closeAllDropDowns = this.closeAllDropDowns.bind(this)
+        this.pages = { home: "", upload: "", explore: "" }
     }
 
     componentDidUpdate(){
-
+        // this.checkCurrentPage();
     }
 
    
 
     componentDidMount(){
+        
         window.addEventListener("click", this.closeAllDropDowns);
     }
     componentWillUnmount(){
@@ -72,9 +73,19 @@ class NavBar extends React.Component {
             return <img className="profile-picture" src="https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png" alt="avatar" />
         }
     }
-    handleCurrentPage(page){
-        this.setState({home: "", upload: ""})
-        this.setState({[page]: "active-page"})
+
+    checkCurrentPage(){
+        this.pages = { home: "", upload: "", explore: "" }
+        let path = this.props.location.pathname.split("/")
+        if (this.props.currentUser.username === path[1]){
+            this.pages["home"] = "active-page"
+        }
+        if(path[1] === "upload"){
+            this.pages["upload"] = "active-page"
+        }
+        if(path[1] === "explore"){
+            this.pages["explore"] = "active-page"
+        }
     }
 
     render() {
@@ -82,12 +93,13 @@ class NavBar extends React.Component {
        //     <div>
                // {/* <button onClick={this.handleClick}>Logout</button> */}
                 <header>
+                    {this.checkCurrentPage()}
                     <nav>
                         <ul className="navbar-list">
                         <li className="navbar-list-item logo-box"><Link to={`/`}><div className="logo"><i className="fas fa-water"></i><i
                             className="fas fa-cloud"></i></div></Link></li>
-                            <li onClick={() => this.handleCurrentPage("home")} className={`navbar-list-item home ${this.state.home}`}><Link to={`/`}>Home</Link></li>
-                        <li className="navbar-list-item playlist"><Link to="/explore">Explore</Link></li>
+                            <li className={`navbar-list-item home ${this.pages.home}`}><Link to={`/`}>Home</Link></li>
+                        <li className={`navbar-list-item playlist ${this.pages.explore}`}><Link to="/explore">Explore</Link></li>
 
                             <li>
                                 <div className="search-zoom">
@@ -96,7 +108,7 @@ class NavBar extends React.Component {
                                 </div>
                             </li>
 
-                            <li onClick={() => this.handleCurrentPage("upload")} className={`navbar-list-item upload ${this.state.upload}`}><Link to="/upload">Upload</Link></li>
+                            <li  className={`navbar-list-item upload ${this.pages.upload}`}><Link to="/upload">Upload</Link></li>
                             
                             <li className="navbar-list-item" onClick={this.openFirstDropdown}>
                                 <div className="profile">
@@ -116,7 +128,7 @@ class NavBar extends React.Component {
                             
                             </li>
                             <li onClick={this.openSecondDropdown} className="dropdown-2" >
-                                <a href="#"><i className="fas fa-ellipsis-h"></i></a>
+                                <i className="fas fa-ellipsis-h"></i>
                                 <div className="dropdown-menu-2" style={{ display: this.state.displaySecondDropdown }}>
                                     <div onClick={this.handleClick}>Logout</div>
                                 </div>
