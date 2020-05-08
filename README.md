@@ -1,24 +1,12 @@
-# README
+# WaveSky
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[LIVE DEMO](https://wavesky.herokuapp.com/)
 
-Things you may want to cover:
+## Introduction
 
-* Ruby version
+[WaveSky](https://wavesky.herokuapp.com/) is a clone of the famous website [SoundCloud](https://soundcloud.com). WaveSky is a platform where people can upload music, listen to music and connect with other people. WaveSky tries to mimic all important features of SoundCloud. Website's frontend was built using React and backend is based on Ruby on Rails.
 
-* System dependencies
+## Features
 
-* Configuration
 
-* Database creation
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
