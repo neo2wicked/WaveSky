@@ -45,12 +45,19 @@
 
 }
 .home-page-welcome{
-    margin-left: 50px;
+    margin-left: 35px;
+    // margin-top: 20px;
+    padding-bottom: 50px;
+    display: flex;
+    align-items: center;
 }
 .home-profile-username{
     font-size: 1.7rem;
     color: white;
-    text-shadow: 0 0 3px rgb(255, 66, 66);
+    // text-shadow: 10px 10px 7px rgb(0, 0, 0);
+    // text-shadow: 2px 2px #000000;
+    padding: 15px 20px;
+    background-color: black;
 
 }
 .home-page-of{

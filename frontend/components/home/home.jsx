@@ -176,8 +176,8 @@ export default class Home extends React.Component {
                             /> : null}
                         </div>
                         <div className="home-page-welcome">
-                            <div><span className="home-page-of">This is page of: </span><span className="home-profile-username">{this.props.user.username}</span></div>
-                            <div className="home-welcome">Welcome!</div>
+                            <div className="home-profile-username">{this.props.user.username}</div>
+                            {/* <div className="home-welcome">Welcome to my page!</div> */}
                         </div>
                     </div>
                     <div onMouseOver={this.showBackgroundButton} onMouseOut={this.hideBackgroundButton} className="home-profile-background">
