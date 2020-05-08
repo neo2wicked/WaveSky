@@ -230,7 +230,6 @@ export default class SongItem extends React.Component {
             // if (this.state.samplePosition >= counter){
             for (let i = 0; i < normalizedData.length; i++) {
                 const x = width * i;
-                // console.log(height)
                 let height = normalizedData[i] // * canvas.offsetHeight - padding;
                 // let height = (Math.round(normalizedData[i] * 100) / 100).toFixed(5);// * canvas.offsetHeight - padding;
 

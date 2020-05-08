@@ -22,7 +22,6 @@ export default class Songs extends React.Component {
     render() {
         return (
             <div className="home-songs-container" >
-                {console.log(this.props.songs)}
                 {Object.values(this.props.songs).reverse().map((song) => (
                     <SongItem 
                         key={`song-${song.username}-${song.id}`}

@@ -24,7 +24,6 @@ export default class Explore extends React.Component {
                 <div className="explore-top-text">Explore new <span className="explore-sounds">sounds</span> and make friends!</div>
                 <div className="explore-middle-container">
                     {this.props.songs.map((song) => {
-                        console.log(song)
                         if(song){
                             return <SongItem
                                 key={`song-${song.username}-${song.id}`}

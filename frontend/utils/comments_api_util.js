@@ -6,7 +6,6 @@ export const fetchComments = (songId) => (
     })
 )
 export const createComment = (comment) => (
-    // console.log(comment)
     $.ajax({
         url: `/api/comments`,
         method: "POST",

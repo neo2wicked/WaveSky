@@ -39,7 +39,6 @@ export default class Seach extends React.Component {
                 <div className="explore-top-text">Search results:</div>
                 <div className="explore-middle-container">
                     {this.props.songs.map((song) => {
-                        console.log(song)
                         if (song) {
                             return <SongItem
                                 key={`song-${song.username}-${song.id}`}

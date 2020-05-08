@@ -35,7 +35,6 @@ export default class SongShowPage extends React.Component {
     }
 
     componentDidUpdate() {
-        // console.log(this.props.song)
     }
 
     handleFollow() {
@@ -133,7 +132,6 @@ export default class SongShowPage extends React.Component {
     render() {
         return (
             <div className="show-page-container" >
-                {/* {console.log(this.props.comments)} */}
                 {this.state.showModal ? <SongEditFormContainer hideEditModal={this.hideEditModal} song={this.props.song} /> : null}
                 {this.props.song ?
                     <SongItemShow
@@ -182,7 +180,6 @@ export default class SongShowPage extends React.Component {
                         </div>
 
                         <div className="show-page-comments-box">
-                            {console.log(this.props.comments)}
                             {this.props.song ? <div className="show-page-description">{this.props.song.description ? this.props.song.description : "The song doesn't have any description yet." }</div> : null}
                             <div className="show-page-comments-amount"><i className="fas fa-comment-alt"></i> {this.props.comments ? Object.values(this.props.comments).length : "0"} Comments</div>
                             {/* {Array.isArray(this.props.comments) ? <SongComments song={this.props.song} currentUser={this.props.currentUser} comments={Object.values(this.props.comments)} deleteComment={this.props.deleteComment}/> : null} */}
