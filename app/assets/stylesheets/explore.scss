@@ -1,9 +1,11 @@
 .explore-container{
+    height: 100%;
     width: 1240px;
+    margin: auto;
     background-color: white;
     display: flex;
     flex-direction: column;
-    // justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 

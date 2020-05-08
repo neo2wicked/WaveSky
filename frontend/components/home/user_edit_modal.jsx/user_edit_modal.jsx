@@ -44,10 +44,7 @@ class UserEditModal extends React.Component {
             .then(() => this.props.history.push("/"))
 
     }
-    printErrors(){
-
-    }
-
+ 
     update(value) {
         return e => (this.setState({ [value]: e.currentTarget.value }))
     }
@@ -142,14 +139,19 @@ class UserEditModal extends React.Component {
                                         </textarea>
                                     </div>
 
-                                    {/* {this.printErrors()} */}
+
                                 </div>
                             </div>
 
                         </div>
-
+           
                     <div className="song-form-bottom user-edit-bottom">
-                            <div>(DO NOT PROVIDE YOUR REAL INFORMATION)</div>
+
+                        <div className="photo-errors user-edit-errors">
+                            {this.props.errors.map((error, i) => (
+                                <li key={`photo-error-${i}`}>{error}</li>
+                            ))}
+                        </div>
 
                             <div>
                                 <button onClick={()=> this.props.hideUserEditModal()} className="song-form-bottom-buttons song-form-cancel" >Cancel</button>

@@ -12,6 +12,7 @@ export default class Index extends React.Component{
     componentWillUnmount(){
         document.body.style.overflowY = "auto";
         document.body.style.overflowX = "auto";
+        // this.songs = []
     }
 
     componentDidMount(){
@@ -46,7 +47,7 @@ export default class Index extends React.Component{
                <div key={`song-index-${song.id}`} className="index-trending-single-track">
                    <img className="track-img" src={this.renderImage(song)} />
                    <h4>{song.title}</h4>
-                   <p>{song.username}</p>
+                   <p onClick={this.handleClick} >{song.username}</p>
                </div>
 
            )
@@ -62,11 +63,11 @@ export default class Index extends React.Component{
     }
 
     renderAllTracks(){
-        
+        this.songs = []
         if (Object.keys(this.props.songs).length !== 0){
 
             this.songs = this.songs.concat(this.props.songs)
-            while (this.songs.length !== 12) {
+            while (this.songs.length < 12) {
                 this.songs.push(null)
             }
         }
@@ -100,14 +101,14 @@ export default class Index extends React.Component{
 
                 <div className="index-search-container">
                     <ul className="index-search">
-                        <li>
+                        {/* <li>
                             <div className="search-zoom">
                                 <input className="index-search-bar" type="text"
                                     placeholder="Search for artists, tracks, playlists" />
                                 <a className="search-button" href="#"><i className="fas fa-search"></i></a>
                             </div>
                         </li>
-                        <li><span style={{ fontSize: 'medium', fontWeight: 400 }}>or</span></li>
+                        <li><span style={{ fontSize: 'medium', fontWeight: 400 }}>or</span></li> */}
                         <li><button onClick={this.handleClick} className="index-search-upload">Upload your own</button></li>
                     </ul>
                 </div>
@@ -122,80 +123,7 @@ export default class Index extends React.Component{
 
 
 
-
-                        {/* <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div>
-
-                        <div className="index-trending-single-track">
-                            <img className="track-img" src={window.party1} />
-                            <h4><a href="#">Name of the Song</a></h4>
-                            <p><a href="#">creatorname</a></p>
-                        </div> */}
-
-                        <button className="index-trending-signup">Sign up now!</button>
+                        <button onClick={this.handleClick}  className="index-trending-signup">Sign up now!</button>
 
                     </div>
                 </div>

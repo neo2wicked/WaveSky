@@ -110,6 +110,7 @@ export default class Home extends React.Component {
             photoImage: null,
             backgroundImage: null
         })
+        this.props.clearUserErrors();
     }
 
     showUserEditModal(){
@@ -118,6 +119,7 @@ export default class Home extends React.Component {
 
     hideUserEditModal(){
         this.setState({ showUserEditModal: false })
+        this.props.clearUserErrors();
 
     }
     printSocialMedia(){
@@ -158,7 +160,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <div className="home-container">
-                {this.state.showUserEditModal ? <UserEditModal hideUserEditModal={this.hideUserEditModal} user={this.props.user} updateUser={this.props.updateUser} history={this.props.history}/> : null}
+                {this.state.showUserEditModal ? <UserEditModal hideUserEditModal={this.hideUserEditModal} user={this.props.user} updateUser={this.props.updateUser} errors={this.props.imageErrors} history={this.props.history}/> : null}
 
                 {this.state.photoImage || this.state.backgroundImage ? <PhotoUploadModal cancelUpload={this.cancelUpload} errors={this.props.imageErrors} backgroundImage={this.state.backgroundImage} photoImage={this.state.photoImage} currentUser={this.props.currentUser} updateUsersPhotos={this.updateUsersPhotos}/> : null}
                 <div className="home-top">

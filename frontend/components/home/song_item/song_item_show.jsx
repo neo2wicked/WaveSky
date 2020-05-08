@@ -21,11 +21,9 @@ export default class SongItemShow extends React.Component {
         this.onEnded = this.onEnded.bind(this)
         this.handleLike = this.handleLike.bind(this)
 
-        this.showEditModal = this.showEditModal.bind(this)
-        this.hideEditModal = this.hideEditModal.bind(this)
-
         this.handleComment = this.handleComment.bind(this)
 
+        this.handleGenreSearch = this.handleGenreSearch.bind(this)
         
     }
 
@@ -367,14 +365,7 @@ export default class SongItemShow extends React.Component {
             }
         }
     }
-    showEditModal() {
-        this.setState({ showModal: true })
-
-    }
-    hideEditModal() {
-        this.setState({ showModal: false })
-
-    }
+    
     update(value) {
         return e => (this.setState({ [value]: e.currentTarget.value }))
     }
@@ -388,6 +379,11 @@ export default class SongItemShow extends React.Component {
             this.setState({commentBody: ""})
         }
     }
+
+    handleGenreSearch() {
+        this.props.history.push(`/search/${this.props.song.genre}`)
+    }
+
 
 
 
@@ -407,17 +403,21 @@ export default class SongItemShow extends React.Component {
                     /> */}
                     <div className="show-page-song-info">
                         <div className="show-page-song-play-title">
-                            <button className="show-play-button" id={`play-${this.props.i}`} onClick={this.handleClick}><i className='fas fa-play'></i></button>
-                            <div className="show-page-creator-title">
-                                <div className="show-page-creator">
-                                    <Link to={`/${this.props.song.username}`}><p >{this.props.song.username}</p></Link>
+                            <div className="show-page-song-play-title-box">
+                                <button className="show-play-button" id={`play-${this.props.i}`} onClick={this.handleClick}><i className='fas fa-play'></i></button>
+                                <div className="show-page-creator-title">
+                                    <div className="show-page-creator">
+                                        <Link to={`/${this.props.song.username}`}><p >{this.props.song.username}</p></Link>
 
-                                </div>
-                                <div className="show-page-title">
-                                    <p >{this.props.song.title}</p>
+                                    </div>
+                                    <div className="show-page-title">
+                                        <p >{this.props.song.title}</p>
+
+                                    </div>
 
                                 </div>
                             </div>
+                             {this.props.song.genre ? <div onClick={this.handleGenreSearch} className="song-genre-show"># {this.props.song.genre}</div> : null}
                         </div>
 
                         {/* <div className="canvas-container"> */}

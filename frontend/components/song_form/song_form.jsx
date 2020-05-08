@@ -171,6 +171,7 @@ export default class SongForm extends React.Component {
             musicImageUrl: null,
             duration: null,
         })
+        this.props.clearSongErrors();
     }
 
     printErrors(){

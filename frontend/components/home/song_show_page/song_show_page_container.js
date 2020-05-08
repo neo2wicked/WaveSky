@@ -11,7 +11,8 @@ import SongShowPage from "./song_show_page"
 
 import {
     fetchSong,
-    createDeleteLike
+    createDeleteLike,
+    clearSongErrors
 } from "../../../actions/songs/songs_actions"
 
 import {fetchComments, createComment, deleteComment} from "../../../actions/comments/comments_actions"
@@ -37,7 +38,8 @@ const mapDTP = dispatch => ({
     deleteComment: (commentId) => dispatch(deleteComment(commentId)),
     receiveCurrentSong: (song) => dispatch(receiveCurrentSong(song)),
     createDeleteLike: (payload) => dispatch(createDeleteLike(payload)),
-    createDeleteFollower: (payload) => dispatch(createDeleteFollower(payload))
+    createDeleteFollower: (payload) => dispatch(createDeleteFollower(payload)),
+    clearSongErrors: () => dispatch(clearSongErrors())
 })
 
 export default withRouter(connect(mapSTP, mapDTP)(SongShowPage))

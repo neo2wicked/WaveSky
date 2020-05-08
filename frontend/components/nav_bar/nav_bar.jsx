@@ -11,11 +11,13 @@ class NavBar extends React.Component {
             upload: "",
             displayFirstDropdown: "none",
             displaySecondDropdown: "none",
+            search: ""
         }
         this.openFirstDropdown = this.openFirstDropdown.bind(this)
         this.openSecondDropdown = this.openSecondDropdown.bind(this)
         this.closeAllDropDowns = this.closeAllDropDowns.bind(this)
         this.pages = { home: "", upload: "", explore: "" }
+        this.handleSearch = this.handleSearch.bind(this)
     }
 
     componentDidUpdate(){
@@ -88,6 +90,19 @@ class NavBar extends React.Component {
         }
     }
 
+    handleSearch(){
+        if(this.state.search.length !== 0){
+            this.props.history.push(`/search/${this.state.search}`)
+        }
+        
+    }
+
+
+    update(value) {
+        return e => (this.setState({ [value]: e.currentTarget.value }))
+    }
+
+
     render() {
         return(
        //     <div>
@@ -103,8 +118,9 @@ class NavBar extends React.Component {
 
                             <li>
                                 <div className="search-zoom">
-                                    <input className="search-bar" type="text" placeholder="Search" />
-                                    <a className="search-button" href="#"><i className="fas fa-search"></i></a>
+                                    <input className="search-bar" onChange={this.update("search")} type="text" placeholder="Search" />
+                                    {/* <a className="search-button" onClick()><i className="fas fa-search"></i></a> */}
+                                    <div className="search-button" onClick={this.handleSearch}><i className="fas fa-search"></i></div>
                                 </div>
                             </li>
 

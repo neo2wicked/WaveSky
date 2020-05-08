@@ -3,7 +3,7 @@ import {
 } from "react-redux"
 
 import {
-    fetchUserSongs, createDeleteLike, deleteSong
+    fetchUserSongs, createDeleteLike, deleteSong, clearSongErrors
 } from "../../../actions/songs/songs_actions"
 
 import {
@@ -30,7 +30,8 @@ const mapDTP = dispatch => ({
     fetchUser: (username) => dispatch(fetchUser(username)),
     receiveCurrentSong: (song) => dispatch(receiveCurrentSong(song)),
     createDeleteLike: (payload) => dispatch(createDeleteLike(payload)),
-    deleteSong: (songId) => dispatch(deleteSong(songId))
+    deleteSong: (songId) => dispatch(deleteSong(songId)),
+    clearSongErrors: () => dispatch(clearSongErrors())
 })
 
 export default withRouter(connect(mapSTP, mapDTP)(Songs))

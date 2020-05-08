@@ -8,6 +8,7 @@ import NavBarContainer from "./nav_bar/nav_bar_container"
 import Player from "../components/player/player_container"
 import SongShowPageContainer from "./home/song_show_page/song_show_page_container"
 import ExploreContainer from './explore/explore_container';
+import SearchContainer from "./search/search_container"
 
 //test
 
@@ -19,6 +20,7 @@ export default () => (
         <AuthRoute exact path="/" component={IndexContainer}></AuthRoute>
         <Switch>
             <ProtectedRoute exact path={'/explore'} component={ExploreContainer}></ProtectedRoute>
+            <ProtectedRoute path={'/search'} component={SearchContainer}></ProtectedRoute>
             <ProtectedRoute exact path={'/upload'} component={SongFormContainer}></ProtectedRoute>
             <ProtectedRoute exact path={`/:username/`} component={HomeContainer} ></ProtectedRoute> 
             <ProtectedRoute exact path={`/:username/:songId`} component={SongShowPageContainer} ></ProtectedRoute> 

@@ -108,6 +108,7 @@ export default class SongShowPage extends React.Component {
     }
     hideEditModal() {
         this.setState({ showModal: false })
+        this.props.clearSongErrors();
 
     }
     update(value) {
@@ -136,7 +137,7 @@ export default class SongShowPage extends React.Component {
                 {this.state.showModal ? <SongEditFormContainer hideEditModal={this.hideEditModal} song={this.props.song} /> : null}
                 {this.props.song ?
                     <SongItemShow
-
+                        clearSongErrors={this.props.clearSongErrors}
                         song={this.props.song}
                         user={this.props.user}
                         i={this.props.song.id}
@@ -144,6 +145,7 @@ export default class SongShowPage extends React.Component {
                         currentSong={this.props.currentSong}
                         createDeleteLike={this.props.createDeleteLike}
                         currentUser={this.props.currentUser}
+                        history={this.props.history}
                     /> : null}
 
                 <div className="show-page-middle-container">

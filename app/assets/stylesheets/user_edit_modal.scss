@@ -68,6 +68,12 @@
 }
 
 .user-edit-bottom{
+    display: flex;
+    justify-content: flex-end;
     margin-top: 80px;
-    // margin-bottom: 40px;
+    
+}
+
+.user-edit-errors{
+    width: 50%;
 }

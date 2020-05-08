@@ -179,22 +179,22 @@ button:focus {
     body{
         height: 100%;
     }
-    // html{
+    html{
 
-    //     height: 100%;
-    // }
+        height: 100%;
+    }
 
-    // #root{
-    //     height: 100%;
-    // }
+    #root{
+        height: 100%;
+    }
 
-    // .app-container{
-    //     height: 100%;
-    // }
+    .app-container{
+        height: 100%;
+    }
 
-    // .home-container{
-    //     height: 100%;
-    // }
+    .home-container{
+        height: 100%;
+    }
 
 
     .page-bottom{
@@ -220,6 +220,7 @@ button:focus {
         align-items: center;
         text-align: center;
         font-size: 1.2rem;
+        height: 100%;
     }
 
     .page-bottom::before,

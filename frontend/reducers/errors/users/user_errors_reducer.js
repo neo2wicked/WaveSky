@@ -1,6 +1,7 @@
 import {
     RECEIVE_USER,
-    RECEIVE_USER_ERRORS
+    RECEIVE_USER_ERRORS,
+    CLEAR_USER_ERRORS
 } from "../../../actions/user/user_actions"
 
 
@@ -10,6 +11,8 @@ const userErrorsReducer = (state = [], action) => {
         case RECEIVE_USER_ERRORS:
             return action.errors
         case RECEIVE_USER:
+            return [];
+        case CLEAR_USER_ERRORS:
             return [];
         default:
             return state;

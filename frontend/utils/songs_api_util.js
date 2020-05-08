@@ -53,3 +53,12 @@ export const fetchRandomNoInfoSongs = () => (
         method: "GET"
     })
 )
+
+export const requestSearch = (search) => (
+    $.ajax({
+        url: `/api/search`,
+        method: "GET",
+        data: { search }
+    })
+)
+

@@ -30,6 +30,7 @@ export default class SongItem extends React.Component {
         this.hideDelete = this.hideDelete.bind(this)
 
         this.deleteSong = this.deleteSong.bind(this)
+        this.handleGenreSearch = this.handleGenreSearch.bind(this)
     }
 
     renderImage() {
@@ -356,6 +357,7 @@ export default class SongItem extends React.Component {
     }
     hideEditModal(){
         this.setState({showModal: false})
+        this.props.clearSongErrors();
 
     }
     handleDelete(e){
@@ -377,6 +379,10 @@ export default class SongItem extends React.Component {
         this.props.deleteSong(this.props.song.id)
     }
 
+    handleGenreSearch(){
+        this.props.history.push(`/search/${this.props.song.genre}`)
+    }
+
 
 
 
@@ -389,11 +395,14 @@ export default class SongItem extends React.Component {
                 <div className="song-item-elements">
 
                     <div className="song-item-container-top">
-                        <button className="play" id={`play-${this.props.i}`} onClick={this.handleClick}><i className='fas fa-play'></i></button>
-                        <div className="song-item-description">
-                            <Link to={`/${this.props.song.username}`}><p className="song-item-description-username">{this.props.song.username}</p></Link>
-                            <Link to={`/${this.props.song.username}/${this.props.song.id}`}><p className="song-item-description-title">{this.props.song.title}</p></Link>
+                        <div className="song-item-container-top-button-text">
+                            <button className="play" id={`play-${this.props.i}`} onClick={this.handleClick}><i className='fas fa-play'></i></button>
+                            <div className="song-item-description">
+                                <Link to={`/${this.props.song.username}`}><p className="song-item-description-username">{this.props.song.username}</p></Link>
+                                <Link to={`/${this.props.song.username}/${this.props.song.id}`}><p className="song-item-description-title">{this.props.song.title}</p></Link>
+                            </div>
                         </div>
+                        {this.props.song.genre ? <div onClick={this.handleGenreSearch} className="song-genre"># {this.props.song.genre}</div> : null}
                     </div>
 
                     <div className="canvas-container">

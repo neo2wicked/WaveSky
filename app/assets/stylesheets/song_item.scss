@@ -23,9 +23,15 @@
     //  image-rendering: pixelated;
     //  image-rendering: crisp-edges;
 }
+
+.song-item-container-top-button-text{
+    display: flex;
+}
 .song-item-container-top{
     display: flex;
+    justify-content: space-between;
     margin-top: 5px;
+    align-items: center;
 }
 .play{
     height: 38px;
@@ -252,4 +258,22 @@
     flex-direction: column;
     justify-content: space-evenly;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.song-genre{
+    padding: 2px 6px;
+   max-width: 80px;
+   margin-right: 20px;
+   text-align: center;
+     overflow:hidden;
+     white-space:nowrap;
+     text-overflow: ellipsis;
+     color: white;
+     border-radius: 10px;
+     background-color: rgb(143, 143, 143);
+     font-size: 0.8rem;
+}
+.song-genre:hover{
+    background-color: rgb(87, 87, 87);
+    
 }
