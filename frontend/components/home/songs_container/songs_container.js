@@ -31,7 +31,7 @@ const mapDTP = dispatch => ({
     receiveCurrentSong: (song) => dispatch(receiveCurrentSong(song)),
     createDeleteLike: (payload) => dispatch(createDeleteLike(payload)),
     deleteSong: (songId) => dispatch(deleteSong(songId)),
-    clearSongErrors: () => dispatch(clearSongErrors())
+    clearSongErrors: () => dispatch(clearSongErrors()),
 })
 
 export default withRouter(connect(mapSTP, mapDTP)(Songs))

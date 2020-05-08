@@ -46,7 +46,9 @@ export default class SongItem extends React.Component {
     }
 
     componentDidMount() {
-        this.setCanvasPropertiesAndDraw(this.props.song.metadata)
+       if(this.props.song.metadata){
+           this.setCanvasPropertiesAndDraw(this.props.song.metadata)
+       }
     }
 
 

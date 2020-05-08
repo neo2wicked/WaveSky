@@ -31,6 +31,11 @@ export default class SongForm extends React.Component {
     componentDidMount() {
        
 
+
+    }
+
+    componentWillUnmount(){
+        this.props.removeSongs()
     }
 
     handleClick(e) {
@@ -53,21 +58,8 @@ export default class SongForm extends React.Component {
 
                 this.props.createSong(formData)
                     .then(() => { this.props.history.push("/")
-                        // window.location.reload();
+                        window.location.reload();
                     })
-                    // .fail( () => {
-                    //     if (!(this.props.errors.length === 1 && this.props.errors[0] === "Title can't be blank")){
-                    //         let timer = setInterval(() => {
-                    //             this.setState({ counter: this.state.counter -= 1 })
-
-                    //         }, 1000)
-
-                    //         setTimeout(() => {
-                    //             clearInterval(timer)
-                    //             window.location.reload(false)
-                    //         }, 4000)
-                    //     }
-                    // })
             })
           
 
@@ -176,20 +168,7 @@ export default class SongForm extends React.Component {
 
     printErrors(){
        
-            // if (!(this.props.errors.length === 1 && this.props.errors[0] === "Title can't be blank")){
-            //     return (
-            //         <div className="song-form-errors"> 
-            //             <div>Failed to upload. Page will be refreshed in: {this.state.counter}</div>
-            //             <div>Errors:</div>
-            //             <ul className="song-form-errors-list">
-
-            //                 {this.props.errors.map((error) => (
-            //                     <li>{error}</li>
-            //                 ))}
-            //             </ul>
-            //         </div>
-            //     )
-            // }else{
+            
              if (this.props.errors.length !== 0){
                 return (
                     <div className="song-form-errors">
@@ -202,9 +181,6 @@ export default class SongForm extends React.Component {
                     </div>
                 )
             }
-            
-             
-        // }
     }
 
 

@@ -2,7 +2,8 @@ import { connect } from "react-redux"
 import SongForm from "./song_form"
 import {
     createSong,
-    clearSongErrors
+    clearSongErrors,
+    removeSongs
 } from "../../actions/songs/songs_actions"
 import {
     withRouter
@@ -15,7 +16,8 @@ const mapSTP = state => ({
 })
 const mapDTP = dispatch => ({
     createSong: (song) => dispatch(createSong(song)),
-    clearSongErrors: () => dispatch(clearSongErrors())
+    clearSongErrors: () => dispatch(clearSongErrors()),
+    removeSongs: () => dispatch(removeSongs())
 })
 
 export default withRouter(connect(mapSTP,mapDTP)(SongForm))

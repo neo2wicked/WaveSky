@@ -70,20 +70,6 @@ export default class Player extends React.Component {
        
         let audio = document.getElementById("player")
 
-        
-
-        // if (!this.eventListener && audio.duration){
-
-        // audio.addEventListener("playing", ()=>{
-        //     audio.play()
-        //         .then(() => this.play(audio.currentTime))
-        // })
-        // audio.addEventListener("waiting", ()=>{
-        //     audio.pause()
-        //     this.pause(audio.currentTime)
-
-        // })
-        // }
         if(this.props.currentSong && this.props.currentSong.id){
             if (this.songPlaying !== this.props.currentSong.id) {
 

@@ -177,7 +177,7 @@ button:focus {
     // }
     
     body{
-        // height: 100%;
+        height: inherit;
     }
     html{
         // height: 100%;
@@ -189,7 +189,7 @@ button:focus {
     }
 
     .app-container{
-        // height: 100%;
+        height: 100%;
     }
 
     .home-container{
@@ -221,6 +221,7 @@ button:focus {
         text-align: center;
         font-size: 1.2rem;
         height: 100%;
+        padding-bottom: 60px;
     }
 
     .page-bottom::before,
@@ -237,3 +238,8 @@ button:focus {
     .page-bottom::after {
         margin-left: 10px;
     }
+
+    .explore-container{
+        height: 100%;
+    }
+

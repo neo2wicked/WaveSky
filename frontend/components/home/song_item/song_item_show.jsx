@@ -185,18 +185,7 @@ export default class SongItemShow extends React.Component {
             this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { songPosition }))
 
 
-            // } else {
-            //     let position = e.layerX / event.currentTarget.width
-            //     let samplePosition = (Math.floor(222 * position))
-            //     this.newPosition = samplePosition;
-
-            //     let seconds = (this.props.song.duration / 222);
-            //     let songPosition = seconds * samplePosition;
-            //     //
-            //     this.props.receiveCurrentSong({ song, songPosition, samplePosition })
-
-            //     this.audio.currentTime = songPosition;
-            // }
+          
 
         }
     }
@@ -391,15 +380,7 @@ export default class SongItemShow extends React.Component {
 
             <div className="show-page-top-container">
                 <div className="show-page-top">
-                    {/* <ReactAudioPlayer
-                        listenInterval={10}
-                        src={this.props.song.musicUrl}
-                        id={`audio-${this.props.i}`}
-                        onAbort={this.pause}
-                        onEnded={this.onEnded}
-                        onPause={this.pause}
-                    // onListen={this.onListen}
-                    /> */}
+                  
                     <div className="show-page-song-info">
                         <div className="show-page-song-play-title">
                             <div className="show-page-song-play-title-box">
@@ -430,79 +411,9 @@ export default class SongItemShow extends React.Component {
                     <img className="show-page-img" src={this.renderImage()} />
                 </div>
 
-
-              
-
-
-                
-
-
-
             </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // <div className="song-item-container">
-            //     {/* <audio onListen={this.onListen} onPause={this.pause} onPlay={this.play} src={this.props.song.musicUrl} id={`audio-${this.props.i}`}></audio> */}
-            //     <ReactAudioPlayer
-            //         listenInterval={10}
-            //         src={this.props.song.musicUrl}
-            //         id={`audio-${this.props.i}`}
-            //         onAbort={this.pause}
-            //         onEnded={this.onEnded}
-            //         onPause={this.pause}
-            //         // onListen={this.onListen}
-            //     />
-
-            //     {this.renderImage()}
-
-            //     <div className="song-item-elements">
-
-            //         <div className="song-item-container-top">
-            //             <button className="play" id={`play-${this.props.i}`} onClick={this.handleClick}><i className='fas fa-play'></i></button>
-            //             <div className="song-item-description">
-            //                 <Link to={`/${this.props.song.username}`}><p className="song-item-description-username">{this.props.song.username}</p></Link>
-            //                 <p className="song-item-description-title">{this.props.song.title}</p>
-            //             </div>
-            //         </div>
-
-            //         <div className="canvas-container">
-            //             <canvas onClick={this.handleCanvasClick} className="canvas" id={`canvas-${this.props.i}`}>
-
-            //             </canvas>
-            //         </div>
-
-
-            //         <div className="song-item-container-bottom">
-            //             {this.printLikes()}
-            //             {/* <div onClick={this.handleLike} className={this.state.showlike}>{Object.values(this.props.song.likes).length} {this.state.heart}</div> */}
-            //             <div>Comment</div>
-
-            //             {this.props.song.username === this.props.currentUser.username ? <div onClick={this.showEditModal} className="song-item-edit"><i className="fas fa-pencil-alt"></i> Edit</div> : null}
-            //             {this.props.song.username === this.props.currentUser.username ? <div className="song-item-delete"><i className="fas fa-trash-alt"></i> Delete</div> : null}
-
-            //         </div>
-            //     </div>
-
-            //     {this.state.showModal ? <SongEditFormContainer hideEditModal={this.hideEditModal} song={this.props.song} /> : null}
-            // </div>
         )
     }
 }
