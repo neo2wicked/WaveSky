@@ -68,8 +68,8 @@ export default class SongShowPage extends React.Component {
 
     renderUserImage() {
         if (this.props.song) {
-            if (this.props.song.profilePhoto) {
-                return this.props.song.profilePhoto
+            if (this.props.currentUser.profilePhoto) {
+                return this.props.currentUser.profilePhoto
             } else {
                 return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
             }

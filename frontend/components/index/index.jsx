@@ -115,7 +115,7 @@ export default class Index extends React.Component{
                 </div>
 
                 <div className="index-trending-container">
-                    <h3>Hear what’s trending in the WaveSky community</h3>
+                    <h3>Hear what people are listening to in the WaveSky community</h3>
                     <div className="index-trending-tracks">
 
 
@@ -178,7 +178,7 @@ export default class Index extends React.Component{
                 <hr />
                 <div className="index-container-footer">
                     <ul className="index-footer-list">
-                        <li><a href="">About us</a></li>
+                        <li><a href="https://github.com/iskraev/WaveSky">About us</a></li>
                         <li>-</li>
                         <li><a onClick={this.handleClick}>Sign in</a></li>
                         <li>-</li>
