@@ -1,7 +1,8 @@
 import {
     RECEIVE_SONGS,
     RECEIVE_SONG,
-    REMOVE_SONG
+    REMOVE_SONG, 
+    REMOVE_SONGS
 } from "../../../actions/songs/songs_actions"
 
 const songsReducers = (state = {}, action) => {
@@ -19,6 +20,9 @@ const songsReducers = (state = {}, action) => {
         case REMOVE_SONG:
             delete nextState[action.songId]
             return nextState;
+        case REMOVE_SONGS:
+            nextState = {}
+            return nextState
         default:
             return state;
     }

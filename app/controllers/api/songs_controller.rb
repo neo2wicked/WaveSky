@@ -4,8 +4,6 @@ class Api::SongsController < ApplicationController
         @user = User.find_by(username: song_params[:username])
         if (@user)
             @songs = @user.songs
-           
-
             render "/api/songs/index"
         else
             render json: ["The user was not found. Can not fetch songs."], status: 404

@@ -10,6 +10,7 @@ export default class Songs extends React.Component {
     componentDidMount() {
         this.props.fetchUser(this.props.match.params.username)
         this.props.fetchUserSongs(this.props.match.params.username)
+        console.log((this.props.match.params.username))
     }
 
     handleClick(e) {

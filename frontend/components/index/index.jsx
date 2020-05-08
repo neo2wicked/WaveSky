@@ -12,6 +12,7 @@ export default class Index extends React.Component{
     componentWillUnmount(){
         document.body.style.overflowY = "auto";
         document.body.style.overflowX = "auto";
+        this.props.removeSongs()
         // this.songs = []
     }
 

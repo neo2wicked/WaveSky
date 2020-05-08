@@ -1,6 +1,6 @@
 export const fetchUserSongs = (username) => (
     $.ajax({
-        url: "/api/songs",
+        url: "/api/songs/",
         method: 'GET',
         data: { song: {username: username}}
     })

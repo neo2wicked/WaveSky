@@ -6,6 +6,7 @@ export const RECEIVE_SONG = "RECEIVE_SONG"
 export const RECEIVE_SONG_ERRORS = "RECEIVE_SONG_ERRORS"
 export const REMOVE_SONG = "REMOVE_SONG"
 export const CLEAR_SONG_ERRORS = "CLEAR_SONG_ERRORS"
+export const REMOVE_SONGS = "REMOVE_SONGS"
 
 //actions
 
@@ -29,6 +30,10 @@ export const clearSongErrors = () => ({
 export const removeSong = (songId) => ({
     type: REMOVE_SONG,
     songId
+})
+
+export const removeSongs = () => ({
+    type: REMOVE_SONGS
 })
 
 //thunk
