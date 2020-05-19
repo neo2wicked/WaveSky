@@ -130,7 +130,6 @@ export default class SongForm extends React.Component {
         file.click()
     }
     handleFileImage(e) {
-        // e.persist();
         const image = e.currentTarget.files[0];
         const fileReader = new FileReader();
         fileReader.onloadend = () => {
