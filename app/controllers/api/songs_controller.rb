@@ -23,12 +23,13 @@ class Api::SongsController < ApplicationController
     def create
         correct_params = song_params.deep_dup
         correct_params[:duration] = correct_params[:duration].to_f
-        correct_params[:metadata] = correct_params[:metadata].split(",")#.map{|ele| ele.to_f}
-        song = Song.new(correct_params)
-        if (song.save)
-            render json: ["Upload was successful"], status: 200
+        correct_params[:metadata] = correct_params[:metadata].split(",")
+        @song = Song.new(correct_params)
+        if (@song.save)
+            @user = User.find_by(username: @song.username)
+            render "/api/songs/show"
         else
-            render json: song.errors.full_messages, status: 422
+            render json: @song.errors.full_messages, status: 422
         end
     end
 

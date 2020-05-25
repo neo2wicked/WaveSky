@@ -54,7 +54,7 @@ export const fetchSong = (songId) => dispatch => (
 
 export const createSong = (song) => dispatch => (
     SongsAPIUtil.createSong(song)
-        .then(() => dispatch(receiveSong(song)))
+        .then((newSong) => dispatch(receiveSong(newSong)))
         .fail((errors) => dispatch(receiveSongErrors(errors.responseJSON)))
 )
 

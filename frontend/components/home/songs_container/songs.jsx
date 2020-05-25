@@ -25,7 +25,6 @@ export default class Songs extends React.Component {
     componentWillUnmount() {
         this.props.clearUser();
         this.props.removeSongs();
-
     }
 
     render() {

@@ -50,6 +50,15 @@ export default class SongItem extends React.Component {
         if (this.props.song.metadata) {
             this.setCanvasPropertiesAndDraw(this.props.song.metadata)
         }
+        if(this.props.currentSong){
+            if(this.props.currentSong.playing){
+                if (this.props.currentSong.id === this.props.i) {
+                    let currentSong = document.getElementById('player')
+                    this.clickFunction();
+                    this.drawPlayingSong(this.props.i);
+                }
+            }
+        }
     }
 
     clickFunction() {
@@ -77,6 +86,7 @@ export default class SongItem extends React.Component {
 
     componentDidUpdate() {
         let button = document.getElementById(`play-${this.props.i}`)
+        console.log("UNPDARW")
         if (this.props.currentSong) {
             if (!this.props.currentSong.finished) {
                 if (this.props.currentSong.id === this.props.song.id) {

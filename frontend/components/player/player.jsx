@@ -27,7 +27,7 @@ export default class Player extends React.Component {
 
     play(currentTime) {
         this.playing = true;
-        this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: true, drawing: true }, { songPosition: currentTime }))
+        this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: true, drawing: true, finished: false }, { songPosition: currentTime }))
     }
 
     pause(currentTime) {

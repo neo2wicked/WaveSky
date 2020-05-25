@@ -9,7 +9,8 @@ import Explore from "./explore"
 import {
     fetchRandomSongs,
     createDeleteLike,
-    deleteSong
+    deleteSong,
+    removeSongs
 } from "../../actions/songs/songs_actions"
 
 import {
@@ -26,7 +27,8 @@ const mapDTP = dispatch => ({
     fetchRandomSongs: () => dispatch(fetchRandomSongs()),
     receiveCurrentSong: (song) => dispatch(receiveCurrentSong(song)),
     createDeleteLike: (payload) => dispatch(createDeleteLike(payload)),
-    deleteSong: (songId) => dispatch(deleteSong(songId))
+    deleteSong: (songId) => dispatch(deleteSong(songId)),
+    removeSongs: () => dispatch(removeSongs())
 })
 
 export default withRouter(connect(mapSTP, mapDTP)(Explore))

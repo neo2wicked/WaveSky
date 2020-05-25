@@ -22,13 +22,13 @@ export default class SongShowPage extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchSong(this.props.match.params.songId)
+        this.props.fetchUser(this.props.match.params.username)
+            .then(() => this.props.fetchSong(this.props.match.params.songId))
             .then(() => {
                 if (this.props.song.username !== this.props.match.params.username) {
                     this.props.history.push("/")
                 }
             })
-            .then(() => this.props.fetchUser(this.props.match.params.username))
             .then(() => { this.props.fetchComments(this.props.match.params.songId) })
     }
 

@@ -48,6 +48,14 @@ export default class SongItemShow extends React.Component {
 
     componentDidMount() {
         this.setCanvasPropertiesAndDraw(this.props.song.metadata)
+        if (this.props.currentSong) {
+            if (this.props.currentSong.playing) {
+                if (this.props.currentSong.id === this.props.song.id) {
+                    this.clickFunction();
+                    this.drawPlayingSong(this.props.i);
+                }
+            }
+        }
     }
 
     clickFunction() {

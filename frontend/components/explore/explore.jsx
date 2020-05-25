@@ -11,6 +11,11 @@ export default class Explore extends React.Component {
         this.props.fetchRandomSongs();
     }
 
+    getNewSongs(){
+        this.props.removeSongs();
+        this.props.fetchRandomSongs();
+    }
+
     render() {
         return (
             <div className="explore-container">
@@ -30,7 +35,7 @@ export default class Explore extends React.Component {
                                 history={this.props.history} />
                         }
                     })}
-                    <button onClick={() => location.reload()} className="explore-button">Explore more!</button>
+                    <button onClick={this.getNewSongs.bind(this)} className="explore-button">Explore more!</button>
                     <PageBottom />
                 </div>
             </div>
