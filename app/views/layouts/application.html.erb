@@ -26,9 +26,7 @@
           "profilePhoto": "<%= current_user.profile_photo.attached? ? url_for(current_user.profile_photo) : nil %>",
           "facebook": "<%= current_user.facebook ? current_user.facebook : nil %>",
           "instagram": "<%= current_user.instagram ? current_user.instagram : nil %>",
-          "description": "<%= current_user.description ? current_user.description : nil %>"
-        }
-
+          "description": "<%= current_user.description ? current_user.description : nil %>"}
       </script>
     <% end %>
 
