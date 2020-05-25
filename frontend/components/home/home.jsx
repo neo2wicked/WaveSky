@@ -142,9 +142,9 @@ export default class Home extends React.Component {
         if (this.props.currentUser.id !== this.props.user.id) {
             if (this.props.user.followers) {
                 if (this.props.user.followers[this.props.currentUser.id]) {
-                    return <button className="home-follow-button following" onClick={this.handleFollow}><i class="fas fa-user-check"></i><p>Following</p></button>
+                    return <button className="home-follow-button following" onClick={this.handleFollow}><i className="fas fa-user-check"></i><p>Following</p></button>
                 } else {
-                    return <button className="home-follow-button " onClick={this.handleFollow}><i class="fas fa-user-plus"></i><p>Follow</p></button>
+                    return <button className="home-follow-button " onClick={this.handleFollow}><i className="fas fa-user-plus"></i><p>Follow</p></button>
                 }
             }
         }

@@ -79,6 +79,11 @@
 
 .player-author {
     color: rgb(148, 148, 148);
+    cursor: pointer;
+}
+
+.player-author:hover{
+    color: rgb(48, 48, 48);
 }
 
 .player-title {

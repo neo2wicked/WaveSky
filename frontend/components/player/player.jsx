@@ -289,7 +289,7 @@ export default class Player extends React.Component {
                     <img className="player-image" src={this.renderImage()} alt="" />
 
                     <div className="player-title-description">
-                        <div onClick={() => this.props.history.push(`/${this.props.currentSong.username}`)} className="player-author">Play any song</div>
+                        <div onClick={() => this.props.currentSong ? this.props.history.push(`/${this.props.currentSong.username}`) : null} className="player-author">Play any song</div>
                         <div className="player-title">Just do it</div>
                     </div>
                 </div>

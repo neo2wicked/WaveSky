@@ -86,7 +86,6 @@ export default class SongItem extends React.Component {
 
     componentDidUpdate() {
         let button = document.getElementById(`play-${this.props.i}`)
-        console.log("UNPDARW")
         if (this.props.currentSong) {
             if (!this.props.currentSong.finished) {
                 if (this.props.currentSong.id === this.props.song.id) {
