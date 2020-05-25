@@ -1,4 +1,7 @@
-import { RECEIVE_USER } from "../../../actions/user/user_actions"
+import {
+    RECEIVE_USER,
+    CLEAR_USER
+} from "../../../actions/user/user_actions"
 /* NEEDS ATTENTION */
 
 const userReducers = (state = {}, action) => {
@@ -10,6 +13,8 @@ const userReducers = (state = {}, action) => {
         case RECEIVE_USER: 
             nextState = action.user
             return nextState;
+        case CLEAR_USER:
+            return {};
         default:
             return state;
     }

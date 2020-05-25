@@ -4,6 +4,7 @@ import * as FollowersAPIUtil from "../../utils/followers_api_util"
 export const RECEIVE_USER = "RECEIVE_USER"
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS"
 export const CLEAR_USER_ERRORS = "CLEAR_USER_ERRORS"
+export const CLEAR_USER = "CLEAR_USER"
 //action
 
 export const receiveUser = (user) => ({
@@ -17,6 +18,10 @@ export const receiveUserErrors = (errors) => ({
 
 export const clearUserErrors = () => ({
     type: CLEAR_USER_ERRORS
+})
+
+export const clearUser = () => ({
+    type: CLEAR_USER
 })
 
 //thunk

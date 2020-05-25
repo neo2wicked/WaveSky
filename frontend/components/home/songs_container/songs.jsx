@@ -9,9 +9,23 @@ export default class Songs extends React.Component {
 
     componentDidMount() {
         this.props.fetchUser(this.props.match.params.username)
-        this.props.fetchUserSongs(this.props.match.params.username)
+            .then(() => this.props.fetchUserSongs(this.props.match.params.username))
+            .then(() => this.props.receiveCurrentSong(this.props.currentSong, { songPosition: audio.currentTime }))
         let audio = document.getElementById("player")
-        this.props.receiveCurrentSong(this.props.currentSong, { songPosition: audio.currentTime })
+    }
+
+    componentDidUpdate() {
+        if (this.props.match.params.username !== this.props.user.username) {
+            this.props.fetchUser(this.props.match.params.username)
+                .then(()=> this.props.removeSongs())
+                .then(() => this.props.fetchUserSongs(this.props.match.params.username))
+        }
+    }
+
+    componentWillUnmount() {
+        this.props.clearUser();
+        this.props.removeSongs();
+
     }
 
     render() {

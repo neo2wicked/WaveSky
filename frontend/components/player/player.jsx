@@ -18,6 +18,7 @@ export default class Player extends React.Component {
         this.showVolumeBar = this.showVolumeBar.bind(this)
         this.hideVolumeBar = this.hideVolumeBar.bind(this)
         this.handleVolume = this.handleVolume.bind(this)
+        this.ended = this.ended.bind(this)
 
         this.state = {
             showVolume: ""
@@ -78,6 +79,8 @@ export default class Player extends React.Component {
         this.playButton = document.getElementById("player-play")
         this.dot = document.getElementById("player-playback-dot")
         this.bar = document.getElementById("player-playback-bar")
+
+        this.setVolume(0.5);
 
         if (!this.eventListener) {
             this.eventListener = true;
@@ -215,13 +218,17 @@ export default class Player extends React.Component {
         }
     }
 
-    handleVolume(e) {
-        let bar = document.getElementsByClassName("player-volume-bar-container")[0]
-        let volume = ((bar.offsetHeight - e.nativeEvent.layerY) / bar.offsetHeight)
+    setVolume(volume){
         let orangeBar = document.getElementsByClassName("player-volume-bar-orange")[0]
         orangeBar.style.height = `${volume * 100}%`
         let dot = document.getElementsByClassName("player-volume-bar-dot")[0]
-        dot.style.top = `${bar.offsetHeight - volume * bar.offsetHeight - 5}px`
+        dot.style.top = `${80 - volume * 80 - 5}px`
+    }
+
+    handleVolume(e) {
+        let bar = document.getElementsByClassName("player-volume-bar-container")[0]
+        let volume = ((bar.offsetHeight - e.nativeEvent.layerY) / bar.offsetHeight)
+        this.setVolume(volume);
         if (this.props.currentSong) {
             this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { volume }))
         } else {
@@ -233,7 +240,7 @@ export default class Player extends React.Component {
         if (this.props.currentSong) {
             return this.props.currentSong.volume
         } else {
-            return 1;
+            return 0.5;
         }
     }
 

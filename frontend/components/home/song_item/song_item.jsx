@@ -58,7 +58,7 @@ export default class SongItem extends React.Component {
             if (this.props.currentSong) {
                 this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true, songPosition: 0, finished: false, volume: this.props.currentSong.volume }))
             } else {
-                this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true, songPosition: 0, finished: false, volume: 1.0 }))
+                this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true, songPosition: 0, finished: false, volume: 0.5 }))
             }
 
         } else {

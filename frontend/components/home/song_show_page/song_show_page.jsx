@@ -58,10 +58,19 @@ export default class SongShowPage extends React.Component {
         }
     }
 
-    renderUserImage() {
+    renderCommentImage() {
         if (this.props.song) {
             if (this.props.currentUser.profilePhoto) {
                 return this.props.currentUser.profilePhoto
+            } else {
+                return "https://i.imgur.com/qItJfVP.png"
+            }
+        }
+    }
+    renderUserImage() {
+        if (this.props.song) {
+            if (this.props.user.profilePhoto) {
+                return this.props.user.profilePhoto
             } else {
                 return "https://i.imgur.com/qItJfVP.png"
             }
@@ -139,7 +148,7 @@ export default class SongShowPage extends React.Component {
                 <div className="show-page-middle-container">
                     <div className="show-page-comment-input-container">
                         <div className="show-page-comment-input">
-                            <img className="show-page-comment-img" src={this.renderUserImage()} alt="" />
+                            <img className="show-page-comment-img" src={this.renderCommentImage()} alt="" />
                             <input
                                 value={this.state.commentBody}
                                 onChange={this.update("commentBody")}
@@ -173,7 +182,7 @@ export default class SongShowPage extends React.Component {
                             {this.props.song ? <div className="show-page-description">{this.props.song.description ? this.props.song.description : "The song doesn't have any description yet."}</div> : null}
                             <div className="show-page-comments-amount"><i className="fas fa-comment-alt"></i> {this.props.comments ? Object.values(this.props.comments).length : "0"} Comments</div>
                             {/* {Array.isArray(this.props.comments) ? <SongComments song={this.props.song} currentUser={this.props.currentUser} comments={Object.values(this.props.comments)} deleteComment={this.props.deleteComment}/> : null} */}
-                            <SongComments song={this.props.song} currentUser={this.props.currentUser} comments={Object.values(this.props.comments)} deleteComment={this.props.deleteComment} />
+                            {this.props.song ? <SongComments song={this.props.song} currentUser={this.props.currentUser} comments={Object.values(this.props.comments)} deleteComment={this.props.deleteComment} /> : null}
                         </div>
                     </div>
                     <PageBottom />

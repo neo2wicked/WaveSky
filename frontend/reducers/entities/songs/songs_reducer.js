@@ -21,8 +21,7 @@ const songsReducers = (state = {}, action) => {
             delete nextState[action.songId]
             return nextState;
         case REMOVE_SONGS:
-            nextState = {}
-            return nextState
+            return {};
         default:
             return state;
     }
