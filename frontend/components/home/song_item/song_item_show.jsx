@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactAudioPlayer from 'react-audio-player';
 import { Link } from "react-router-dom"
 
 export default class SongItemShow extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { showModal: false,
+        this.state = {
+            showModal: false,
             showDelete: false
         }
 
@@ -16,15 +16,13 @@ export default class SongItemShow extends React.Component {
         this.handleClick = this.handleClick.bind(this)
         this.handleCanvasClick = this.handleCanvasClick.bind(this)
 
-        this.play = this.play.bind(this)
-        this.pause = this.pause.bind(this)
         this.onEnded = this.onEnded.bind(this)
         this.handleLike = this.handleLike.bind(this)
 
         this.handleComment = this.handleComment.bind(this)
 
         this.handleGenreSearch = this.handleGenreSearch.bind(this)
-        
+
     }
 
     renderImage() {
@@ -34,7 +32,7 @@ export default class SongItemShow extends React.Component {
             if (this.props.user.profilePhoto) {
                 return this.props.user.profilePhoto
             } else {
-                return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
+                return "https://i.imgur.com/qItJfVP.png"
             }
         }
     }
@@ -43,33 +41,18 @@ export default class SongItemShow extends React.Component {
         if (this.props.song.profilePhoto) {
             return this.props.song.profilePhoto
         } else {
-            return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
+            return "https://i.imgur.com/qItJfVP.png"
         }
-        
+
     }
 
     componentDidMount() {
-        // this.audio = document.getElementById(`audio-${this.props.i}`)
-
-
-
-        // this.audio.addEventListener("playing", ()=>{
-        //     this.play()
-        // })
-        // this.audio.addEventListener("waiting", ()=>{
-        //     this.pause()
-
-        // })
         this.setCanvasPropertiesAndDraw(this.props.song.metadata)
     }
 
-
     clickFunction() {
-        // let button = document.getElementById(`play-${this.props.i}`)
-
         if (!this.wasPlayed) {
             this.wasPlayed = true;
-            // button.innerHTML = "<i class='fas fa-pause'></i>"
             if (this.props.currentSong) {
                 this.props.receiveCurrentSong(Object.assign({}, this.props.song, { playing: true, songPosition: 0, finished: false, volume: this.props.currentSong.volume }))
             } else {
@@ -77,12 +60,9 @@ export default class SongItemShow extends React.Component {
             }
 
         } else {
-
             if (this.props.currentSong.playing) {
-                // button.innerHTML = "<i class='fas fa-pause'></i>"
                 this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false }))
             } else {
-                // button.innerHTML = "<i class='fas fa-play'></i>"
                 this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: true }))
             }
 
@@ -90,11 +70,9 @@ export default class SongItemShow extends React.Component {
 
     }
 
-
-    handleClick(event) {
+    handleClick() {
         this.clickFunction();
     }
-
 
     componentDidUpdate() {
 
@@ -110,10 +88,6 @@ export default class SongItemShow extends React.Component {
                     let audio = document.getElementById("player")
                     this.newPosition = Math.floor(audio.currentTime / seconds)
 
-
-                    // this.newPosition = Math.floor(this.props.currentSong.songPosition / seconds)
-
-
                     if (this.props.currentSong.id === this.props.song.id) {
 
                         if (this.props.currentSong.playing) {
@@ -125,7 +99,6 @@ export default class SongItemShow extends React.Component {
 
                         } else {
                             button.innerHTML = "<i class='fas fa-play'></i>"
-
                             clearInterval(this.eachSample)
                         }
 
@@ -170,31 +143,14 @@ export default class SongItemShow extends React.Component {
             // if (this.props.currentSong.playing) {
             let position = e.layerX / event.currentTarget.width
             let samplePosition = (Math.floor(222 * position))
-            //NO NEED TO PASS
             this.newPosition = samplePosition;
-
-            //
             let seconds = (this.props.song.duration / 222);
-
-
-            //
             let songPosition = seconds * samplePosition;
-            //
             let audio = document.getElementById("player")
             audio.currentTime = songPosition;
             this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { songPosition }))
-
-
-          
-
         }
     }
-
-
-
-
-
-
 
     setCanvasPropertiesAndDraw(data) {
         const canvas = document.getElementById(`canvas-${this.props.i}`);
@@ -218,25 +174,17 @@ export default class SongItemShow extends React.Component {
             this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
             this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
         }
-
-
-
-        // this.draw(this.props.song.metadata, canvas, ctx, this.newPosition, alpha);
     }
 
 
     draw(normalizedData, canvas, ctx, counter = null, alpha = null) {
 
         // draw the initial canvas
-        // const width = Math.floor((canvas.width) / normalizedData.length) * 1.5;
         if (normalizedData) {
             const width = (Math.floor((canvas.width) / normalizedData.length)) * 1.5;
-
-            // if (this.state.samplePosition >= counter){
             for (let i = 0; i < normalizedData.length; i++) {
                 const x = width * i;
                 let height = normalizedData[i] // * canvas.offsetHeight - padding;
-                // let height = (Math.round(normalizedData[i] * 100) / 100).toFixed(5);// * canvas.offsetHeight - padding;
 
                 if (i < counter) {
                     this.drawLineSegment(ctx, x, height * 120, `rgba(255,66,0,${alpha})`);
@@ -246,10 +194,8 @@ export default class SongItemShow extends React.Component {
                     this.drawLineSegment(ctx, x, height * 120, "rgb(143,143,143)");
                     this.drawLineSegment(ctx, x, -height * 60, "#c2c2c2");
                 }
-
             }
         }
-
     };
 
 
@@ -259,30 +205,21 @@ export default class SongItemShow extends React.Component {
         ctx.beginPath();
         ctx.moveTo(x, 0);
         ctx.lineTo(x, -height);
-
         ctx.stroke();
     };
 
     drawPlayingSong(buttonNumber) {
-
         clearInterval(this.eachSample)
         clearInterval(this.fading);
-
-        // const audio = document.getElementById(`audio-${buttonNumber}`);
         const canvas = document.getElementById(`canvas-${buttonNumber}`);
         const ctx = canvas.getContext("2d");
         let ms = (this.props.song.duration / 222) * 1000;
-
-
         let alpha = 0;
-
-
         // moves the canvas's songs position when clicked
         this.fading = setInterval(() => {
             this.draw(this.props.song.metadata, canvas, ctx, this.newPosition, alpha);
             alpha += 0.1;
         }, ms / 100)
-
         //set interval for color changing
         this.eachSample = setInterval(() => {
             clearInterval(this.fading);
@@ -295,35 +232,15 @@ export default class SongItemShow extends React.Component {
             }, ms / 20)
 
             this.newPosition++;
-
-
-
-
         }, ms);
     }
 
-    play() {
-        // this.setState({playing: true})
-        // this.drawPlayingSong(this.props.i)
-    }
     pause() {
         clearInterval(this.eachSample)
         this.setState({ playing: false })
     }
 
-
-
-
-
-
-
-
-    playNext() {
-
-    }
-
     onEnded() {
-        // this.newPosition = 0;
         this.setState({ wasPlayed: false })
         clearInterval(this.eachSample)
         this.resetCanvas();
@@ -353,18 +270,19 @@ export default class SongItemShow extends React.Component {
             }
         }
     }
-    
+
     update(value) {
         return e => (this.setState({ [value]: e.currentTarget.value }))
     }
-    handleComment(){
-        if(this.state.commentBody.length !==0){
+
+    handleComment() {
+        if (this.state.commentBody.length !== 0) {
             const formData = new FormData();
             formData.append('comment[body]', this.state.commentBody);
             formData.append('comment[song_id]', this.props.song.id);
             formData.append('comment[author_id]', this.props.currentUser.id);
             this.props.createComment(formData)
-            this.setState({commentBody: ""})
+            this.setState({ commentBody: "" })
         }
     }
 
@@ -372,15 +290,10 @@ export default class SongItemShow extends React.Component {
         this.props.history.push(`/search/${this.props.song.genre}`)
     }
 
-
-
-
     render() {
         return (
-
             <div className="show-page-top-container">
                 <div className="show-page-top">
-                  
                     <div className="show-page-song-info">
                         <div className="show-page-song-play-title">
                             <div className="show-page-song-play-title-box">
@@ -388,32 +301,19 @@ export default class SongItemShow extends React.Component {
                                 <div className="show-page-creator-title">
                                     <div className="show-page-creator">
                                         <Link to={`/${this.props.song.username}`}><p >{this.props.song.username}</p></Link>
-
                                     </div>
                                     <div className="show-page-title">
                                         <p >{this.props.song.title}</p>
-
                                     </div>
-
                                 </div>
                             </div>
-                             {this.props.song.genre ? <div onClick={this.handleGenreSearch} className="song-genre-show"># {this.props.song.genre}</div> : null}
+                            {this.props.song.genre ? <div onClick={this.handleGenreSearch} className="song-genre-show"># {this.props.song.genre}</div> : null}
                         </div>
-
-                        {/* <div className="canvas-container"> */}
-                        <canvas onClick={this.handleCanvasClick} className="canvas" id={`canvas-${this.props.i}`}>
-
-                        </canvas>
-                        {/* </div> */}
+                        <canvas onClick={this.handleCanvasClick} className="canvas" id={`canvas-${this.props.i}`}></canvas>
                     </div>
-
-                    {/* {this.renderImage()} */}
                     <img className="show-page-img" src={this.renderImage()} />
                 </div>
-
             </div>
-
-
         )
     }
 }

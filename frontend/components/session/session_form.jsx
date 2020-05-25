@@ -18,9 +18,8 @@ class SessionForm extends React.Component {
         this.props.action(this.state)
     }
 
-
-    formLogin(){
-        return(
+    formLogin() {
+        return (
             <div className="modal-form-content">
                 <div className="modal-form-container session-form">
 
@@ -52,8 +51,8 @@ class SessionForm extends React.Component {
         )
     }
 
-    formSignup(){
-        return(
+    formSignup() {
+        return (
             <div className="modal-form-content">
                 <div className="modal-form-container session-form">
 
@@ -78,27 +77,22 @@ class SessionForm extends React.Component {
                                 <li key={`error-${i}`}>
                                     {error}
                                 </li>
-                        ))}
+                            ))}
                     </ul>
                     <button className="modal-form-button" onClick={this.handleClick}>{this.props.formType}</button>
 
                     <p className="modal-text">You do not need to enter your private information. You can use demo button to login and test the website. We respect your privacy.</p>
-
                 </div>
             </div>
         )
     }
 
-
-
-
-
     render() {
-        if (this.props.formType === "Sign up"){
+        if (this.props.formType === "Sign up") {
             return this.formSignup()
-        }else{
+        } else {
             return this.formLogin();
-        }                
+        }
     }
 }
 

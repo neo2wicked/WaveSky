@@ -1,29 +1,23 @@
 import React from 'react'
 import LoginFormContainer from "./login_form_container"
 import SignupFormContainer from './signup_form_container'
-import { Route } from "react-router-dom"
 
-
-
-
-
-class FirstForm extends React.Component{
-    constructor(props){
+class FirstForm extends React.Component {
+    constructor(props) {
         super(props)
-        this.state = { username: "", form: null}
+        this.state = { username: "", form: null }
         this.handleClick = this.handleClick.bind(this)
         this.demoLogin = this.demoLogin.bind(this)
-        
     }
 
-    componentDidMount(){
+    componentDidMount() {
         //resets form if clicked outside modal
         let form = document.getElementsByClassName("modal-form")[0]
-        form.addEventListener("click",(e)=>{
-            if (e.target === form){
+        form.addEventListener("click", (e) => {
+            if (e.target === form) {
                 this.resetForm()
             }
-        }) 
+        })
         //resets form if clicked on close button
         let close = document.getElementsByClassName("close")[0]
         close.addEventListener("click", () => {
@@ -31,7 +25,7 @@ class FirstForm extends React.Component{
         })
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         //remove event listeners
         let form = document.getElementsByClassName("modal-form")[0]
         form.removeEventListener("click", (e) => {
@@ -44,57 +38,50 @@ class FirstForm extends React.Component{
         close.removeEventListener("click", () => {
             this.resetForm()
         })
-      
     }
 
-
-
-    resetForm(){
+    resetForm() {
         //hide the whole modal element
         document.getElementsByClassName("modal-form")[0].style.display = "none";
-
         //allow to scroll in the browser
         document.body.style.overflowX = "auto";
         document.body.style.overflowY = "auto";
-
         //reset the ll forms and show the first form again if modal was closed
         document.getElementsByClassName("first-form")[0].style.display = "block";
-
         //reset the forms to null
         this.setState({ form: null })
     }
 
-
-    update(value){
+    update(value) {
         return e => {
-            this.setState({[value]: e.currentTarget.value})
+            this.setState({ [value]: e.currentTarget.value })
         }
     }
 
-
-    handleClick(e){
+    handleClick(e) {
         e.preventDefault();
-        let user = { username: this.state.username}
-        if (user.username !== ""){
-            document.getElementsByClassName("first-form")[0].style.display="none";
+        let user = { username: this.state.username }
+        if (user.username !== "") {
+            document.getElementsByClassName("first-form")[0].style.display = "none";
             this.props.fetchUserByUsername(user)
-                .then(() => this.setState({ form: <LoginFormContainer username={this.state.username} resetForm={this.resetForm}/>, username: "" }))
-                .fail(() => this.setState({ form: <SignupFormContainer username={this.state.username} resetForm={this.resetForm}/>, username: "" }))
+                .then(() => this.setState({ form: <LoginFormContainer username={this.state.username} resetForm={this.resetForm} />, username: "" }))
+                .fail(() => this.setState({ form: <SignupFormContainer username={this.state.username} resetForm={this.resetForm} />, username: "" }))
         }
     }
-    demoLogin(){
-        this.props.login({username: "iamdemouser", password: "123456"})
+
+    demoLogin() {
+        this.props.login({ username: "iamdemouser", password: "123456" })
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="modal-form">
                 <div className="close"><span>&times;</span></div>
                 <div className="modal-form-content first-form">
                     <div className="modal-form-container">
                         <button onClick={this.demoLogin} className="demo-button">DEMO LOGIN</button>
                         <div className="separator">or</div>
-                        
+
                         <input
                             className="modal-form-input"
                             placeholder="Your username"
@@ -105,14 +92,9 @@ class FirstForm extends React.Component{
                         <button className="modal-form-button" onClick={this.handleClick}>Continue</button>
 
                         <p className="modal-text">You do not need to enter your private information. You can use demo button to login and test the website. We respect your privacy.</p>
-
-                        
-                        
                     </div>
                 </div>
                 {this.state.form}
-
-                
             </div>
         )
     }

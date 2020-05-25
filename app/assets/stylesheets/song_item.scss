@@ -1,99 +1,95 @@
-.song-item-container{
+.song-item-container {
     height: 170px;
     width: 838px;
     display: flex;
     justify-content: space-between;
     background-color: white;
     padding-bottom: 35px;
-
 }
 
-.song-item-container > img{
+.song-item-container>img {
     height: 160px;
     width: 160px;
-    
 }
 
-.canvas{
+.canvas {
     margin-top: 5px;
     width: 660px;
     height: 60px;
-    //  image-rendering: -moz-crisp-edges;
-    //  image-rendering: -webkit-crisp-edges;
-    //  image-rendering: pixelated;
-    //  image-rendering: crisp-edges;
 }
 
-.song-item-container-top-button-text{
+.song-item-container-top-button-text {
     display: flex;
 }
-.song-item-container-top{
+
+.song-item-container-top {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
     align-items: center;
 }
-.play{
+
+.play {
     height: 38px;
     width: 38px;
     border-radius: 200px;
-    background-color: rgb(255,75,0);
+    background-color: rgb(255, 75, 0);
     color: white;
     text-align: center;
 }
-.song-item-container-bottom{
+
+.song-item-container-bottom {
     display: flex;
     margin-bottom: 5px;
 }
 
-.canvas-container{
+.canvas-container {
     margin-top: 5px;
     height: 90px;
 }
+
 .song-item-description {
     margin-left: 5px;
     width: inherit;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // align-items: center;
 }
 
-.song-item-description-username{
-    color: rgb(142,142,142);
+.song-item-description-username {
+    color: rgb(142, 142, 142);
     font-weight: 300;
     font-size: 0.8rem;
     letter-spacing: 1.3px;
-    
 }
-.song-item-description-title{
+
+.song-item-description-title {
     font-weight: 300;
     font-size: 1rem;
-    // letter-spacing: 1.1px;
 }
-.song-item-elements{
+
+.song-item-elements {
     margin-left: 15px;
 }
+
 .song-item-container-bottom {
     display: flex;
     text-align: center;
-   
 }
-.song-item-container-bottom > div{
+
+.song-item-container-bottom>div {
     height: 20px;
     padding: 0px 5px;
     display: flex;
     align-items: center;
-   
     border-radius: 3px;
-
 }
-.song-item-container-bottom > div:nth-child(n+2) {
+
+.song-item-container-bottom>div:nth-child(n+2) {
     margin-left: 5px;
 }
 
-
-.song-item-like{
+.song-item-like {
     width: 50px;
     text-align: center;
     white-space: 2px;
@@ -104,9 +100,9 @@
     font-size: 0.8rem;
     font-weight: 400;
     cursor: pointer;
-   
 }
-.song-item-comment{
+
+.song-item-comment {
     color: rgb(97, 97, 97);
     text-align: center;
     white-space: 2px;
@@ -119,34 +115,37 @@
     cursor: pointer;
 }
 
-.home-fa-comment-alt{
-    padding-top:2px;
+.home-fa-comment-alt {
+    padding-top: 2px;
     padding-right: 4px;
 }
 
-.song-item-comment:hover{
+.song-item-comment:hover {
     border: 1px solid rgb(150, 150, 150);
     color: rgb(54, 54, 54);
     transition: color 0.6s;
     transition: border 0.6s;
 }
-.song-item-like p{
-    overflow:hidden;
-    white-space:nowrap;
-    text-overflow: ellipsis;
 
+.song-item-like p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
-.show-like{
-    color: rgb(255,75,0);
-    border: 1px solid rgb(255,75,0);
+
+.show-like {
+    color: rgb(255, 75, 0);
+    border: 1px solid rgb(255, 75, 0);
     background-color: rgb(253, 253, 253);
 }
-.fa-heart{
+
+.fa-heart {
     margin: 0;
     padding-top: 2px;
 }
 
-.song-item-delete, .song-item-edit{
+.song-item-delete,
+.song-item-edit {
     position: relative;
     color: rgb(97, 97, 97);
     font-size: 0.8rem;
@@ -157,46 +156,39 @@
     border: 1px solid rgb(197, 196, 196);
     background-color: white;
     cursor: pointer;
-    
-}
-.song-item-delete{
-    transition: background-color 2s ease,
-    color 0.5s ease;
-    
 }
 
-.song-item-edit:hover{
+.song-item-delete {
+    transition: background-color 2s ease,
+        color 0.5s ease;
+}
+
+.song-item-edit:hover {
     border: 1px solid rgb(150, 150, 150);
     color: rgb(54, 54, 54);
     transition: color 0.6s;
     transition: border 0.6s;
-
 }
-.song-item-delete:hover{
+
+.song-item-delete:hover {
     border: 1px solid rgb(255, 255, 255);
     color: white;
-    
     background-color: rgb(209, 35, 35);
     transition: background-color 1.5s ease,
-    color 0.5s ease;
-    
-    // transition: border 0.6s;
-
+        color 0.5s ease;
 }
 
-
-
-.song-delete-window:hover{
+.song-delete-window:hover {
     background-color: rgb(238, 238, 238);
-
 }
-.song-delete-window-question{
+
+.song-delete-window-question {
     font-weight: 600;
     color: rgb(56, 56, 56);
     font-size: 1rem;
 }
 
-.song-delete-window-buttons{
+.song-delete-window-buttons {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -204,16 +196,16 @@
 }
 
 .song-delete-window-buttons button:nth-child(1) {
-    border: 1px solid rgb(142,142,142);
+    border: 1px solid rgb(142, 142, 142);
     border-radius: 3px;
-     padding: 3px 5px;
+    padding: 3px 5px;
     width: 40px;
     color: green;
 }
 
 .song-delete-window-buttons button:nth-child(2) {
     padding: 3px 5px;
-     border-radius: 3px;
+    border-radius: 3px;
     color: red;
     border: 1px solid rgb(142, 142, 142);
     width: 40px;
@@ -223,23 +215,20 @@
     color: white;
     background-color: green;
     border: 1px solid rgb(255, 255, 255);
-
-    
 }
 
-.song-delete-window-buttons button:nth-child(2):hover{
-   background-color: red;
-   color: white;
-   border: 1px solid white;
+.song-delete-window-buttons button:nth-child(2):hover {
+    background-color: red;
+    color: white;
+    border: 1px solid white;
 }
 
-.song-delete-modal{
+.song-delete-modal {
     position: fixed;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    // z-index: -1;
 }
 
 .song-delete-window {
@@ -250,9 +239,6 @@
     border: 1px solid rgb(142, 142, 142);
     background-color: rgb(253, 253, 253);
     top: 25px;
-    
-    // top: 500px;
-    // left: 500px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -260,20 +246,20 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.song-genre{
+.song-genre {
     padding: 2px 6px;
-   max-width: 80px;
-   margin-right: 20px;
-   text-align: center;
-     overflow:hidden;
-     white-space:nowrap;
-     text-overflow: ellipsis;
-     color: white;
-     border-radius: 10px;
-     background-color: rgb(143, 143, 143);
-     font-size: 0.8rem;
+    max-width: 80px;
+    margin-right: 20px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: white;
+    border-radius: 10px;
+    background-color: rgb(143, 143, 143);
+    font-size: 0.8rem;
 }
-.song-genre:hover{
+
+.song-genre:hover {
     background-color: rgb(87, 87, 87);
-    
 }

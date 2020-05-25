@@ -1,5 +1,4 @@
-.explore-container{
-    // height: 100%;
+.explore-container {
     width: 1240px;
     margin: auto;
     background-color: white;
@@ -9,37 +8,35 @@
     align-items: center;
 }
 
-.explore-top-text{
+.explore-top-text {
     font-size: 2rem;
     color: rgb(46, 46, 46);
     padding: 40px 0px;
-    // font-weight: ;
 }
-.explore-middle-container{
+
+.explore-middle-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.explore-button{
+.explore-button {
     padding: 10px 20px;
     border: 1px solid white;
-   
-    background-color: rgb(255,75,0);
+    background-color: rgb(255, 75, 0);
     color: white;
-   margin: auto;
-   font-weight: 300;
-   font-size: 1.2rem;
-   border-radius: 4px;
+    margin: auto;
+    font-weight: 300;
+    font-size: 1.2rem;
+    border-radius: 4px;
 }
 
-.explore-button:hover{
+.explore-button:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(255, 75, 0);
-     border: 1px solid rgb(255, 75, 0);
-
+    border: 1px solid rgb(255, 75, 0);
 }
 
-.explore-sounds{
+.explore-sounds {
     color: rgb(255, 75, 0);
 }

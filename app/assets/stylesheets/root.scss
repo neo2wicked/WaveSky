@@ -1,10 +1,9 @@
 .main-content {
     width: 1240px;
     margin: auto;
-    
 }
 
-a{
+a {
     cursor: pointer;
 }
 
@@ -77,52 +76,54 @@ a{
     font-weight: 300;
 }
 
-.index-carousel{
+.index-carousel {
     height: 600px;
     position: relative;
-    
+
 }
-.carousel{
+
+.carousel {
     height: 600px;
     position: relative;
     overflow: hidden;
 }
-.carousel-images{
+
+.carousel-images {
     position: absolute;
-    filter: brightness(75%); 
+    filter: brightness(75%);
 }
 
-#slide-1{
+#slide-1 {
     position: relative;
 }
 
-#slide-1 img{
+#slide-1 img {
     top: -50px
 }
-#slide-2{
+
+#slide-2 {
     position: absolute;
     top: 0;
     transform: translateX(100%)
 }
 
-#slide-2 img{
+#slide-2 img {
     bottom: -50px;
 }
 
-
-.carousel-buttons{
+.carousel-buttons {
     position: absolute;
     display: flex;
     justify-content: space-between;
     width: 50px;
     z-index: 2;
-    left:0;
+    left: 0;
     right: 0;
     margin: auto;
     bottom: 25px;
 }
 
-.carousel-button{
+.carousel-button {
     border: 1px solid white;
     background-color: transparent;
     height: 13px;
@@ -130,11 +131,11 @@ a{
     border-radius: 10px;
 }
 
-.active{
+.active {
     background-color: white;
 }
 
-.carousel-item{
+.carousel-item {
     position: absolute;
     height: 100%;
     display: flex;
@@ -203,7 +204,6 @@ a{
     padding: 25px 0px;
 }
 
-
 .index-search-bar {
     width: 600px;
     height: 30px;
@@ -250,7 +250,7 @@ a{
     width: 180px;
 }
 
-.index-trending-single-track p{
+.index-trending-single-track p {
     cursor: pointer;
 }
 
@@ -304,7 +304,6 @@ h4 {
 
 .index-container-other-img {
     width: 500px;
-
 }
 
 .index-container-other-text {
@@ -337,7 +336,6 @@ h4 {
     display: flex;
     align-items: center;
     color: white;
-
 }
 
 .index-container-singer img {
@@ -357,7 +355,6 @@ h4 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
     text-align: center;
     width: 400px;
 }
@@ -384,7 +381,6 @@ h4 {
     margin: 20px auto;
     font-weight: lighter;
     font-size: 1rem;
-
 }
 
 .index-container-bottom {
@@ -416,9 +412,9 @@ h4 {
     background-color: rgb(255, 75, 0);
     border-radius: 4px;
     padding: 13px 35px;
-
 }
-.index-container-bottom-text p{
+
+.index-container-bottom-text p {
     margin-bottom: 20px;
 }
 
@@ -431,7 +427,6 @@ h4 {
     border: 1px solid gray;
     border-radius: 4px;
     padding: 5px 15px;
-
 }
 
 .index-container-bottom-signin-container {
@@ -466,6 +461,6 @@ h4 {
     color: rgb(87, 86, 86);
 }
 
-.last-item{
+.last-item {
     margin-top: 20px;
 }

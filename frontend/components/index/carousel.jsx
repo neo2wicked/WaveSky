@@ -4,7 +4,7 @@ export default class Carousel extends React.Component {
     constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this)
-        this.state ={
+        this.state = {
             button1: "active",
             button2: "",
             slide1: "active-slide",
@@ -12,7 +12,7 @@ export default class Carousel extends React.Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.button1 = document.getElementsByClassName("slide-1-button")[0]
         this.button2 = document.getElementsByClassName("slide-2-button")[0]
         this.slide1 = document.getElementById("slide-1")
@@ -20,19 +20,18 @@ export default class Carousel extends React.Component {
         this.slideInterval1 = null;
         this.slideInterval2 = null;
 
-        this.randomInterval = setInterval(()=>{
-            if (this.state.button1 === "active"){
+        this.randomInterval = setInterval(() => {
+            if (this.state.button1 === "active") {
                 this.button2.click()
-            }else{
+            } else {
                 this.button1.click()
             }
         }, 4000)
     }
-    componentWillUnmount(){
+
+    componentWillUnmount() {
         clearInterval(this.randomInterval)
     }
-
-
 
     handleClick(e) {
         clearInterval(this.randomInterval)
@@ -50,23 +49,19 @@ export default class Carousel extends React.Component {
         if (e.currentTarget === this.button1 && this.state.slide1 !== "active-slide") {
             slide1.style.transform = "translateX(0%)"
             slide1.style.transition = "transform 0.6s ease-in-out 0s"
-
             slide2.style.transform = "translateX(100%)"
             slide2.style.transition = "transform 0.6s ease-in-out 0s"
-            this.setState({slide1: "active-slide", slide2:"", button1: "active", button2: ""})
-            
-        } else if (e.currentTarget === this.button2 && this.state.slide2 !== "active-slide"){
+            this.setState({ slide1: "active-slide", slide2: "", button1: "active", button2: "" })
 
+        } else if (e.currentTarget === this.button2 && this.state.slide2 !== "active-slide") {
             slide1.style.transform = "translateX(-100%)"
             slide1.style.transition = "transform 0.6s ease-in-out 0s"
-
             slide2.style.transform = "translateX(0%)"
             slide2.style.transition = "transform 0.6s ease-in-out 0s"
             this.setState({ slide1: "", slide2: "active-slide", button1: "", button2: "active" })
         }
-       
-        
     }
+
     render() {
         return (
             <div className="index-carousel">
@@ -75,7 +70,6 @@ export default class Carousel extends React.Component {
                     <div onClick={this.handleClick} className={`slide-1-button carousel-button ${this.state.button1}`}></div>
                     <div onClick={this.handleClick} className={`slide-2-button carousel-button ${this.state.button2}`}></div>
                 </div>
-
 
                 <div className="carousel">
                     <div id="slide-1" className={`carousel-item ${this.state.slide1}`}>
@@ -86,7 +80,7 @@ export default class Carousel extends React.Component {
                                         <br />Upload your own and share with friends!
                                         <br />Just chill and feel the vibe.
                                     </p>
-                            <button className="carousel-text-button">Start listening</button>
+                            <button className="carousel-text-button" onClick={this.props.handleClick}>Start listening</button>
                         </div>
                     </div>
 
@@ -103,11 +97,6 @@ export default class Carousel extends React.Component {
                         </div>
                     </div>
                 </div>
-
-
-
-
-
             </div>
         )
     }

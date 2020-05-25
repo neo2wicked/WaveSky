@@ -12,23 +12,14 @@ export default class SongSingleComment extends React.Component {
         this.deleteComment = this.deleteComment.bind(this)
     }
 
-    componentDidMount() {
-        // this.props.fetchUser(this.props.match.params.username)
-        // this.props.fetchUserSongs(this.props.match.params.username)
-    }
-
-    handleClick(e) {
-    }
-
-    componentDidUpdate() {
-    }
     printCommentImage(comment) {
         if (comment.profilePhoto) {
             return comment.profilePhoto
         } else {
-            return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
+            return "https://i.imgur.com/qItJfVP.png"
         }
     }
+
     showTrash(e) {
         this.setState({ showTrash: true })
     }
@@ -37,13 +28,12 @@ export default class SongSingleComment extends React.Component {
         this.setState({ showTrash: false })
     }
 
-    deleteComment(){
+    deleteComment() {
         this.props.deleteComment(this.props.comment.id)
     }
 
     render() {
         return (
-
             <div onMouseEnter={this.showTrash} onMouseLeave={this.hideTrash} className="show-page-each-comment-content">
                 <img className="show-page-each-comment-image" src={this.printCommentImage(this.props.comment)} alt="" />
                 <div className="show-page-comment-username-text">

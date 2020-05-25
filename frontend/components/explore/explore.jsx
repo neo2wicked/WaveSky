@@ -7,16 +7,9 @@ export default class Explore extends React.Component {
         super(props)
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.fetchRandomSongs();
     }
-
-    handleClick() {
-    }
-
-    componentDidUpdate() {
-    }
-
 
     render() {
         return (
@@ -24,7 +17,7 @@ export default class Explore extends React.Component {
                 <div className="explore-top-text">Explore new <span className="explore-sounds">sounds</span> and make friends!</div>
                 <div className="explore-middle-container">
                     {this.props.songs.map((song) => {
-                        if(song){
+                        if (song) {
                             return <SongItem
                                 key={`song-${song.username}-${song.id}`}
                                 song={song}
@@ -36,9 +29,8 @@ export default class Explore extends React.Component {
                                 deleteSong={this.props.deleteSong}
                                 history={this.props.history} />
                         }
-                        
                     })}
-                    <button onClick={()=> location.reload()}className="explore-button">Explore more!</button>
+                    <button onClick={() => location.reload()} className="explore-button">Explore more!</button>
                     <PageBottom />
                 </div>
             </div>

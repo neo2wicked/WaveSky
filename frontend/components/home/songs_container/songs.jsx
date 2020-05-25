@@ -11,37 +11,27 @@ export default class Songs extends React.Component {
         this.props.fetchUser(this.props.match.params.username)
         this.props.fetchUserSongs(this.props.match.params.username)
         let audio = document.getElementById("player")
-
-        this.props.receiveCurrentSong(this.props.currentSong,{songPosition: audio.currentTime})
-
+        this.props.receiveCurrentSong(this.props.currentSong, { songPosition: audio.currentTime })
     }
-
-    handleClick(e) {
-    }
-
-    componentDidUpdate() {
-    }
-
 
     render() {
         return (
             <div className="home-songs-container" >
                 {Object.values(this.props.songs).reverse().map((song) => (
-                    <SongItem 
+                    <SongItem
                         key={`song-${song.username}-${song.id}`}
-                        song={song} 
-                        user={this.props.user} 
-                        i={song.id} 
-                        receiveCurrentSong={this.props.receiveCurrentSong} 
-                        currentSong = {this.props.currentSong}
-                        createDeleteLike = {this.props.createDeleteLike}
-                        currentUser = {this.props.currentUser}
-                        deleteSong = {this.props.deleteSong}
+                        song={song}
+                        user={this.props.user}
+                        i={song.id}
+                        receiveCurrentSong={this.props.receiveCurrentSong}
+                        currentSong={this.props.currentSong}
+                        createDeleteLike={this.props.createDeleteLike}
+                        currentUser={this.props.currentUser}
+                        deleteSong={this.props.deleteSong}
                         clearSongErrors={this.props.clearSongErrors}
                         history={this.props.history}
                     />
                 ))}
-
                 <PageBottom />
             </div>
         )

@@ -15,10 +15,6 @@ export default class Seach extends React.Component {
         }
         this.search = path[2];
         this.props.requestSearch(path[2]);
-        
-    }
-
-    handleClick() {
     }
 
     componentDidUpdate() {
@@ -26,12 +22,11 @@ export default class Seach extends React.Component {
         if (path.length != 3) {
             this.props.history.push("/")
         }
-        if(this.search !== path[2]){
+        if (this.search !== path[2]) {
             this.search = path[2]
             this.props.requestSearch(path[2]);
         }
     }
-
 
     render() {
         return (
@@ -48,10 +43,9 @@ export default class Seach extends React.Component {
                                 currentSong={this.props.currentSong}
                                 createDeleteLike={this.props.createDeleteLike}
                                 currentUser={this.props.currentUser}
-                                deleteSong={this.props.deleteSong} 
-                                history={this.props.history}/>
+                                deleteSong={this.props.deleteSong}
+                                history={this.props.history} />
                         }
-
                     })}
                     <PageBottom />
                 </div>

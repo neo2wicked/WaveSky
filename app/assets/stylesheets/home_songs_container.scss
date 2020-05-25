@@ -1,82 +1,71 @@
-.home-songs-container{
+.home-songs-container {
     padding-top: 20px;
     position: relative;
     background-color: "lightgray";
     overflow: hidden;
-    // height: 105%;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: space-between;
 }
 
-.home-container{
+.home-container {
     width: 1240px;
     margin: auto;
     position: relative;
     background-color: white;
 }
-.home-top{
+
+.home-top {
     position: relative;
 }
-.home-profile-photo{
-    // position: absolute;
-   
-    // top: auto;
-    
+
+.home-profile-photo {
     height: 200px;
     width: 200px;
     border-radius: 100px;
 }
 
-.home-photo-user{
+.home-photo-user {
     position: absolute;
     display: flex;
     top: 35px;
     left: 35px;
-   
 }
 
-.home-profile-background{
+.home-profile-background {
     width: inherit;
     height: 270px;
     background-color: #21D4FD;
     background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
-
-
 }
-.home-page-welcome{
+
+.home-page-welcome {
     margin-left: 35px;
-    // margin-top: 20px;
     padding-bottom: 50px;
     display: flex;
     align-items: center;
 }
-.home-profile-username{
+
+.home-profile-username {
     font-size: 1.7rem;
     color: white;
-    // text-shadow: 10px 10px 7px rgb(0, 0, 0);
-    // text-shadow: 2px 2px #000000;
     padding: 15px 20px;
     background-color: black;
-
 }
-.home-page-of{
+
+.home-page-of {
     color: white;
     font-size: 1.2rem;
 }
 
-.home-welcome{
+.home-welcome {
     font-size: 2.5rem;
     color: white;
     text-shadow: 0 0 3px #000;
-
 }
 
-.home-photo-container{
+.home-photo-container {
     position: relative;
 }
 
-.home-photo-button{
+.home-photo-button {
     display: none;
     position: absolute;
     left: 0;
@@ -84,66 +73,63 @@
     margin: auto;
     bottom: 35px;
     padding: 5px 10px;
-    background-color: rgb(255,75,0);
+    background-color: rgb(255, 75, 0);
     color: white;
     border-radius: 3px;
     border: 1px solid white;
 }
-.home-background-button{
+
+.home-background-button {
     display: none;
     position: absolute;
     top: 30px;
     right: 30px;
     padding: 5px 10px;
-    background-color: rgb(255,75,0);
+    background-color: rgb(255, 75, 0);
     color: white;
     border-radius: 3px;
     border: 1px solid white;
 }
 
-.home-button-show{
+.home-button-show {
     display: block;
 }
 
-.home-background-image{
+.home-background-image {
     height: 100%;
     object-fit: cover;
 }
-.home-middle-container{
+
+.home-middle-container {
     width: 96.5%;
     margin: auto;
     background-color: white;
-    // display: flex;
 }
-.home-songs-middle{
+
+.home-songs-middle {
     display: flex;
     margin-top: 25px;
-    // justify-content: space-between;
 }
-.home-recent-songs-containers{
-  
+
+.home-recent-songs-containers {
     border-right: 1px solid rgb(226, 226, 226);
     padding-right: 20px;
     width: 70%;
-
 }
-.home-page-info-container{
-    // position: relative;
-   
+
+.home-page-info-container {
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    // width: 90%;
     height: 50px;
     border-bottom: 1px solid rgb(226, 226, 226);
-    //   margin-top: 30px;
 }
 
-.home-page-info-container-all{
+.home-page-info-container-all {
     color: rgb(255, 75, 0);
     height: 100%;
-    border-bottom: 1px solid rgb(255,75,0);
+    border-bottom: 1px solid rgb(255, 75, 0);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -151,12 +137,7 @@
     width: 50px;
 }
 
-.home-page-info-container button{
-    
-    
-}
-
-.home-profile-edit{
+.home-profile-edit {
     width: 70px;
     color: rgb(66, 66, 66);
     margin-right: 30px;
@@ -167,12 +148,14 @@
     display: flex;
     justify-content: space-evenly;
 }
-.home-profile-edit:hover{
+
+.home-profile-edit:hover {
     border: 1px solid rgb(167, 167, 167);
     color: rgb(43, 43, 43);
 
 }
-.home-follow-button{
+
+.home-follow-button {
     width: 90px;
     margin-right: 30px;
     padding: 7px 15px;
@@ -180,29 +163,23 @@
     text-align: center;
     display: flex;
     justify-content: space-evenly;
-    background-color: rgb(255,75,0);
+    background-color: rgb(255, 75, 0);
     color: white;
 
-} 
-.home-follow-button:hover{
+}
+
+.home-follow-button:hover {
     opacity: 0.9;
 
 }
-.following{
+
+.following {
     color: rgb(255, 75, 0);
     background-color: white;
     border: 1px solid rgb(255, 75, 0);
-
 }
 
-
-
-
-
-
-
-
-.home-page-recent{
+.home-page-recent {
     display: flex;
     justify-content: flex-end;
     flex-direction: column;
@@ -210,53 +187,50 @@
     font-size: 1.5rem;
     font-weight: 300;
 }
-.home-right-panel-container{
+
+.home-right-panel-container {
     display: flex;
     flex-direction: column;
     width: 30%;
     padding-left: 20px;
-    // align-items: center;
-    // justify-content: space-between;
-    // height: 250px;
 }
 
-.home-right-panel-columns{
+.home-right-panel-columns {
     display: flex;
     justify-content: space-evenly;
     font-size: 0.85rem;
     color: rgb(145, 145, 145);
     font-weight: 400;
-    
 }
 
-.home-right-panel-columns-followers{
-width: 33.3%;
-
+.home-right-panel-columns-followers {
+    width: 33.3%;
 }
 
-.home-right-panel-columns-following{
+.home-right-panel-columns-following {
     border-left: 1px solid rgb(226, 226, 226);
     border-right: 1px solid rgb(226, 226, 226);
-
     width: 33.3%;
     padding-left: 15px;
 }
 
-.home-right-panel-columns-tracks{
+.home-right-panel-columns-tracks {
     width: 33.3%;
     padding-left: 15px;
 }
-.home-right-panel-counters{
+
+.home-right-panel-counters {
     font-size: 1.4rem;
 }
 
-.home-right-panel-container-top{
+.home-right-panel-container-top {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 200px;
 }
-.home-right-panel-description{
+
+.home-right-panel-description {
     height: 100px;
     overflow-y: scroll;
     border: 1px solid rgb(226, 226, 226);
@@ -270,37 +244,40 @@ width: 33.3%;
     background-color: rgb(248, 248, 248);
 
 }
-.home-right-panel-description:hover{
+
+.home-right-panel-description:hover {
     color: rgb(29, 29, 29);
-    
     background-color: rgb(240, 240, 240);
     transition: color 0.7s;
 }
-.home-social-media{
+
+.home-social-media {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 80px;
-    // margin-left: 10px;
     margin-top: 15px;
     font-size: 0.9rem;
     color: rgb(145, 145, 145);
     width: 100px;
     margin-bottom: 15px;
 }
-.home-social-media a:nth-child(1){
+
+.home-social-media a:nth-child(1) {
     padding-left: 3px;
 }
-.home-social-media a:nth-child(1):hover{
+
+.home-social-media a:nth-child(1):hover {
     color: #4267B2;
 }
+
 .home-social-media a:nth-child(2) {
     padding-left: 3px;
 }
-.home-social-media a:nth-child(2):hover{
+
+.home-social-media a:nth-child(2):hover {
     background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
     background-size: 10%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
 }

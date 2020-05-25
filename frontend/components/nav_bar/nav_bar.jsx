@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 
 class NavBar extends React.Component {
@@ -20,28 +20,23 @@ class NavBar extends React.Component {
         this.handleSearch = this.handleSearch.bind(this)
     }
 
-    componentDidUpdate(){
-        // this.checkCurrentPage();
-    }
-
-   
-
-    componentDidMount(){
-        
+    componentDidMount() {
         window.addEventListener("click", this.closeAllDropDowns);
     }
-    componentWillUnmount(){
+
+    componentWillUnmount() {
         window.removeEventListener("click", this.closeAllDropDowns);
     }
-    closeAllDropDowns(){
+
+    closeAllDropDowns() {
         this.closeFirstDropdown()
         this.closeSecondDropdown();
     }
 
-    closeFirstDropdown(){
+    closeFirstDropdown() {
         this.setState({ displayFirstDropdown: "none" })
     }
-    closeSecondDropdown(){
+    closeSecondDropdown() {
         this.setState({ displaySecondDropdown: "none" })
     }
 
@@ -49,114 +44,107 @@ class NavBar extends React.Component {
         e.preventDefault();
         this.props.logout();
     }
-    openFirstDropdown(e){
+
+    openFirstDropdown(e) {
         e.stopPropagation()
         this.closeSecondDropdown()
         if (this.state.displayFirstDropdown === "none") {
             this.setState({ displayFirstDropdown: "block" });
-        }else{
+        } else {
             this.setState({ displayFirstDropdown: "none" });
         }
     }
-    openSecondDropdown(e){
+
+    openSecondDropdown(e) {
         e.stopPropagation()
         this.closeFirstDropdown()
         if (this.state.displaySecondDropdown === "none") {
             this.setState({ displaySecondDropdown: "block" });
-        }else{
+        } else {
             this.setState({ displaySecondDropdown: "none" });
         }
     }
 
-    renderAvatar(){
-        if (this.props.currentUser.profilePhoto){
+    renderAvatar() {
+        if (this.props.currentUser.profilePhoto) {
             return <img className="profile-picture" src={this.props.currentUser.profilePhoto} alt="avatar" />
-        }else{
-            return <img className="profile-picture" src="https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png" alt="avatar" />
+        } else {
+            return <img className="profile-picture" src="https://i.imgur.com/qItJfVP.png" alt="avatar" />
         }
     }
 
-    checkCurrentPage(){
+    checkCurrentPage() {
         this.pages = { home: "", upload: "", explore: "" }
         let path = this.props.location.pathname.split("/")
-        if (this.props.currentUser.username === path[1]){
+        if (this.props.currentUser.username === path[1]) {
             this.pages["home"] = "active-page"
         }
-        if(path[1] === "upload"){
+        if (path[1] === "upload") {
             this.pages["upload"] = "active-page"
         }
-        if(path[1] === "explore"){
+        if (path[1] === "explore") {
             this.pages["explore"] = "active-page"
         }
     }
 
-    handleSearch(){
-        if(this.state.search.length !== 0){
+    handleSearch() {
+        if (this.state.search.length !== 0) {
             this.props.history.push(`/search/${this.state.search}`)
         }
-        
     }
-
 
     update(value) {
         return e => (this.setState({ [value]: e.currentTarget.value }))
     }
 
-
     render() {
-        return(
-       //     <div>
-               // {/* <button onClick={this.handleClick}>Logout</button> */}
-                <header>
-                    {this.checkCurrentPage()}
-                    <nav>
-                        <ul className="navbar-list">
+        return (
+            <header>
+                {this.checkCurrentPage()}
+                <nav>
+                    <ul className="navbar-list">
                         <li className="navbar-list-item logo-box"><Link to={`/`}><div className="logo"><i className="fas fa-water"></i><i
                             className="fas fa-cloud"></i></div></Link></li>
-                            <li className={`navbar-list-item home ${this.pages.home}`}><Link to={`/`}>Home</Link></li>
+                        <li className={`navbar-list-item home ${this.pages.home}`}><Link to={`/`}>Home</Link></li>
                         <li className={`navbar-list-item playlist ${this.pages.explore}`}><Link to="/explore">Explore</Link></li>
 
-                            <li>
-                                <div className="search-zoom">
-                                    <input className="search-bar" onChange={this.update("search")} type="text" placeholder="Search" />
-                                    {/* <a className="search-button" onClick()><i className="fas fa-search"></i></a> */}
-                                    <div className="search-button" onClick={this.handleSearch}><i className="fas fa-search"></i></div>
+                        <li>
+                            <div className="search-zoom">
+                                <input className="search-bar" onChange={this.update("search")} type="text" placeholder="Search" />
+                                <div className="search-button" onClick={this.handleSearch}><i className="fas fa-search"></i></div>
+                            </div>
+                        </li>
+
+                        <li className={`navbar-list-item upload ${this.pages.upload}`}><Link to="/upload">Upload</Link></li>
+
+                        <li className="navbar-list-item" onClick={this.openFirstDropdown}>
+                            <div className="profile">
+                                {this.renderAvatar()}
+
+                                <div className="username-box">
+                                    <div className="username">{this.props.currentUser.username}</div>
+                                    <div className="arrow">↯</div>
                                 </div>
-                            </li>
+                            </div>
 
-                            <li  className={`navbar-list-item upload ${this.pages.upload}`}><Link to="/upload">Upload</Link></li>
-                            
-                            <li className="navbar-list-item" onClick={this.openFirstDropdown}>
-                                <div className="profile">
-                                    {this.renderAvatar()}
+                            <div className="dropdown-menu-1" style={{ display: this.state.displayFirstDropdown }} >
+                                <div><Link to={`/`}>Profile</Link></div>
+                            </div>
 
-                                   <div className="username-box">
-                                        <div className="username">{this.props.currentUser.username}</div>
-                                        <div className="arrow">↯</div>
-                                   </div>
-                                </div>
+                        </li>
+                        <li onClick={this.openSecondDropdown} className="dropdown-2" >
+                            <i className="fas fa-ellipsis-h"></i>
+                            <div className="dropdown-menu-2" style={{ display: this.state.displaySecondDropdown }}>
+                                <div onClick={this.handleClick}>Logout</div>
+                            </div>
+                        </li>
 
-                                <div className="dropdown-menu-1"  style={{ display: this.state.displayFirstDropdown }} >
-                                    <div><Link to={`/`}>Profile</Link></div>
-                                    {/* <div><Link>Likes(not working)</Link></div>
-                                    <div><Link>Following(not working)</Link></div> */}
-                                </div>
-                            
-                            </li>
-                            <li onClick={this.openSecondDropdown} className="dropdown-2" >
-                                <i className="fas fa-ellipsis-h"></i>
-                                <div className="dropdown-menu-2" style={{ display: this.state.displaySecondDropdown }}>
-                                    <div onClick={this.handleClick}>Logout</div>
-                                </div>
-                            </li>
+                    </ul>
+                </nav>
+                <div className="fake-header">
 
-                        </ul>
-                    </nav>
-                    <div className="fake-header">
-
-                    </div>
-                </header>
-            //</div>
+                </div>
+            </header>
         )
     }
 }

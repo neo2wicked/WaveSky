@@ -3,8 +3,7 @@ import { Provider } from 'react-redux'
 import AppContainer from './app_container'
 import { BrowserRouter } from "react-router-dom"
 
-
-export default ({store}) => (
+export default ({ store }) => (
     <Provider store={store}>
         <BrowserRouter>
             <AppContainer />

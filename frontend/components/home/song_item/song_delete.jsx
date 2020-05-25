@@ -3,27 +3,26 @@ import React from 'react';
 export default class SongDelete extends React.Component {
     constructor(props) {
         super(props)
-       this.hideDelete = this.hideDelete.bind(this)
+        this.hideDelete = this.hideDelete.bind(this)
     }
 
     componentDidMount() {
         window.addEventListener("click", this.hideDelete)
     }
-    componentWillUnmount(){
+
+    componentWillUnmount() {
         window.removeEventListener("click", this.hideDelete)
     }
 
-    hideDelete(e){
+    hideDelete(e) {
         let modal = document.getElementsByClassName("song-delete-modal")[0]
-        if (e.target === modal){
+        if (e.target === modal) {
             this.props.hideDelete()
         }
     }
 
-
     render() {
         return (
-           
             <div className="song-delete-window" >
                 <div className="song-delete-window-question">Delete song?</div>
                 <div className="song-delete-window-buttons">

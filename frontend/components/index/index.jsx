@@ -3,59 +3,56 @@ import FirstFormContainer from '../session/first_form_container'
 import Carousel from "./carousel"
 
 
-export default class Index extends React.Component{
-    constructor(props){
+export default class Index extends React.Component {
+    constructor(props) {
         super(props)
         this.handleClick = this.handleClick.bind(this)
         this.songs = []
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         document.body.style.overflowY = "auto";
         document.body.style.overflowX = "auto";
         this.props.removeSongs()
-        // this.songs = []
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.fetchRandomNoInfoSongs();
     }
 
-    handleClick(e){
+    handleClick(e) {
         e.preventDefault();
 
         document.getElementsByClassName("modal-form")[0].style.display = "block";
         document.body.style.overflowY = "hidden";
         document.body.style.overflowX = "hidden";
-
-        
     }
 
-    renderImage(song){
-        if(song.imageUrl){
+    renderImage(song) {
+        if (song.imageUrl) {
             return song.imageUrl
-        }else{
-            if(song.profilePhoto){
+        } else {
+            if (song.profilePhoto) {
                 return song.profilePhoto
-            }else{
-                return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
+            } else {
+                return "https://i.imgur.com/qItJfVP.png"
             }
         }
     }
 
-    renderTrack(song, i){
-        if(song){
-           return(
-               <div key={`song-index-${song.id}`} className="index-trending-single-track">
-                   <img className="track-img" src={this.renderImage(song)} />
-                   <h4>{song.title}</h4>
-                   <p onClick={this.handleClick} >{song.username}</p>
-               </div>
+    renderTrack(song, i) {
+        if (song) {
+            return (
+                <div key={`song-index-${song.id}`} className="index-trending-single-track">
+                    <img className="track-img" src={this.renderImage(song)} />
+                    <h4>{song.title}</h4>
+                    <p onClick={this.handleClick} >{song.username}</p>
+                </div>
 
-           )
-        }else{
-            return(
+            )
+        } else {
+            return (
                 <div key={`song-index-non-${i}`} className="index-trending-single-track">
-                    <div className="track-img"/>
+                    <div className="track-img" />
                     <h4>Comming soon</h4>
                     <p>Comming soon</p>
                 </div>
@@ -63,9 +60,9 @@ export default class Index extends React.Component{
         }
     }
 
-    renderAllTracks(){
+    renderAllTracks() {
         this.songs = []
-        if (Object.keys(this.props.songs).length !== 0){
+        if (Object.keys(this.props.songs).length !== 0) {
 
             this.songs = this.songs.concat(this.props.songs)
             while (this.songs.length < 12) {
@@ -74,15 +71,15 @@ export default class Index extends React.Component{
         }
 
         return this.songs.map((song, i) => (
-            this.renderTrack(song, i)        
+            this.renderTrack(song, i)
         ))
-            
+
     }
-    render(){
-        return(
+    render() {
+        return (
             <div className="main-content">
 
-               <FirstFormContainer />
+                <FirstFormContainer />
 
                 <div className="orange-line"></div>
                 <div className="index-top-container">
@@ -98,18 +95,10 @@ export default class Index extends React.Component{
                     </div>
                 </div>
 
-                <Carousel />
+                <Carousel handleClick={this.handleClick}/>
 
                 <div className="index-search-container">
                     <ul className="index-search">
-                        {/* <li>
-                            <div className="search-zoom">
-                                <input className="index-search-bar" type="text"
-                                    placeholder="Search for artists, tracks, playlists" />
-                                <a className="search-button" href="#"><i className="fas fa-search"></i></a>
-                            </div>
-                        </li>
-                        <li><span style={{ fontSize: 'medium', fontWeight: 400 }}>or</span></li> */}
                         <li><button onClick={this.handleClick} className="index-search-upload">Upload your own</button></li>
                     </ul>
                 </div>
@@ -118,13 +107,9 @@ export default class Index extends React.Component{
                     <h3>Hear what people are listening to in the WaveSky community</h3>
                     <div className="index-trending-tracks">
 
+                        {this.renderAllTracks()}
 
-
-                    {this.renderAllTracks()}
-
-
-
-                        <button onClick={this.handleClick}  className="index-trending-signup">Sign up now!</button>
+                        <button onClick={this.handleClick} className="index-trending-signup">Sign up now!</button>
 
                     </div>
                 </div>
@@ -147,7 +132,7 @@ export default class Index extends React.Component{
                     </div>
                     <div className="index-container-singer-text">
                         <div className="index-container-singer-text-single">
-                            <button className="index-singer-signup">Sign Up!</button>
+                            <button className="index-singer-signup" onClick={this.handleClick}>Sign Up!</button>
                         </div>
 
                         <div></div>

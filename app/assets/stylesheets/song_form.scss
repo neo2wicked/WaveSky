@@ -1,42 +1,43 @@
-.song-form-container{
-   
+.song-form-container {
     height: 100%;
     background-color: rgb(240, 240, 240);
 }
-.song-form-content{
+
+.song-form-content {
     width: 1240px;
     height: inherit;
     background-color: white;
     margin: auto;
-
 }
-.song-form-errors{
+
+.song-form-errors {
     color: red;
     font-weight: 500;
     list-style: circle;
     margin-top: 10px;
 }
-.song-form-errors-list{
+
+.song-form-errors-list {
     font-weight: 400;
     list-style: circle;
 }
-.song-form-image{
+
+.song-form-image {
     position: relative;
     margin: auto;
-
 }
-.image-preview img{
+
+.image-preview img {
     height: inherit;
     background-color: white;
-    
 }
-.first-song-form{
+
+.first-song-form {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     position: absolute;
-
     z-index: 1;
     background-color: white;
     width: 800px;
@@ -45,21 +46,18 @@
     right: 0;
     margin: auto;
     top: 10%;
-    // margin-top: 100px;
-    
 }
 
-.first-song-form > h3{
+.first-song-form>h3 {
     font-size: 2rem;
     font-weight: 400;
 }
-.second-song-form{
+
+.second-song-form {
     position: absolute;
     z-index: 1;
     background-color: white;
     width: 800px;
-    // height: 85%;
-    // height: 600px;
     left: 0;
     right: 0;
     margin: auto;
@@ -70,14 +68,11 @@
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
-    
 }
 
-.upload-button{
+.upload-button {
     background-color: rgb(255, 75, 0);
 }
-
-
 
 .music-upload-button {
     color: white;
@@ -87,15 +82,12 @@
     font-size: 20px;
 }
 
-.files{
+.files {
     display: none;
 }
 
-
-
-.song-form-image-button{
+.song-form-image-button {
     position: absolute;
-    // margin: auto;
     bottom: 20px;
     left: 0;
     right: 0;
@@ -105,7 +97,7 @@
     border-radius: 3px;
 }
 
-.image-preview{
+.image-preview {
     position: relative;
     background: rgb(186, 38, 38);
     background: linear-gradient(135deg, rgba(186, 38, 38, 1) 0%, rgba(126, 18, 210, 1) 48%, rgba(0, 212, 255, 1) 100%);
@@ -113,22 +105,22 @@
     height: 260px;
 }
 
-.song-info{
+.song-info {
     display: flex;
     justify-content: space-evenly;
     margin-top: 20px;
     height: 100%;
-   
 }
 
-.text-field{
+.text-field {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 50px;
     padding-bottom: 10px;
 }
-.description{
+
+.description {
     border: 1px solid rgb(197, 197, 197);
     border-radius: 3px;
     resize: vertical;
@@ -137,7 +129,8 @@
     min-height: 150px;
     margin-top: 10px;
 }
-.basic-info{
+
+.basic-info {
     width: 110px;
     color: rgb(255, 75, 0);
     height: 40px;
@@ -148,49 +141,42 @@
     margin-left: 20px;
     margin-top: 20px;
     border-bottom: 2px solid rgb(255, 75, 0);
-
 }
 
-.song-form-input{
+.song-form-input {
     padding: 5px 0px;
     padding-left: 5px;
     border: 1px solid rgb(197, 197, 197);
     border-radius: 4px;
 }
-.song-texts{
+
+.song-texts {
     display: flex;
     flex-direction: column;
-    // justify-content: space-between;
-    // height: 100%;
-
 }
-.song-all-inputs{
-    // height: 90%;
+
+.song-all-inputs {
     width: 100%;
-    
 }
 
-.genre{
+.genre {
     width: 150px;
 }
-.song-form-bottom{
+
+.song-form-bottom {
     height: 90px;
     display: flex;
     justify-content: space-between;
     width: 90%;
     margin: auto;
     align-items: center;
-    // margin-top: 10px;
 }
 
-.song-form-bottom-buttons{
+.song-form-bottom-buttons {
     padding: 5px 10px;
 }
-.song-form-cancel{
-    
-}
 
-.song-form-save{
+.song-form-save {
     background-color: rgb(255, 75, 0);
     color: white;
     border-radius: 3px;

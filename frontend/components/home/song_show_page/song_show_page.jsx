@@ -7,8 +7,10 @@ import PageBottom from "../page_bottom"
 export default class SongShowPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { commentBody: "",
-        showModal:false }
+        this.state = {
+            commentBody: "",
+            showModal: false
+        }
         this.handleLike = this.handleLike.bind(this)
 
         this.showEditModal = this.showEditModal.bind(this)
@@ -21,7 +23,6 @@ export default class SongShowPage extends React.Component {
 
     componentDidMount() {
         this.props.fetchSong(this.props.match.params.songId)
-
             .then(() => {
                 if (this.props.song.username !== this.props.match.params.username) {
                     this.props.history.push("/")
@@ -31,18 +32,11 @@ export default class SongShowPage extends React.Component {
             .then(() => { this.props.fetchComments(this.props.match.params.songId) })
     }
 
-    handleClick(e) {
-    }
-
-    componentDidUpdate() {
-    }
-
     handleFollow() {
         let user = this.props.user
         let userId = user.id;
         let currentUserId = this.props.currentUser.id
         let follower = { userId, follower: currentUserId }
-
         if (user.followers[currentUserId]) {
             delete user.followers[currentUserId]
         } else {
@@ -53,7 +47,6 @@ export default class SongShowPage extends React.Component {
     }
 
     printFollowerButton() {
-        
         if (this.props.currentUser.id !== this.props.user.id) {
             if (this.props.user.followers) {
                 if (this.props.user.followers[this.props.currentUser.id]) {
@@ -63,7 +56,6 @@ export default class SongShowPage extends React.Component {
                 }
             }
         }
-
     }
 
     renderUserImage() {
@@ -71,25 +63,23 @@ export default class SongShowPage extends React.Component {
             if (this.props.currentUser.profilePhoto) {
                 return this.props.currentUser.profilePhoto
             } else {
-                return "https://www.unitedfamilies.org/wp-content/uploads/2015/09/unknown.png"
+                return "https://i.imgur.com/qItJfVP.png"
             }
         }
-
     }
+
     handleLike() {
         let song = this.props.song
         let songId = song.id;
         let userId = this.props.currentUser.id
         let like = { songId, userId }
-
         if (song.likes[userId]) {
             delete song.likes[userId]
         } else {
             song.likes[userId] = like
         }
         this.props.createDeleteLike({ song, like })
-        this.setState({ })
-
+        this.setState({})
     }
 
     printLikes() {
@@ -101,18 +91,20 @@ export default class SongShowPage extends React.Component {
             }
         }
     }
+
     showEditModal() {
         this.setState({ showModal: true })
-
     }
+
     hideEditModal() {
         this.setState({ showModal: false })
         this.props.clearSongErrors();
-
     }
+
     update(value) {
         return e => (this.setState({ [value]: e.currentTarget.value }))
     }
+
     handleComment() {
         if (this.state.commentBody.length !== 0) {
             let comment = {
@@ -124,10 +116,8 @@ export default class SongShowPage extends React.Component {
             }
             this.props.createComment(comment)
             this.setState({ commentBody: "" })
-
         }
     }
-
 
     render() {
         return (
@@ -180,14 +170,13 @@ export default class SongShowPage extends React.Component {
                         </div>
 
                         <div className="show-page-comments-box">
-                            {this.props.song ? <div className="show-page-description">{this.props.song.description ? this.props.song.description : "The song doesn't have any description yet." }</div> : null}
+                            {this.props.song ? <div className="show-page-description">{this.props.song.description ? this.props.song.description : "The song doesn't have any description yet."}</div> : null}
                             <div className="show-page-comments-amount"><i className="fas fa-comment-alt"></i> {this.props.comments ? Object.values(this.props.comments).length : "0"} Comments</div>
                             {/* {Array.isArray(this.props.comments) ? <SongComments song={this.props.song} currentUser={this.props.currentUser} comments={Object.values(this.props.comments)} deleteComment={this.props.deleteComment}/> : null} */}
-                            <SongComments song={this.props.song} currentUser={this.props.currentUser} comments={Object.values(this.props.comments)} deleteComment={this.props.deleteComment}/>
+                            <SongComments song={this.props.song} currentUser={this.props.currentUser} comments={Object.values(this.props.comments)} deleteComment={this.props.deleteComment} />
                         </div>
                     </div>
-                            <PageBottom/>
-
+                    <PageBottom />
                 </div>
             </div>
         )

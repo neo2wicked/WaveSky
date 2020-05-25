@@ -17,14 +17,13 @@ import {
 import { receiveCurrentSong } from "../../../actions/session/session_actions"
 import Songs from "./songs"
 
-
 const mapSTP = state => ({
     songs: state.entities.songs,
     user: state.entities.user,
     currentSong: state.session.currentSong,
     currentUser: state.session.currentUser
-    
 })
+
 const mapDTP = dispatch => ({
     fetchUserSongs: (username) => dispatch(fetchUserSongs(username)),
     fetchUser: (username) => dispatch(fetchUser(username)),

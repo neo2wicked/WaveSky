@@ -1,6 +1,4 @@
 import React from 'react';
-import SongItem from "../home/song_item/song_item"
-import { Redirect } from 'react-router-dom';
 
 export default class SongForm extends React.Component {
     constructor(props) {
@@ -18,7 +16,6 @@ export default class SongForm extends React.Component {
             duration: null,
             counter: 4,
             songErrors: null
-        
         }
         this.handleClick = this.handleClick.bind(this)
         this.handleFileMusic = this.handleFileMusic.bind(this)
@@ -28,13 +25,7 @@ export default class SongForm extends React.Component {
         this.cancel = this.cancel.bind(this)
     }
 
-    componentDidMount() {
-       
-
-
-    }
-
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.removeSongs()
     }
 
@@ -49,22 +40,17 @@ export default class SongForm extends React.Component {
                 formData.append('song[username]', this.props.user.username);
                 formData.append('song[music]', this.state.music);
                 formData.append('song[metadata]', this.state.metadata);
-                if (this.state.musicImage){
+                if (this.state.musicImage) {
                     formData.append('song[music_image]', this.state.musicImage);
                 }
                 formData.append('song[duration]', this.state.duration);
-
-
-
                 this.props.createSong(formData)
-                    .then(() => { this.props.history.push("/")
+                    .then(() => {
+                        this.props.history.push("/")
                         window.location.reload();
                     })
             })
-          
-
     }
-
 
     filterData(audioBuffer) {
         const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
@@ -82,8 +68,6 @@ export default class SongForm extends React.Component {
         return filteredData;
     };
 
-
-
     getSongData() {
         const audioContext = new AudioContext();
         return this.state.music.arrayBuffer()
@@ -91,17 +75,14 @@ export default class SongForm extends React.Component {
             .then(audioBuffer => this.setState({ metadata: this.filterData(audioBuffer) }))
     }
 
-
-    handleFileMusicClick(e) {
+    handleFileMusicClick() {
         let file = document.getElementById("song-form-music-file")
         file.click()
     }
 
-    
     handleFileMusic(e) {
         const fileReader = new FileReader();
         const music = e.currentTarget.files[0]
-        
 
         fileReader.onload = (e) => {
             const audioElement = document.createElement('audio');
@@ -110,33 +91,30 @@ export default class SongForm extends React.Component {
             const timer = setInterval(() => {
                 if (audioElement.readyState === 4) {
                     let duration = audioElement.duration
-                    that.setState({ music: music, firstForm: false, secondForm: true , duration: duration})
+                    that.setState({ music: music, firstForm: false, secondForm: true, duration: duration })
                     clearInterval(timer);
-                }else{
-                    this.setState({songErrors: true})
+                } else {
+                    this.setState({ songErrors: true })
                 }
             }, 500)
-
-
         };
         if (music) {
             fileReader.readAsDataURL(music)
         }
-        
     }
 
     handleFileImageClick(e) {
         let file = document.getElementById("song-form-image-file")
         file.click()
     }
+
     handleFileImage(e) {
         const image = e.currentTarget.files[0];
         const fileReader = new FileReader();
         fileReader.onloadend = () => {
-            this.setState({ musicImage: image, musicImageUrl: fileReader.result})
-            
+            this.setState({ musicImage: image, musicImageUrl: fileReader.result })
         };
-        if (image){
+        if (image) {
             fileReader.readAsDataURL(image);
         }
     }
@@ -145,11 +123,7 @@ export default class SongForm extends React.Component {
         return e => (this.setState({ [value]: e.currentTarget.value }))
     }
 
-
-    componentDidUpdate() {
-    }
-
-    cancel(){
+    cancel() {
         this.setState({
             title: "",
             genre: "",
@@ -165,23 +139,20 @@ export default class SongForm extends React.Component {
         this.props.clearSongErrors();
     }
 
-    printErrors(){
-       
-            
-             if (this.props.errors.length !== 0){
-                return (
-                    <div className="song-form-errors">
-                        <div>Failed to upload. Errors: </div>
-                        <ul className="song-form-errors-list">
-                            {this.props.errors.map((error, index) => (
-                                <li key={`errors-song-form-${index}`}>{error}</li>
-                            ))}
-                        </ul>
-                    </div>
-                )
-            }
+    printErrors() {
+        if (this.props.errors.length !== 0) {
+            return (
+                <div className="song-form-errors">
+                    <div>Failed to upload. Errors: </div>
+                    <ul className="song-form-errors-list">
+                        {this.props.errors.map((error, index) => (
+                            <li key={`errors-song-form-${index}`}>{error}</li>
+                        ))}
+                    </ul>
+                </div>
+            )
+        }
     }
-
 
     renderForm() {
         if (this.state.firstForm) {
@@ -192,7 +163,7 @@ export default class SongForm extends React.Component {
                         <button onClick={this.handleFileMusicClick} className="music-upload-button">or choose file to upload</button>
                         <input
                             id="song-form-music-file"
-                            className="files"        
+                            className="files"
                             type="file"
                             onChange={this.handleFileMusic}
                         />
@@ -213,7 +184,6 @@ export default class SongForm extends React.Component {
                             </div>
 
                             <div className="song-info">
-
                                 <div className="image-preview">
                                     {this.state.musicImageUrl ? <img src={this.state.musicImageUrl} alt="" /> : null}
                                     <button onClick={this.handleFileImageClick} className="song-form-image-button"><i className="fas fa-camera"></i> Upload image</button>
@@ -240,7 +210,7 @@ export default class SongForm extends React.Component {
                                         <div>Description</div>
                                         <textarea placeholder="Describe your track" className="description" cols="65" rows="10" onChange={this.update("description")}></textarea>
                                     </div>
-                                    
+
                                     {this.printErrors()}
                                 </div>
                             </div>
@@ -249,29 +219,22 @@ export default class SongForm extends React.Component {
 
                         <div className="song-form-bottom">
                             <div>* Required fields</div>
-                            
                             <div>
-                                <button onClick={this.cancel}className="song-form-bottom-buttons song-form-cancel" >Cancel</button>
+                                <button onClick={this.cancel} className="song-form-bottom-buttons song-form-cancel" >Cancel</button>
                                 <button className="song-form-bottom-buttons song-form-save" onClick={this.handleClick}>Save</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             )
         }
-
     }
-
 
     render() {
         return (
             <div className="song-form-container">
                 {this.renderForm()}
-                {/* {this.state.firstForm ?  : <div className="song-form-image"></div>} */}
             </div>
-
         )
     }
 }

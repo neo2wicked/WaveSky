@@ -3,7 +3,7 @@
     /* Hidden by default */
     position: fixed;
     /* Stay in place */
-    z-index: 2;
+    z-index: 3;
     /* Sit on top */
     left: 0;
     top: 0;
@@ -23,13 +23,10 @@
 .modal-form-content {
     background-color: #fefefe;
     margin: 1% auto;
-    /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
     max-width: 400px;
     height: 450px;
-    /* margin-bottom: 400px; */
-    /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
@@ -41,7 +38,6 @@
     justify-content: flex-end;
     padding-top: 30px;
     padding-right: 30px;
-    
 }
 
 .close:hover,
@@ -50,7 +46,6 @@
     text-decoration: none;
     cursor: pointer;
 }
-
 
 .separator {
     display: flex;
@@ -74,16 +69,14 @@
     margin-left: 20px;
 }
 
-.modal-form-container{
-
-    /* margin-top: 30px; */
+.modal-form-container {
     display: flex;
     flex-direction: column;
     height: 350px;
     justify-content: space-evenly;
 }
 
-.modal-form-input{
+.modal-form-input {
     width: inherit;
     height: 30px;
     padding: 9px 0;
@@ -93,9 +86,10 @@
     font-size: medium;
     font-weight: 400;
     letter-spacing: 1px;
-    border: 1px solid rgb(168,168,168)
+    border: 1px solid rgb(168, 168, 168)
 }
-.demo-button{
+
+.demo-button {
     margin-top: 20px;
     width: inherit;
     height: 30px;
@@ -110,7 +104,7 @@
     letter-spacing: 1px;
 }
 
-.modal-form-button{
+.modal-form-button {
     width: inherit;
     height: 30px;
     padding: 9px 0;
@@ -124,17 +118,18 @@
     letter-spacing: 1px;
 }
 
-.modal-text{
+.modal-text {
     margin-top: 25px;
     font-size: 1rem;
-    color: rgb(158,158,158);
+    color: rgb(158, 158, 158);
     line-height: 24px;
 }
 
-.session-form{
+.session-form {
     height: 400px;
 }
-.session-form > h1{
+
+.session-form>h1 {
     width: 300px;
     font-size: 1.9rem;
     font-weight: 700;
@@ -142,7 +137,7 @@
     margin: 0px auto;
 }
 
-.errors{
+.errors {
     list-style-type: none;
     color: red;
 }
