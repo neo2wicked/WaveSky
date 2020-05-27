@@ -47,7 +47,6 @@ export default class SongForm extends React.Component {
                 this.props.createSong(formData)
                     .then(() => {
                         this.props.history.push("/")
-                        // window.location.reload();
                     })
             })
     }

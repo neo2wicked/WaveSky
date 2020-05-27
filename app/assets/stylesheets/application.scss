@@ -14,9 +14,6 @@
 *= require_self
 */
 
-
-
-
 /* RESET FIRST */
 
 /* PHASE 0: Reset */
@@ -59,8 +56,6 @@ small {
     box-sizing: inherit;
     font-size: 100%;
     font: inherit;
-    
-    /* background: transparent; */
 }
 
 ul {
@@ -93,27 +88,17 @@ input[type="submit"] {
 
 }
 
-// html, body{
-//     height: 100%;
-// }
-
 /* Main Body Application */
 body {
     font-family: 'Roboto', sans-serif !important;
     background-color: rgb(240, 240, 240);
     font-size: 0.9rem;
     padding-bottom: 50px;
-    
-    /* font-family: 'Overpass',sans-serif;
-font-family: Arial, Helvetica, sans-serif; */
-
-
 }
 
 h3 {
     text-align: center;
 }
-
 
 .main-content {
     background-color: white;
@@ -143,11 +128,9 @@ a:visited {
     background-color: white;
 }
 
-
 .search-button,
 .search-button:active,
 .search-button:hover {
-    /* background-color: lawngreen; */
     text-decoration: none;
     color: gray;
     font-size: 18px;
@@ -160,86 +143,71 @@ a:visited {
     align-items: center;
 }
 
-
 img {
     pointer-events: none;
-    /* height: inherit; */
 }
 
 button:focus {
     outline: none;
 }
 
+body {
+    height: inherit;
+}
 
+#root {
+    height: 100%;
+}
 
-// .body{
-    //     height: 100%;
-    // }
-    
-    body{
-        height: inherit;
-    }
-    html{
-        // height: 100%;
+.app-container {
+    height: 100%;
+}
 
-    }
+.home-container {
+    height: 100%;
+}
 
-    #root{
-        height: 100%;
-    }
+.page-bottom {
+    color: rgb(255, 75, 0);
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-color: white;
+}
 
-    .app-container{
-        height: 100%;
-    }
+.page-bottom-text {
+    width: 60px;
+}
 
-    .home-container{
-        height: 100%;
-    }
+.page-bottom-wave {
+    font-size: 1rem;
+}
 
+.page-bottom {
+    position: relative;
+    // z-index: -1;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 1.2rem;
+    height: 100%;
+    padding-bottom: 60px;
+}
 
-    .page-bottom{
-        color: rgb(255,75,0);
-        padding-bottom: 20px;
-        padding-top: 20px;
-        border-color: white;
-        // font-size: 1.5rem;
-    }
+.page-bottom::before,
+.page-bottom::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgb(126, 126, 126);
+}
 
-    .page-bottom-text{
-        width: 60px;
-    }
+.page-bottom::before {
+    margin-right: 10px;
+}
 
-    .page-bottom-wave{
-        font-size: 1rem;
-    }
+.page-bottom::after {
+    margin-left: 10px;
+}
 
-    .page-bottom {
-        position: relative;
-        // z-index: -1;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        font-size: 1.2rem;
-        height: 100%;
-        padding-bottom: 60px;
-    }
-
-    .page-bottom::before,
-    .page-bottom::after {
-        content: '';
-        flex: 1;
-        border-bottom: 1px solid rgb(126, 126, 126);
-    }
-
-    .page-bottom::before {
-        margin-right: 10px;
-    }
-
-    .page-bottom::after {
-        margin-left: 10px;
-    }
-
-    .explore-container{
-        height: 100%;
-    }
-
+.explore-container {
+    height: 100%;
+}
