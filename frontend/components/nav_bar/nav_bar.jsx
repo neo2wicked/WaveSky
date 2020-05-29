@@ -129,6 +129,8 @@ class NavBar extends React.Component {
 
                             <div className="dropdown-menu-1" style={{ display: this.state.displayFirstDropdown }} >
                                 <div><Link to={`/`}>Profile</Link></div>
+                                <div><a href="https://www.linkedin.com/in/iskrayev/" target="_blank">LinkedIn</a></div>
+                                <div><a href="https://github.com/iskraev" target="_blank">GitHub</a></div>
                             </div>
 
                         </li>
