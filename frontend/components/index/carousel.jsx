@@ -26,7 +26,7 @@ export default class Carousel extends React.Component {
             } else {
                 this.button1.click()
             }
-        }, 4000)
+        }, 5000)
     }
 
     componentWillUnmount() {
@@ -41,7 +41,7 @@ export default class Carousel extends React.Component {
             } else {
                 this.button1.click()
             }
-        }, 4000)
+        }, 5000)
 
         let slide1 = document.getElementById("slide-1");
         let slide2 = document.getElementById("slide-2");
@@ -87,7 +87,7 @@ export default class Carousel extends React.Component {
                     <div id="slide-2" className={`carousel-item ${this.state.slide2}`}>
                         <img src={window.party2} className="carousel-images" alt="party2" />
                         <div className="carousel-text git">
-                            <h3>This project is the clone of SoundCloud</h3>
+                            <h3>This project was highly inspired by <a target="_blank" href="https://SoundCloud.com">SoundCloud.com</a></h3>
                             <p>My name is <span className="name">Dias Iskrayev</span>.
                                         <br />I am a creator of this fun little project.
                                         <br />Link to GitHub repo for this project is down below!

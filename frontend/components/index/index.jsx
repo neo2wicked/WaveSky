@@ -2,7 +2,6 @@ import React from 'react';
 import FirstFormContainer from '../session/first_form_container'
 import Carousel from "./carousel"
 
-
 export default class Index extends React.Component {
     constructor(props) {
         super(props)
@@ -47,7 +46,6 @@ export default class Index extends React.Component {
                     <h4>{song.title}</h4>
                     <p onClick={this.handleClick} >{song.username}</p>
                 </div>
-
             )
         } else {
             return (
@@ -95,7 +93,7 @@ export default class Index extends React.Component {
                     </div>
                 </div>
 
-                <Carousel handleClick={this.handleClick}/>
+                <Carousel handleClick={this.handleClick} />
 
                 <div className="index-search-container">
                     <ul className="index-search">
@@ -174,10 +172,8 @@ export default class Index extends React.Component {
 
                     <p className="last-item"> Created by Dias Iskrayev</p>
 
-
                 </div>
             </div>
-
         )
     }
 }
