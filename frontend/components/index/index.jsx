@@ -1,6 +1,7 @@
 import React from 'react';
 import FirstFormContainer from '../session/first_form_container'
 import Carousel from "./carousel"
+import SingleImage from './single-image'
 
 export default class Index extends React.Component {
     constructor(props) {
@@ -42,7 +43,8 @@ export default class Index extends React.Component {
         if (song) {
             return (
                 <div key={`song-index-${song.id}`} className="index-trending-single-track">
-                    <img className="track-img" src={this.renderImage(song)} />
+                    <SingleImage url={this.renderImage(song)} imageClass="track-img"/>
+                    {/* <img className="" src={} /> */}
                     <h4>{song.title}</h4>
                     <p onClick={this.handleClick} >{song.username}</p>
                 </div>

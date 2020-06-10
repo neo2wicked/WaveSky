@@ -9,7 +9,8 @@ export default class SongItem extends React.Component {
         super(props)
         this.state = {
             showModal: false,
-            showDelete: false
+            showDelete: false,
+            imageLoaded: false,
         }
 
         this.wasPlayed = false
@@ -36,12 +37,12 @@ export default class SongItem extends React.Component {
 
     renderImage() {
         if (this.props.song.imageUrl) {
-            return <img src={this.props.song.imageUrl} />
+            return this.props.song.imageUrl
         } else {
             if (this.props.song.profilePhoto) {
-                return <img src={this.props.song.profilePhoto} />
+                return this.props.song.profilePhoto
             } else {
-                return <img src="https://i.imgur.com/qItJfVP.png" />
+                return "https://i.imgur.com/qItJfVP.png"
             }
         }
     }
@@ -53,7 +54,6 @@ export default class SongItem extends React.Component {
         if(this.props.currentSong){
             if(this.props.currentSong.playing){
                 if (this.props.currentSong.id === this.props.i) {
-                    let currentSong = document.getElementById('player')
                     this.clickFunction();
                     this.drawPlayingSong(this.props.i);
                 }
@@ -307,7 +307,9 @@ export default class SongItem extends React.Component {
     render() {
         return (
             <div className="song-item-container">
-                {this.renderImage()}
+                
+                <img src={this.renderImage()} className={`${this.state.imageLoaded ? "" : 'hidden-image'} smooth-image`} onLoad={() => this.setState({ imageLoaded: true })} />
+                {!this.state.imageLoaded ? <img className="preloaded-image"></img> : null}
                 <div className="song-item-elements">
                     <div className="song-item-container-top">
                         <div className="song-item-container-top-button-text">
