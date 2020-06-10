@@ -271,6 +271,7 @@
 
 .smooth-image{
     transition: all 1s ease-in-out;
+    object-fit: cover;
 }
 
 .preloaded-image{
