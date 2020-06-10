@@ -28,6 +28,7 @@
 }
 
 .image-preview img {
+    object-fit: cover;
     height: inherit;
     background-color: white;
 }
