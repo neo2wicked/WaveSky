@@ -19,10 +19,14 @@ export default class Player extends React.Component {
         this.hideVolumeBar = this.hideVolumeBar.bind(this)
         this.handleVolume = this.handleVolume.bind(this)
         this.ended = this.ended.bind(this)
+        this.dotDragging = false;
 
         this.state = {
             showVolume: ""
         }
+        this.dragStartPositionDot = this.dragStartPositionDot.bind(this)
+        this.dragDropPositionDot = this.dragDropPositionDot.bind(this)
+        this.dragPosition = this.dragPosition.bind(this)
     }
 
     play(currentTime) {
@@ -70,6 +74,14 @@ export default class Player extends React.Component {
     }
 
     componentDidMount() {
+
+        this.image = new Image();
+        this.image.src = window.empty;
+
+        document.addEventListener('dragover',(e)=>{
+            e.preventDefault();
+        })
+
         this.audio = document.getElementById("player")
         this.orangeBar = document.getElementById("player-bar-orange")
         this.author = document.getElementsByClassName("player-author")[0]
@@ -107,6 +119,8 @@ export default class Player extends React.Component {
     }
 
     ended() {
+        this.playing = false;
+        this.dotDragging = false;
         this.dot.style.left = "auto";
         this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { playing: false, songPosition: 0, finished: true }))
         this.playButton.innerHTML = "<i class='fas fa-play'></i>";
@@ -178,17 +192,22 @@ export default class Player extends React.Component {
 
     onListen(currentTime) {
         let orangeBarPosition = (currentTime / this.props.currentSong.duration) * 100;
-        this.orangeBar.style.width = `${orangeBarPosition}%`
+        
         this.time.innerHTML = this.showTime(this.audio.currentTime)
         this.dotPosition = (currentTime / this.props.currentSong.duration) * this.bar.offsetWidth;
-        this.dot.style.left = `${this.dotPosition - 5}px`
+        if(!this.dotDragging){
+            this.orangeBar.style.width = `${orangeBarPosition}%`
+            this.dot.style.left = `${this.dotPosition - 5}px`
+        }
     }
 
     handleBarClick(e) {
-        e.persist()
-        let songPosition = (e.nativeEvent.layerX / e.nativeEvent.target.offsetWidth) * this.props.currentSong.duration
-        this.audio.currentTime = songPosition;
-        this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { songPosition }))
+        if(this.playing){
+            e.persist()
+            let songPosition = (e.nativeEvent.layerX / e.nativeEvent.target.offsetWidth) * this.props.currentSong.duration
+            this.audio.currentTime = songPosition;
+            this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { songPosition }))
+        }
     }
 
     renderImage() {
@@ -244,6 +263,62 @@ export default class Player extends React.Component {
         }
     }
 
+    dragPosition(e){
+        if(this.dotDragging){
+            e.persist()
+            e.preventDefault()
+
+
+            let dot = document.getElementById("player-playback-dot");
+            let bar = document.getElementById("player-bar");
+            let left = bar.getBoundingClientRect().left;
+
+            if (e.nativeEvent.clientX !== 0) {
+                let percentage = (e.nativeEvent.clientX - left) / bar.offsetWidth * 100;
+                if (percentage >= 100) {
+                    this.orangeBar.style.width = `${100}%`
+                    dot.style.left = `Calc(${100}% - 5px)`
+                } else
+                    if (percentage <= 0) {
+                        this.orangeBar.style.width = `${0}%`
+                        dot.style.left = `Calc(${0}% - 5px)`
+                    } else {
+                        this.orangeBar.style.width = `${percentage}%`
+                        dot.style.left = `Calc(${percentage}% - 5px)`
+                    }
+
+            }
+        }
+    }
+
+    dragDropPositionDot(e){
+        if(this.playing){
+            this.dotDragging = false;
+
+            let bar = document.getElementById("player-bar");
+            let left = bar.getBoundingClientRect().left;
+
+            let percentage = (e.nativeEvent.clientX - left) / bar.offsetWidth;
+            let songPosition;
+            if(percentage >= 1){
+                this.audio.currentTime = 0;
+                this.audio.pause();
+                this.ended();
+            }else{
+                songPosition = percentage * this.props.currentSong.duration;
+                this.audio.currentTime = songPosition;
+                this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { songPosition }))
+            }
+            
+        }
+    }
+    dragStartPositionDot(e){
+        e.dataTransfer.setDragImage(this.image, 0, 0);
+        if(this.playing){
+            this.dotDragging = true;
+        }
+    }
+
     render() {
         return (
             <div className="player-container">
@@ -255,8 +330,8 @@ export default class Player extends React.Component {
 
                     <div className="player-time">-- : --</div>
 
-                    <div className="player-playback">
-                        <div id="player-playback-dot"></div>
+                    <div className="player-playback" onDrag={this.dragPosition} onDragEnd={this.dragDropPositionDot} onDragStart={this.dragStartPositionDot} draggable='true'>
+                        <button id="player-playback-dot"></button>
                         <div onClick={this.handleBarClick} id="player-playback-bar">
                             <div id="player-bar"></div>
                             <div id="player-bar-orange"></div>
@@ -271,7 +346,7 @@ export default class Player extends React.Component {
                     <div onMouseLeave={this.hideVolumeBar} className={`player-volume-container ${this.state.showVolume}`}>
                         <div className="player-volume-bar-container">
                             <div className="player-volume-bar">
-                                <div className="player-volume-bar-dot"></div>
+                                <button className="player-volume-bar-dot" draggable="true"></button>
                             </div>
                             <div className="player-volume-bar-orange">
 
