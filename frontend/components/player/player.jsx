@@ -22,11 +22,17 @@ export default class Player extends React.Component {
         this.dotDragging = false;
 
         this.state = {
-            showVolume: ""
+            showVolume: "",
+            muted: false,
         }
         this.dragStartPositionDot = this.dragStartPositionDot.bind(this)
         this.dragDropPositionDot = this.dragDropPositionDot.bind(this)
         this.dragPosition = this.dragPosition.bind(this)
+
+        this.muteSong = this.muteSong.bind(this);
+        this.volume = 0.5;
+        this.dragVolume = this.dragVolume.bind(this);
+        this.dragEndVolume = this.dragEndVolume.bind(this);
     }
 
     play(currentTime) {
@@ -247,7 +253,9 @@ export default class Player extends React.Component {
     handleVolume(e) {
         let bar = document.getElementsByClassName("player-volume-bar-container")[0]
         let volume = ((bar.offsetHeight - e.nativeEvent.layerY) / bar.offsetHeight)
+        this.volume = volume;
         this.setVolume(volume);
+        this.setState({muted: false})
         if (this.props.currentSong) {
             this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { volume }))
         } else {
@@ -257,7 +265,11 @@ export default class Player extends React.Component {
 
     checkVolume() {
         if (this.props.currentSong) {
-            return this.props.currentSong.volume
+            if(this.state.muted){
+                return 0;
+            }else{
+                return this.props.currentSong.volume;
+            }
         } else {
             return 0.5;
         }
@@ -319,11 +331,63 @@ export default class Player extends React.Component {
         }
     }
 
+    muteSong(){
+        this.setState({muted: !this.state.muted}, () => {
+            if(this.state.muted){
+                this.audio.volume = 0;
+                this.setVolume(0)
+            }else{
+                this.audio.volume = this.volume;
+                this.setVolume(this.volume)
+            }
+        })
+    }
+
+    dragStartVolume(){
+        document.getElementsByClassName("player-volume-bar-orange")[0].style.transition = 'none';
+        document.getElementsByClassName("player-volume-bar-dot ")[0].style.transition = 'none';
+    }
+
+    dragEndVolume(){
+        this.setVolume(this.volume);
+        this.setState({ muted: false })
+        if (this.props.currentSong) {
+            this.props.receiveCurrentSong(Object.assign({}, this.props.currentSong, { volume: this.volume }))
+        } else {
+            this.props.receiveCurrentSong(Object.assign({}, { volume: this.volume }))
+        }
+        document.getElementsByClassName("player-volume-bar-orange")[0].style.transition = 'height 0.5s';
+        document.getElementsByClassName("player-volume-bar-dot ")[0].style.transition = 'top 0.5s';
+    }
+
+    dragVolume(e){
+        e.persist();
+        let bar = document.getElementsByClassName('player-volume-bar-container-fake')[0]
+        let top = bar.getBoundingClientRect().top;
+        let pos = (e.nativeEvent.clientY - top - bar.offsetHeight) * -1;
+        
+        let percentage = pos / bar.offsetHeight;
+        if(percentage >= 1){
+            this.audio.volume = 1;
+            this.setVolume(1);
+            this.volume = 1;
+        } else if (percentage <= 0){
+            this.audio.volume = 0;
+            this.setVolume(0);
+            this.volume = 0;
+        } else{
+            this.audio.volume = percentage;
+            this.setVolume(percentage);
+            this.volume = percentage;
+        }
+
+    }
+
     render() {
         return (
             <div className="player-container">
                 <div>
-                    <div onClick={this.handlePlayClick} id="player-play"><i className='fas fa-play'></i></div>
+                    <button onClick={this.handlePlayClick} id="player-play"><i className='fas fa-play'></i></button>
                 </div>
 
                 <div className="player-progress">
@@ -353,11 +417,11 @@ export default class Player extends React.Component {
                             </div>
                         </div>
 
-                        <div onClick={this.handleVolume} className="player-volume-bar-container-fake">
+                        <div onClick={this.handleVolume} className="player-volume-bar-container-fake" draggable='true' onDrag={this.dragVolume} onDragStart={this.dragStartVolume} onDragEnd={this.dragEndVolume}>
 
                         </div>
                     </div>
-                    <button onMouseOver={this.showVolumeBar} ><i className="fas fa-volume-up"></i></button>
+                    <button onMouseOver={this.showVolumeBar} onClick={this.muteSong} >{!this.state.muted && this.volume !== 0 ? <i className="fas fa-volume-up"></i> : <i className="fas fa-volume-mute"></i>}</button>
                 </div>
 
                 <div className="player-description">
