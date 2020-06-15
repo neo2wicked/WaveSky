@@ -5,6 +5,7 @@
     justify-content: space-between;
     background-color: white;
     padding-bottom: 35px;
+    // cursor: pointer;
 }
 
 .song-item-container>img {
@@ -16,6 +17,7 @@
     margin-top: 5px;
     width: 660px;
     height: 60px;
+    cursor: pointer;
 }
 
 .song-item-container-top-button-text {
@@ -61,6 +63,10 @@
     font-weight: 300;
     font-size: 0.8rem;
     letter-spacing: 1.3px;
+}
+
+.song-item-description-username:hover{
+    color: black;
 }
 
 .song-item-description-title {
@@ -272,8 +278,11 @@
 .smooth-image{
     transition: all 1s ease-in-out;
     object-fit: cover;
+    cursor: pointer;
+    pointer-events: all;
 }
 
 .preloaded-image{
     background-image: linear-gradient(45deg, #ccc, #999, #ccc);
 }
+

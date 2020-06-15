@@ -86,7 +86,8 @@ class NavBar extends React.Component {
         }
     }
 
-    handleSearch() {
+    handleSearch(e) {
+        e.preventDefault();
         if (this.state.search.length !== 0) {
             this.props.history.push(`/search/${this.state.search}`)
         }
@@ -109,7 +110,9 @@ class NavBar extends React.Component {
 
                         <li>
                             <div className="search-zoom">
-                                <input className="search-bar" onChange={this.update("search")} type="text" placeholder="Search" />
+                                <form onSubmit={this.handleSearch}>
+                                    <input className="search-bar" onChange={this.update("search")} type="text" placeholder="Search" />
+                                </form>
                                 <div className="search-button" onClick={this.handleSearch}><i className="fas fa-search"></i></div>
                             </div>
                         </li>

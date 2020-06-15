@@ -119,8 +119,8 @@ export default class Home extends React.Component {
     printSocialMedia() {
         if (this.props.user.instagram || this.props.user.facebook) {
             return <div className="home-social-media">
-                {this.props.user.facebook ? <a href={`http://${this.props.user.facebook}`}><i className="fab fa-facebook-f"></i> Facebook</a> : null}
-                {this.props.user.instagram ? <a href={`http://${this.props.user.instagram}`}><i className="fab fa-instagram"></i> Instagram</a> : null}
+                {this.props.user.facebook ? <a href={`http://${this.props.user.facebook}`} target="_blank"><i className="fab fa-facebook-f"></i> Facebook</a> : null}
+                {this.props.user.instagram ? <a href={`http://${this.props.user.instagram}`} target="_blank"><i className="fab fa-instagram"></i> Instagram</a> : null}
             </div>
         }
     }

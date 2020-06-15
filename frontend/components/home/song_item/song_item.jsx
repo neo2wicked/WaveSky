@@ -51,8 +51,8 @@ export default class SongItem extends React.Component {
         if (this.props.song.metadata) {
             this.setCanvasPropertiesAndDraw(this.props.song.metadata)
         }
-        if(this.props.currentSong){
-            if(this.props.currentSong.playing){
+        if (this.props.currentSong) {
+            if (this.props.currentSong.playing) {
                 if (this.props.currentSong.id === this.props.i) {
                     this.clickFunction();
                     this.drawPlayingSong(this.props.i);
@@ -307,9 +307,11 @@ export default class SongItem extends React.Component {
     render() {
         return (
             <div className="song-item-container">
+
+                <img src={this.renderImage()} onClick={() => this.props.history.push(`/${this.props.song.username}/${this.props.song.id}`)} className={`${this.state.imageLoaded ? "" : 'hidden-image'} smooth-image`} onLoad={() => this.setState({ imageLoaded: true })} />
+                {!this.state.imageLoaded ? <img className="preloaded-image"/> : null}
                 
-                <img src={this.renderImage()} className={`${this.state.imageLoaded ? "" : 'hidden-image'} smooth-image`} onLoad={() => this.setState({ imageLoaded: true })} />
-                {!this.state.imageLoaded ? <img className="preloaded-image"></img> : null}
+
                 <div className="song-item-elements">
                     <div className="song-item-container-top">
                         <div className="song-item-container-top-button-text">
@@ -321,9 +323,11 @@ export default class SongItem extends React.Component {
                         </div>
                         {this.props.song.genre ? <div onClick={this.handleGenreSearch} className="song-genre"># {this.props.song.genre}</div> : null}
                     </div>
+
                     <div className="canvas-container">
                         <canvas onClick={this.handleCanvasClick} className="canvas" id={`canvas-${this.props.i}`}></canvas>
                     </div>
+
                     <div className="song-item-container-bottom">
                         {this.printLikes()}
                         {this.props.song && this.props.song.comments ? <div className="song-item-comment"><Link to={`/${this.props.song.username}/${this.props.song.id}`} ><i className="fas fa-comment-alt home-fa-comment-alt"></i> {this.props.song.comments.length} Comments</Link> </div> : null}

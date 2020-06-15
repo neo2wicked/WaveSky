@@ -248,10 +248,11 @@ a {
 .index-trending-single-track {
     padding-bottom: 20px;
     width: 180px;
+    cursor: pointer;
 }
 
 .index-trending-single-track p {
-    cursor: pointer;
+    
 }
 
 .track-img {
@@ -462,4 +463,12 @@ h4 {
 
 .last-item {
     margin-top: 20px;
+}
+
+.track-img{
+    cursor: pointer;
+}
+
+.track-img + h2{
+    cursor: pointer;
 }

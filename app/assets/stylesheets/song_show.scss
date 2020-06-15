@@ -83,7 +83,7 @@
 }
 
 .show-page-input {
-    width: 90%;
+    width: 95%;
     margin: 5px;
     background-color: rgb(255, 255, 255);
     border-radius: 4px;
@@ -111,6 +111,7 @@
     padding-top: 30px;
     padding-bottom: 15px;
 }
+
 
 .show-page-comment-container {
     background-color: white;
@@ -242,6 +243,11 @@
     width: 100%;
 }
 
+.show-page-comments-box p{
+    padding-bottom: 20px;
+    color: rgb(87, 87, 87);
+}
+
 .show-page-description {
     height: 80px;
     width: 400px;
@@ -287,4 +293,8 @@
 
 .show-page-song-play-title-box {
     display: flex;
+}
+
+.form-comments{
+    width: 100%;
 }

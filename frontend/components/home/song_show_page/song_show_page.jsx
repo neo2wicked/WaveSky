@@ -114,7 +114,8 @@ export default class SongShowPage extends React.Component {
         return e => (this.setState({ [value]: e.currentTarget.value }))
     }
 
-    handleComment() {
+    handleComment(e) {
+        e.preventDefault();
         if (this.state.commentBody.length !== 0) {
             let comment = {
                 body: this.state.commentBody,
@@ -147,14 +148,17 @@ export default class SongShowPage extends React.Component {
 
                 <div className="show-page-middle-container">
                     <div className="show-page-comment-input-container">
+
                         <div className="show-page-comment-input">
                             <img className="show-page-comment-img" src={this.renderCommentImage()} alt="" />
-                            <input
-                                value={this.state.commentBody}
-                                onChange={this.update("commentBody")}
-                                className="show-page-input"
-                                placeholder="Write a comment"
-                                type="text" />
+                            <form onSubmit={this.handleComment} className="form-comments">
+                                <input
+                                    value={this.state.commentBody}
+                                    onChange={this.update("commentBody")}
+                                    className="show-page-input"
+                                    placeholder="Write a comment"
+                                    type="text" />
+                            </form>
                             <button onClick={this.handleComment} className="show-comment-post-button">Comment</button>
                         </div>
 
@@ -179,6 +183,7 @@ export default class SongShowPage extends React.Component {
                         </div>
 
                         <div className="show-page-comments-box">
+                            <p>Song description:</p>
                             {this.props.song ? <div className="show-page-description">{this.props.song.description ? this.props.song.description : "The song doesn't have any description yet."}</div> : null}
                             <div className="show-page-comments-amount"><i className="fas fa-comment-alt"></i> {this.props.comments ? Object.values(this.props.comments).length : "0"} Comments</div>
                             {/* {Array.isArray(this.props.comments) ? <SongComments song={this.props.song} currentUser={this.props.currentUser} comments={Object.values(this.props.comments)} deleteComment={this.props.deleteComment}/> : null} */}

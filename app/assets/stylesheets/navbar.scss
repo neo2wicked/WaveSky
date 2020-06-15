@@ -48,6 +48,7 @@ nav {
 
 .navbar-list-item:hover {
     color: white;
+    cursor: pointer;
 }
 
 .navbar-list-item {
@@ -146,6 +147,7 @@ nav {
     font-size: 1.4rem;
     margin-left: 20px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 canvas {
@@ -201,6 +203,7 @@ canvas {
 
 .dropdown-2 {
     position: relative;
+    cursor: pointer;
 }
 
 .dropdown-menu-2 div {
@@ -215,4 +218,8 @@ canvas {
 .dropdown-menu-2 div:hover {
     color: white;
     background-color: rgb(51, 51, 51);
+}
+
+.search-button{
+    cursor: pointer;
 }

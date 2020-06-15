@@ -42,10 +42,10 @@ export default class Index extends React.Component {
     renderTrack(song, i) {
         if (song) {
             return (
-                <div key={`song-index-${song.id}`} className="index-trending-single-track">
-                    <SingleImage url={this.renderImage(song)} imageClass="track-img"/>
+                <div key={`song-index-${song.id}`} className="index-trending-single-track" onClick={this.handleClick}>
+                    <SingleImage url={this.renderImage(song)} imageClass="track-img" />
                     {/* <img className="" src={} /> */}
-                    <h4>{song.title}</h4>
+                    <h4 onClick={this.handleClick}>{song.title}</h4>
                     <p onClick={this.handleClick} >{song.username}</p>
                 </div>
             )
@@ -122,7 +122,7 @@ export default class Index extends React.Component {
                     <div className="index-container-other-text">
                         <h3>Not mobile friendly</h3>
                         <div className="hr-line"></div>
-                        <p>Unfortunately, we are not mobile friendly. Sorry for the inconvenience</p>
+                        <p>Unfortunately, we are not mobile friendly yet. Comming soon!</p>
                     </div>
                 </div>
 
