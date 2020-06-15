@@ -22,6 +22,7 @@ export default class SongShowPage extends React.Component {
     }
 
     componentDidMount() {
+        window.scroll(0,0);
         this.props.fetchUser(this.props.match.params.username)
             .then(() => this.props.fetchSong(this.props.match.params.songId))
             .then(() => {
