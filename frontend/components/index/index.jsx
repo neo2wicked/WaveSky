@@ -163,13 +163,15 @@ export default class Index extends React.Component {
                 <hr />
                 <div className="index-container-footer">
                     <ul className="index-footer-list">
-                        <li><a href="https://github.com/iskraev/WaveSky" target="_blank">About us</a></li>
+                        <li><a href="https://iskrayev.com" target="_blank">About us</a></li>
                         <li>-</li>
                         <li><a onClick={this.handleClick}>Sign in</a></li>
                         <li>-</li>
                         <li><a onClick={this.handleClick}>Sing up</a></li>
                         <li>-</li>
                         <li><a href="https://github.com/iskraev/WaveSky" target="_blank">GitHub</a></li>
+                        <li>-</li>
+                        <li><a href="https://www.linkedin.com/in/iskrayev/" target="_blank">LinkedIn</a></li>
                     </ul>
 
                     <p className="last-item"> Created by Dias Iskrayev</p>

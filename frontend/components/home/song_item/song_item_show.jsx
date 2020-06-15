@@ -309,13 +309,14 @@ export default class SongItemShow extends React.Component {
                                 <div className="show-page-creator-title">
                                     <div className="show-page-creator">
                                         <Link to={`/${this.props.song.username}`}><p >{this.props.song.username}</p></Link>
+                                        {this.props.song.genre ? <div onClick={this.handleGenreSearch} className="song-genre-show"># {this.props.song.genre}</div> : null}
                                     </div>
                                     <div className="show-page-title">
-                                        <p >{this.props.song.title}</p>
+                                        <p>{this.props.song.title}</p>
                                     </div>
                                 </div>
                             </div>
-                            {this.props.song.genre ? <div onClick={this.handleGenreSearch} className="song-genre-show"># {this.props.song.genre}</div> : null}
+                            
                         </div>
                         <canvas onClick={this.handleCanvasClick} className="canvas" id={`canvas-${this.props.i}`}></canvas>
                     </div>
