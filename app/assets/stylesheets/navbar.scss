@@ -35,6 +35,7 @@ nav {
     height: inherit;
 }
 
+
 .navbar-list {
     display: flex;
     height: 100%;
@@ -222,4 +223,10 @@ canvas {
 
 .search-button{
     cursor: pointer;
+}
+
+@media screen and (max-width: 1240px) {
+    .navbar-list, nav{
+        width: 100%;
+    }
 }

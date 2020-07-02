@@ -8,6 +8,12 @@
     align-items: center;
 }
 
+@media screen and (max-width: 1240px) {
+    .explore-container {
+        width: 100%;
+    }
+}
+
 .explore-top-text {
     font-size: 2rem;
     color: rgb(46, 46, 46);

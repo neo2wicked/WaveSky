@@ -279,3 +279,10 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+@media screen and (max-width: 1240px) {
+
+    .home-container{
+        width: 100%;
+    }
+}

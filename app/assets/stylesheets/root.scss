@@ -3,6 +3,12 @@
     margin: auto;
 }
 
+@media screen and (max-width: 1240px){
+    .main-content{
+        width: 100%;
+    }
+}
+
 a {
     cursor: pointer;
 }
@@ -146,6 +152,7 @@ a {
     width: 1240px;
 }
 
+
 .carousel-text {
     position: absolute;
     text-align: center;
@@ -190,6 +197,8 @@ a {
 }
 
 
+
+
 .index-search-container {
     padding: 20px 0px;
     background-color: white;
@@ -214,6 +223,44 @@ a {
     font-size: medium;
     font-weight: 400;
     letter-spacing: 1px;
+}
+
+@media screen and (max-width: 1240px) {
+    .carousel-item {
+        width: 100%;
+        font-size: 1vw;
+    }
+
+    .carousel-text {
+        height: 80%;
+        width: 80%;
+    }
+
+    .index-search {
+        width: 100%;
+    }
+
+    .index-carousel{
+        height: 100%;
+    }
+
+    .carousel{
+        height: 40vw;
+    }
+
+    .carousel-button{
+        height: 1vw;
+        width: 1vw;
+    }
+
+    .carousel-buttons{
+        width: 7vw;
+    }
+
+    .carousel-text-button{
+        padding: 1vw 2vw;
+        font-size: 1vw;
+    }
 }
 
 .index-search-upload {
