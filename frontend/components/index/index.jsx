@@ -167,7 +167,7 @@ export default class Index extends React.Component {
                         <li>-</li>
                         <li><a onClick={this.handleClick}>Sign in</a></li>
                         <li>-</li>
-                        <li><a onClick={this.handleClick}>Sing up</a></li>
+                        <li><a onClick={this.handleClick}>Sign up</a></li>
                         <li>-</li>
                         <li><a href="https://github.com/iskraev/WaveSky" target="_blank">GitHub</a></li>
                         <li>-</li>
