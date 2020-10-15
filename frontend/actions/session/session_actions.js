@@ -24,7 +24,6 @@ export const receiveErrors = (errors) => ({
 })
 
 
-
 export const receiveCurrentSong = song => ({
     type: RECEIVE_CURRENT_SONG,
     song 

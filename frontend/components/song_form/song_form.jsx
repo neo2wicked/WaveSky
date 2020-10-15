@@ -22,7 +22,8 @@ export default class SongForm extends React.Component {
         this.handleFileImage = this.handleFileImage.bind(this)
         this.handleFileMusicClick = this.handleFileMusicClick.bind(this)
         this.handleFileImageClick = this.handleFileImageClick.bind(this)
-        this.cancel = this.cancel.bind(this)
+        this.cancel = this.cancel.bind(this);
+        this.uploadButton = React.createRef();
     }
 
     componentWillUnmount() {
@@ -31,6 +32,9 @@ export default class SongForm extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
+        console.log(this.uploadButton.current)
+        this.uploadButton.current.disabled = true;
+        this.setState({uploading: true})
         const formData = new FormData();
         this.getSongData()
             .then(() => {
@@ -48,7 +52,12 @@ export default class SongForm extends React.Component {
                     .then(() => {
                         this.props.history.push("/")
                     })
+                    .fail(() => {
+                        this.setState({ uploading: false })
+                        this.uploadButton.current.disabled = false;
+                    })
             })
+            
     }
 
     filterData(audioBuffer) {
@@ -220,7 +229,7 @@ export default class SongForm extends React.Component {
                             <div>* Required fields</div>
                             <div>
                                 <button onClick={this.cancel} className="song-form-bottom-buttons song-form-cancel" >Cancel</button>
-                                <button className="song-form-bottom-buttons song-form-save" onClick={this.handleClick}>Save</button>
+            <button ref={this.uploadButton} className="song-form-bottom-buttons song-form-save" onClick={this.handleClick}>{this.state.uploading ? 'Uploading...' : 'Save'}</button>
                             </div>
                         </div>
                     </div>
