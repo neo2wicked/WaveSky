@@ -32,7 +32,7 @@
     "image-webpack-loader": "^6.0.0"
   },
   "engines": {
-    "node": "10.13.0",
-    "npm": "6.4.1"
+    "node": "19.0.0",
+    "npm": "9.6.6"
   }
 }
