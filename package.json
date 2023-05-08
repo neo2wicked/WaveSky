@@ -28,8 +28,8 @@
     "webpack-cli": "^3.3.11"
   },
   "devDependencies": {
-    "file-loader": "^6.0.0",
-    "image-webpack-loader": "^6.0.0"
+    "file-loader": "^6.2.0",
+    "image-webpack-loader": "^8.1.0"
   },
   "engines": {
     "node": "19.0.0",
